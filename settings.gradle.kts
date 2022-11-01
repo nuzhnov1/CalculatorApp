@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CalculatorApp"
+
 include(":app")
+include(":libcalculator")

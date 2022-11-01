@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sunman.calculatorapp"
-        minSdk = 16
+        minSdk = 18
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
