@@ -1,0 +1,44 @@
+[versions]
+kotlinVersion = "1.7.20+"
+kotlinBigMathVersion = "2.3.0"
+
+junitBomVersion = "5.8.2"
+junitJupiterVersion = "5.9.1"
+
+androidApplicationVersion = "7.2.2"
+androidxCoreKtxVersion = "1.9.0"
+appcompatVersion = "1.5.1"
+materialVersion = "1.7.0"
+junit4Version = "4.13.2"
+androidxJunitVersion = "1.1.3"
+espressoVersion = "3.4.0"
+
+dokkaKotlinAsJavaVersion = "1.7.10+"
+
+
+[plugins]
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+android-application = { id = "com.android.application", version.ref = "androidApplicationVersion" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlinVersion" }
+
+
+[libraries]
+kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlinVersion" }
+android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidApplicationVersion" }
+dokka-gradle = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "kotlinVersion" }
+
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom" }
+kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
+kotlin-bigmath = { group = "ch.obermuhlner", name = "kotlin-big-math", version.ref = "kotlinBigMathVersion" }
+
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBomVersion" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiterVersion" }
+dokka-kotlinAsJava = { group = "org.jetbrains.dokka", name = "kotlin-as-java-plugin", version.ref = "dokkaKotlinAsJavaVersion" }
+
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreKtxVersion" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompatVersion" }
+material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
+junit4 = { group = "junit", name = "junit", version.ref = "junit4Version" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunitVersion" }
+androidx-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoVersion" }

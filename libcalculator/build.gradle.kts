@@ -1,18 +1,20 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.7.20"
-    id("org.jetbrains.dokka") version "1.7.20"
     `java-library`
+
+    id(libs.plugins.kotlin.jvm.get().pluginId)
+    id(libs.plugins.dokka.get().pluginId)
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("ch.obermuhlner:kotlin-big-math:2.3.0")
+    implementation(platform(libs.kotlin.bom))
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.kotlin.bigmath)
 
-    testImplementation(platform("org.junit:junit-bom:5.8.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
 
-    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.10")
+    dokkaHtmlPlugin(libs.dokka.kotlinAsJava)
 }
 
 tasks.jar {
