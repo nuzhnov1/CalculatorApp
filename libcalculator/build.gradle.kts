@@ -10,6 +10,7 @@ dependencies {
     implementation(platform(libs.kotlin.bom))
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlin.bigmath)
+    implementation(libs.bigmath)
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
@@ -19,10 +20,12 @@ dependencies {
 
 tasks.jar {
     manifest {
-        attributes(mapOf(
-            "Implementation-Title" to artifactName,
-            "Implementation-Version" to project.version
-        ))
+        attributes(
+            mapOf(
+                "Implementation-Title" to artifactName,
+                "Implementation-Version" to project.version
+            )
+        )
     }
 }
 

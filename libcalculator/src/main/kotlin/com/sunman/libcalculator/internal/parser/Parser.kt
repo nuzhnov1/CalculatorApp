@@ -1,5 +1,9 @@
-package com.sunman.libcalculator
+package com.sunman.libcalculator.internal.parser
 
+import com.sunman.libcalculator.SyntaxException
+import com.sunman.libcalculator.internal.GrammarSymbol
+import com.sunman.libcalculator.internal.tokenizer.Token
+import com.sunman.libcalculator.internal.tokenizer.Tokenizer
 import java.io.Reader
 
 /**
@@ -74,77 +78,53 @@ internal class Parser {
             Token.Kind.EOL -> return
 
             Token.Kind.NUMBER -> {
-                try {
-                    parseExpr()
-                    parseEndLine()
-                } catch (e: SyntaxException) {
-                    throw SyntaxException("Invalid expression", e)
-                }
+                parseExpr()
+                parseEndLine()
             }
 
             Token.Kind.IDENT -> {
                 val nextToken = readToken()
 
                 if (nextToken.kind == Token.Kind.ASSIGN) {
-                    try {
-                        postfixRecord.add(PostfixItem(PostfixItem.Kind.IDENT, curToken.lexem))
-                        curToken = readTokenInExpr()
-                        parseExpr()
-                        postfixRecord.add(PostfixItem(PostfixItem.Kind.ASSIGN, "="))
-                        parseEndLine()
-                    } catch (e: SyntaxException) {
-                        throw SyntaxException("Invalid assignment", e)
-                    }
+                    postfixRecord.add(PostfixItem(PostfixItem.Kind.IDENT, curToken.lexem))
+                    curToken = readTokenInExpr()
+                    parseExpr()
+                    postfixRecord.add(PostfixItem(PostfixItem.Kind.ASSIGN, "="))
+                    parseEndLine()
                 } else {
-                    try {
-                        tokenizer.pushback(nextToken)
-                        parseExpr()
-                        parseEndLine()
-                    } catch (e: SyntaxException) {
-                        throw SyntaxException("Invalid expression", e)
-                    }
+                    tokenizer.pushback(nextToken)
+                    parseExpr()
+                    parseEndLine()
                 }
             }
 
             Token.Kind.OP -> {
                 if (curToken.lexem == "+" || curToken.lexem == "-") {
-                    try {
-                        parseExpr()
-                        parseEndLine()
-                    } catch (e: SyntaxException) {
-                        throw SyntaxException("Invalid expression", e)
-                    }
+                    parseExpr()
+                    parseEndLine()
                 } else {
-                    throw SyntaxException("Invalid expression")
+                    errorReport("expression or command", curToken)
                 }
             }
 
             Token.Kind.PARENTHESES -> {
-                if (curToken.lexem == "(") {
-                    try {
-                        parseExpr()
-                        parseEndLine()
-                    } catch (e: SyntaxException) {
-                        throw SyntaxException("Invalid expression", e)
-                    }
+                if (curToken.lexem == "(" || curToken.lexem == "[") {
+                    parseExpr()
+                    parseEndLine()
                 } else {
-                    throw SyntaxException("Invalid expression")
+                    errorReport("expression or command", curToken)
                 }
             }
 
             Token.Kind.COMMAND -> {
-                try {
-                    val commandName = curToken.lexem.substring(1)
+                val commandName = curToken.lexem.substring(1)
 
-                    postfixRecord.add(PostfixItem(PostfixItem.Kind.COMMAND, commandName))
-                    curToken = readToken()
-                    parseEndLine()
-                } catch (e: SyntaxException) {
-                    throw SyntaxException("Invalid command", e)
-                }
+                postfixRecord.add(PostfixItem(PostfixItem.Kind.COMMAND, commandName))
+                curToken = readToken()
+                parseEndLine()
             }
 
-            else -> throw SyntaxException("Invalid expression")
+            else -> errorReport("expression or command", curToken)
         }
     }
 
@@ -175,6 +155,9 @@ internal class Parser {
                 NonTerminal.ExprPriority2 -> parseExprPriority2()
                 NonTerminal.ExprPriority2Rest -> parseExprPriority2Rest()
                 NonTerminal.ExprPriority1 -> parseExprPriority1()
+                NonTerminal.FunctionCallOrEpsilon -> parseFunctionCallOrEpsilon()
+                NonTerminal.ActualArgumentsList -> parseActualArgumentsList()
+                NonTerminal.ActualArgumentsListRest -> parseActualArgumentsListRest()
 
                 // Processing of non-terminals of actions:
 
@@ -193,11 +176,14 @@ internal class Parser {
                 NonTerminal.AddDivToPostfixRecord -> postfixRecord.add(
                     PostfixItem(PostfixItem.Kind.OP, "/")
                 )
-                NonTerminal.AddModToPostfixRecord -> postfixRecord.add(
-                    PostfixItem(PostfixItem.Kind.OP, "%")
-                )
                 NonTerminal.AddPowToPostfixRecord -> postfixRecord.add(
                     PostfixItem(PostfixItem.Kind.OP, "^")
+                )
+                NonTerminal.AddInvokeActionToPostfixRecord -> postfixRecord.add(
+                    PostfixItem(PostfixItem.Kind.ACTION, "invoke")
+                )
+                NonTerminal.AddPutArgActionToPostfixRecord -> postfixRecord.add(
+                    PostfixItem(PostfixItem.Kind.ACTION, "put_arg")
                 )
 
                 // Processing of terminals (tokens):
@@ -239,29 +225,36 @@ internal class Parser {
     }
 
     private fun parseExprPriority5Rest() {
-        if (curToken.kind == Token.Kind.OP) {
-            when (curToken.lexem) {
-                "*" -> {
+        when (curToken.kind) {
+            Token.Kind.OP -> {
+                if (curToken.lexem == "*") {
                     curToken = readTokenInExpr()
                     symbolsStack.addFirst(NonTerminal.ExprPriority5Rest)
                     symbolsStack.addFirst(NonTerminal.AddMulToPostfixRecord)
                     symbolsStack.addFirst(NonTerminal.ExprPriority4)
-                }
-
-                "/" -> {
+                } else if (curToken.lexem == "/") {
                     curToken = readTokenInExpr()
                     symbolsStack.addFirst(NonTerminal.ExprPriority5Rest)
                     symbolsStack.addFirst(NonTerminal.AddDivToPostfixRecord)
                     symbolsStack.addFirst(NonTerminal.ExprPriority4)
                 }
+            }
 
-                "%" -> {
-                    curToken = readTokenInExpr()
+            Token.Kind.NUMBER, Token.Kind.IDENT -> {
+                symbolsStack.addFirst(NonTerminal.ExprPriority5Rest)
+                symbolsStack.addFirst(NonTerminal.AddMulToPostfixRecord)
+                symbolsStack.addFirst(NonTerminal.ExprPriority3)
+            }
+
+            Token.Kind.PARENTHESES -> {
+                if (curToken.lexem == "(" || curToken.lexem == "[") {
                     symbolsStack.addFirst(NonTerminal.ExprPriority5Rest)
-                    symbolsStack.addFirst(NonTerminal.AddModToPostfixRecord)
-                    symbolsStack.addFirst(NonTerminal.ExprPriority4)
+                    symbolsStack.addFirst(NonTerminal.AddMulToPostfixRecord)
+                    symbolsStack.addFirst(NonTerminal.ExprPriority3)
                 }
             }
+
+            else -> return
         }
     }
 
@@ -302,7 +295,7 @@ internal class Parser {
     }
 
     private fun parseExprPriority2Rest() {
-        while (curToken.lexem == "!") {
+        while (curToken.lexem == "!" || curToken.lexem == "%") {
             postfixRecord.add(PostfixItem(PostfixItem.Kind.OP, curToken.lexem))
             curToken = readTokenInExpr()
         }
@@ -318,19 +311,58 @@ internal class Parser {
             Token.Kind.IDENT -> {
                 postfixRecord.add(PostfixItem(PostfixItem.Kind.IDENT, curToken.lexem))
                 curToken = readTokenInExpr()
+                parseFunctionCallOrEpsilon()
             }
 
             Token.Kind.PARENTHESES -> {
-                if (curToken.lexem == "(") {
-                    curToken = readTokenInExpr()
-                    symbolsStack.addFirst(Token(Token.Kind.PARENTHESES, ")"))
-                    symbolsStack.addFirst(NonTerminal.Expr)
-                } else {
-                    errorReport("expression", curToken)
+                when (curToken.lexem) {
+                    "(" -> {
+                        curToken = readTokenInExpr()
+                        symbolsStack.addFirst(Token(Token.Kind.PARENTHESES, ")"))
+                        symbolsStack.addFirst(NonTerminal.Expr)
+                    }
+
+                    "[" -> {
+                        curToken = readTokenInExpr()
+                        symbolsStack.addFirst(Token(Token.Kind.PARENTHESES, "]"))
+                        symbolsStack.addFirst(NonTerminal.Expr)
+                    }
+
+                    else -> errorReport("expression", curToken)
                 }
             }
 
             else -> errorReport("expression", curToken)
+        }
+    }
+
+    private fun parseFunctionCallOrEpsilon() {
+        if (curToken.lexem == "(") {
+            curToken = readTokenInExpr()
+
+            if (curToken.lexem == ")") {
+                curToken = readTokenInExpr()
+                postfixRecord.add(PostfixItem(PostfixItem.Kind.ACTION, "invoke"))
+            } else {
+                symbolsStack.addFirst(NonTerminal.AddInvokeActionToPostfixRecord)
+                symbolsStack.addFirst(Token(Token.Kind.PARENTHESES, ")"))
+                symbolsStack.addFirst(NonTerminal.ActualArgumentsList)
+            }
+        }
+    }
+
+    private fun parseActualArgumentsList() {
+        symbolsStack.addFirst(NonTerminal.ActualArgumentsListRest)
+        symbolsStack.addFirst(NonTerminal.AddPutArgActionToPostfixRecord)
+        symbolsStack.addFirst(NonTerminal.Expr)
+    }
+
+    private fun parseActualArgumentsListRest() {
+        if (curToken.kind == Token.Kind.COMMA) {
+            curToken = readTokenInExpr()
+            symbolsStack.addFirst(NonTerminal.ActualArgumentsListRest)
+            symbolsStack.addFirst(NonTerminal.AddPutArgActionToPostfixRecord)
+            symbolsStack.addFirst(NonTerminal.Expr)
         }
     }
 
@@ -343,11 +375,15 @@ internal class Parser {
         Expr, ExprRest, ExprPriority5, ExprPriority5Rest,
         ExprPriority4, ExprPriority3, ExprPriority3Rest,
         ExprPriority2, ExprPriority2Rest, ExprPriority1,
+        FunctionCallOrEpsilon, ActualArgumentsList,
+        ActualArgumentsListRest,
 
         // Non-terminals of actions:
         AddBinPlusToPostfixRecord, AddBinMinusToPostfixRecord,
         AddUnMinusToPostfixRecord,
-        AddMulToPostfixRecord, AddDivToPostfixRecord, AddModToPostfixRecord,
-        AddPowToPostfixRecord
+        AddMulToPostfixRecord, AddDivToPostfixRecord,
+        AddPowToPostfixRecord,
+        AddInvokeActionToPostfixRecord,
+        AddPutArgActionToPostfixRecord
     }
 }

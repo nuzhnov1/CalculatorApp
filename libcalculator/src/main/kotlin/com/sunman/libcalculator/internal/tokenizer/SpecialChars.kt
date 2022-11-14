@@ -1,4 +1,4 @@
-package com.sunman.libcalculator
+package com.sunman.libcalculator.internal.tokenizer
 
 internal const val EOF      = '\u0000'  // End of file
 internal const val TAB      = '\t'      // Horizontal tabulation

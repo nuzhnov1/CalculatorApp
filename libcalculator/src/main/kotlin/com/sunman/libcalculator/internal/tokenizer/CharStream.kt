@@ -1,4 +1,4 @@
-package com.sunman.libcalculator
+package com.sunman.libcalculator.internal.tokenizer
 
 import java.io.Closeable
 import java.io.LineNumberReader

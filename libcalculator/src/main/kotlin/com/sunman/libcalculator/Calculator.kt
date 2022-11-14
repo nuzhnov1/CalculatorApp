@@ -1,25 +1,37 @@
 package com.sunman.libcalculator
 
+import ch.obermuhlner.math.big.BigDecimalMath.e
+import ch.obermuhlner.math.big.BigDecimalMath.pi
+import com.sunman.libcalculator.internal.parser.Parser
+import com.sunman.libcalculator.internal.parser.PostfixItem
+import com.sunman.libcalculator.internal.tokenizer.CR
+import com.sunman.libcalculator.internal.tokenizer.LF
 import java.io.Reader
 import java.io.StringReader
-import java.math.BigInteger
+import java.math.BigDecimal
+import java.math.MathContext
 
 /**
  * The main class of the calculator.
  * This class is used to compute expressions read from various reading streams.
+ *
+ * @param mc the precision of numbers and the rounding mode used in calculations.
+ * @throws UnsupportedOperationException If the [mc] has unlimited precision.
  */
-@Suppress("MemberVisibilityCanBePrivate", "unused")
-class CalculatorAPI {
-
-    internal sealed interface Operand
-    internal data class Ident(val name: String) : Operand
-
+@Suppress("MemberVisibilityCanBePrivate")
+class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
 
     /**
      * The mutable map of declared variables.
      */
     val declaredVariables = mutableMapOf<String, Number>()
+
     private val operandStack = ArrayDeque<Operand>()
+    private val actualArgumentsStack = ArrayDeque<Number>()
+    private val constants: Map<String, Number> = mapOf(
+        "pi" to Number(pi(mc)),
+        "e" to Number(e(mc))
+    )
 
 
     /**
@@ -67,29 +79,34 @@ class CalculatorAPI {
                     PostfixItem.Kind.IDENT -> operandStack.addFirst(Ident(it.lexem))
                     PostfixItem.Kind.OP -> executeOperator(it.lexem)
                     PostfixItem.Kind.ASSIGN -> declareVariable()
+                    PostfixItem.Kind.ACTION -> performAction(it.lexem)
                     PostfixItem.Kind.COMMAND -> return executeCommand(it.lexem)
                 }
             }
 
             return operandStack.popNumberOrNull()
         } catch (e: ArithmeticException) {
-            val message = e.localizedMessage
-
-            if ("overflow" in message.lowercase()) {
-                throw ExecutionException("Overflow", e)
-            } else {
-                throw ExecutionException(e.localizedMessage, e)
-            }
+            throw ExecutionException(e.localizedMessage, e)
         } finally {
             // Reset calculator state:
             operandStack.clear()
+            actualArgumentsStack.clear()
         }
     }
 
-    private fun makeNumber(representation: String) = Number(BigInteger(representation))
+    private fun makeNumber(representation: String) =
+        try {
+            Number(BigDecimal(representation, mc))
+        } catch (e: NumberFormatException) {
+            throw ExecutionException("'$representation' could not be converted to a number", e)
+        }
 
     private fun derefIdent(name: String) =
-        declaredVariables[name] ?: throw ExecutionException("Unknown variable")
+        when {
+            constants[name] != null -> constants[name]!!
+            declaredVariables[name] != null -> declaredVariables[name]!!
+            else -> throw ExecutionException("Undeclared variable '$name'")
+        }
 
     private fun ArrayDeque<Operand>.popNumberOrNull() =
         when (val operand = removeFirstOrNull()) {
@@ -107,52 +124,50 @@ class CalculatorAPI {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
-                operandStack.addFirst(first + second)
+                operandStack.addFirst(first.add(second, mc))
             }
 
             "-" -> {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
-                operandStack.addFirst(first - second)
+                operandStack.addFirst(first.subtract(second, mc))
             }
 
             "*" -> {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
-                operandStack.addFirst(first * second)
+                operandStack.addFirst(first.multiply(second, mc))
             }
 
             "/" -> {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
-                operandStack.addFirst(first / second)
-            }
-
-            "%" -> {
-                val second = operandStack.popNumber()
-                val first = operandStack.popNumber()
-
-                operandStack.addFirst(first % second)
+                operandStack.addFirst(first.divide(second, mc))
             }
 
             "u-" -> {
                 val operand = operandStack.popNumber()
-                operandStack.addFirst(-operand)
+                operandStack.addFirst(operand.negate(mc))
             }
 
             "^" -> {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
-                operandStack.addFirst(first pow second)
+                operandStack.addFirst(first.pow(second, mc))
             }
 
             "!" -> {
                 val number = operandStack.popNumber()
-                operandStack.addFirst(number.factorial())
+                operandStack.addFirst(number.factorial(mc))
+            }
+
+            "%" -> {
+                val number = operandStack.popNumber()
+                operandStack.addFirst(number.percent(mc))
             }
         }
     }
@@ -161,13 +176,36 @@ class CalculatorAPI {
         val number = operandStack.popNumber()
         val ident = operandStack.popIdent().name
 
-        declaredVariables[ident] = number
+        if (ident in constants) {
+            throw ExecutionException("A constant with name '$ident' is already declared")
+        } else {
+            declaredVariables[ident] = number
+        }
+    }
+
+    private fun performAction(actionName: String) {
+        when (actionName) {
+            "invoke" -> invokeFunction()
+            "put_arg" -> actualArgumentsStack.addFirst(operandStack.popNumber())
+        }
+    }
+
+    private fun invokeFunction() {
+        val function = operandStack.popIdent()
+        val result = invokeFunction(function.name, actualArgumentsStack, mc)
+
+        operandStack.addFirst(result)
     }
 
     private fun executeCommand(commandName: String) =
         when (commandName) {
             "help" -> Command.HELP
+            "functions" -> Command.FUNCTIONS
             "exit" -> Command.EXIT
-            else -> throw ExecutionException("Unknown command")
+            else -> throw ExecutionException("Unknown command '$commandName'")
         }
+
+
+    internal sealed interface Operand
+    internal data class Ident(val name: String) : Operand
 }

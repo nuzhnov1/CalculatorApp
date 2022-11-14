@@ -1,5 +1,6 @@
 package com.sunman.libcalculator
 
+import com.sunman.libcalculator.internal.parser.Parser
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.io.StringReader
@@ -19,34 +20,26 @@ internal class TestParser {
         """
     )
     fun testParseAssignStatements() {
-        println("\tTesting the parsing of the assigment statements...")
+        println("\tTesting the parsing of the assignment statements...")
 
-        print("\t\tTesting the parsing of the valid assigment statements... ")
-        testParseStatement("a= \t10-5\n\n", "a 10 5 - =")
+        print("\t\tTesting the parsing of the valid assignment statements... ")
+        testParseStatement("a= \t1.0-5\n\n", "a 1.0 5 - =")
         testParseStatement("a=b\n", "a b =")
         testParseStatement("a =+2\n", "a 2 =")
         testParseStatement("a  =  -2\n", "a 2 u- =")
-        testParseStatement("e = 0\n", "e 0 =")
+        testParseStatement("e1 = 0\n", "e1 0 =")
         testParseStatement("a=( b )\n", "a b =")
         println("OK")
 
-        print("\t\tTesting the parsing of the invalid assigment statements... ")
-        testParseInvalidStatement("a=", "Invalid assigment")
-        testParseInvalidStatement("a=\n", "Invalid assigment")
-        testParseInvalidStatement("a=*", "Invalid assigment")
-        testParseInvalidStatement("a=/", "Invalid assigment")
-        testParseInvalidStatement("a==", "Invalid assigment")
-        testParseInvalidStatement("a= ", "Invalid assigment")
-        testParseInvalidStatement("a=)", "Invalid assigment")
-        testParseInvalidStatement("a=/help", "Invalid assigment")
-        testParseInvalidStatement("a=1+1", "Invalid assigment")
-        testParseInvalidStatement("a1 = 8", "Invalid identifier")
-        testParseInvalidStatement("n1 = a2a", "Invalid identifier")
-        testParseInvalidStatement("n = a2a", "Invalid assigment")
-        testParseInvalidStatement("a = 7 = 8", "Invalid assigment")
+        print("\t\tTesting the parsing of the invalid assignment statements... ")
+        testParseInvalidStatement("a=1+1", "Expected end of line, got end of file")
+        testParseInvalidStatement("a==", "Expected expression, got '='")
+        testParseInvalidStatement("a=\n", "Expected expression, got end of line")
+        testParseInvalidStatement("a=*", "Expected expression, got '*'")
+        testParseInvalidStatement("a=/help", "Expected expression, got '/'")
         println("OK")
 
-        println("\tTesting the parsing of the assigment statements... OK")
+        println("\tTesting the parsing of the assignment statements... OK")
     }
 
     @Test
@@ -63,8 +56,9 @@ internal class TestParser {
         println("OK")
 
         print("\t\tTesting the parsing of the invalid command statement... ")
-        testParseInvalidStatement("/go*1", "Invalid command")
-        testParseInvalidStatement("/go  1", "Invalid command")
+        testParseInvalidStatement("/go*1", "Expected end of line, got '*'")
+        testParseInvalidStatement("/go  1", "Expected end of line, got '1'")
+        testParseInvalidStatement("/go,", "Expected end of line, got ','")
         println("OK")
 
         println("\tTesting the parsing of the command statements... OK")
@@ -97,25 +91,30 @@ internal class TestParser {
         print("\t\tTesting the parsing of valid simple expressions... ")
         testParseStatement("5\n", "5")
         testParseStatement("e\n", "e")
-        testParseStatement("+ 10\n", "10")
+        testParseStatement("+ 1.0\n", "1.0")
         testParseStatement("-5\n", "5 u-")
         testParseStatement("(1)\n", "1")
+        testParseStatement("[1 + 1]\n", "1 1 +")
         testParseStatement("1-1\n", "1 1 -")
         testParseStatement("a + b\n", "a b +")
-        testParseStatement("10 -  2\n", "10 2 -")
-        testParseStatement("\t 20\t*\t32\n", "20 32 *")
-        testParseStatement("10/0\n", "10 0 /")
-        testParseStatement("10/a\n", "10 a /")
-        testParseStatement("41  ^ \t 11\n", "41 11 ^")
+        testParseStatement("1.0 -  2\n", "1.0 2 -")
+        testParseStatement("\t 2.0\t*\t3.2\n", "2.0 3.2 *")
+        testParseStatement("1.0/0\n", "1.0 0 /")
+        testParseStatement("1.0/a\n", "1.0 a /")
+        testParseStatement("24a\n", "24 a *")
+        testParseStatement("24 12\n", "24 12 *")
+        testParseStatement("(23)(24)\n", "23 24 *")
+        testParseStatement("(23)[24]\n", "23 24 *")
+        testParseStatement("10!a\n", "10 ! a *")
+        testParseStatement("4.1  ^ \t 1.1\n", "4.1 1.1 ^")
         testParseStatement("5!\n", "5 !")
+        testParseStatement("54 %\n", "54 %")
         println("OK")
 
         print("\t\tTesting the parsing of invalid simple expressions... ")
-        testParseInvalidStatement("24a\n", "Invalid number")
-        testParseInvalidStatement("24 12\n", "Invalid expression")
-        testParseInvalidStatement("(23)(24)\n", "Invalid expression")
-        testParseInvalidStatement("*1", "Invalid expression")
-        testParseInvalidStatement(")a", "Invalid expression")
+        testParseInvalidStatement("*1", "Expected expression or command, got '*'")
+        testParseInvalidStatement(")a", "Expected expression or command, got ')'")
+        testParseInvalidStatement(",a", "Expected expression or command, got ','")
         println("OK")
 
         println("\tTesting the parsing of simple expressions, such as: '1 + 1', '2 * 2', etc... OK")
@@ -130,10 +129,10 @@ internal class TestParser {
     fun testAssociationOfOperators() {
         print("\tTesting the association of operators in expressions... ")
         testParseStatement("9 + 1 - 2\n", "9 1 + 2 -")
-        testParseStatement("12 * 8 / 21\n", "12 8 * 21 /")
-        testParseStatement(" +-+++ 12\n", "12 u-")
+        testParseStatement("1.2 * 8 / 2.1\n", "1.2 8 * 2.1 /")
+        testParseStatement(" +-+++ 1.2\n", "1.2 u-")
         testParseStatement("2^3^9\n", "2 3 9 ^ ^")
-        testParseStatement("2!!%2\n", "2 ! ! 2 %")
+        testParseStatement("2!!%!\n", "2 ! ! % !")
         println("OK")
     }
 
@@ -148,45 +147,86 @@ internal class TestParser {
 
         print("\t\tTesting the operator priorities in valid expressions without parenthesis... ")
         testParseStatement("1 + 2 * 3\n", "1 2 3 * +")
-        testParseStatement("1 - 2*e\n", "1 2 e * -")
-        testParseStatement("1 - +-2*e\n", "1 2 u- e * -")
+        testParseStatement("1 - 2e\n", "1 2 e * -")
+        testParseStatement("1 - +-2e\n", "1 2 u- e * -")
         testParseStatement(
-            "--+10 +-+-+-+ +-13\n",
-            "10 u- u- 13 u- u- u- u- +"
+            "--+1.0 +-+-+-+ +-1.3\n",
+            "1.0 u- u- 1.3 u- u- u- u- +"
         )
-        testParseStatement("--10 %+ -10\n", "10 u- u- 10 u- %")
+        testParseStatement("--1.0 *+ -1.0\n", "1.0 u- u- 1.0 u- *")
         testParseStatement("-7^+-2!\n", "7 2 ! u- ^ u-")
         testParseStatement(
-            "-7^+-2!!^-7  \t- +- \t4 * --4*var/another\n",
-            "7 2 ! ! 7 u- ^ u- ^ u- 4 u- 4 u- u- * var * another / -"
+            "-7^+-2!!^-7  \t- +- \t4% * --4var/another_var\n",
+            "7 2 ! ! 7 u- ^ u- ^ u- 4 % u- 4 u- u- * var * another_var / -"
         )
         println("OK")
 
         print("\t\tTesting the operator priorities in invalid expressions without parenthesis... ")
-        testParseInvalidStatement("-7+\n", "Invalid expression")
-        testParseInvalidStatement("abc/%\n", "Invalid expression")
-        testParseInvalidStatement("+/abc\n", "Invalid expression")
-        testParseInvalidStatement("-7^*2", "Invalid expression")
-        testParseInvalidStatement("!", "Invalid expression")
+        testParseInvalidStatement("-7+\n", "Expected expression, got end of line")
+        testParseInvalidStatement("abc/%\n", "Expected expression, got '%'")
+        testParseInvalidStatement("+/abc\n", "Expected expression, got '/'")
+        testParseInvalidStatement("-7^*2", "Expected expression, got '*'")
+        testParseInvalidStatement("!", "Expected expression or command, got '!'")
         println("OK")
 
         print("\t\tTesting the operator priorities in valid expressions with parenthesis... ")
         testParseStatement("(1 + 2) * 3\n", "1 2 + 3 *")
-        testParseStatement("(1 - 2)*e\n", "1 2 - e *")
+        testParseStatement("(1 - 2)e\n", "1 2 - e *")
         testParseStatement(
-            "(((-7)^(+2)!!)^-7 - +-4) * (--4*var/another)\n",
-            "7 u- 2 ! ! ^ 7 u- ^ 4 u- - 4 u- u- var * another / *"
+            "([(-7)^(+2)!!]^-7 - +-4%) * (--4var/another_var)\n",
+            "7 u- 2 ! ! ^ 7 u- ^ 4 % u- - 4 u- u- var * another_var / *"
         )
         println("OK")
 
         print("\t\tTesting the operator priorities in invalid expressions with parenthesis... ")
-        testParseInvalidStatement("()\n", "Invalid expression")
-        testParseInvalidStatement("(1", "Invalid expression")
-        testParseInvalidStatement("(1 + 2 * 3", "Invalid expression")
-        testParseInvalidStatement("(2\n", "Invalid expression")
+        testParseInvalidStatement("()\n", "Expected expression, got ')'")
+        testParseInvalidStatement("(1", "Expected ')', got end of file")
+        testParseInvalidStatement("(1 + 2 * 3", "Expected ')', got end of file")
+        testParseInvalidStatement("[2\n", "Expected ']', got end of line")
         println("OK")
 
         println("\tTesting the operator priorities... OK")
+    }
+
+    @Test
+    @DisplayName(
+        """
+        Testing the function calls
+        """
+    )
+    fun testFunctionCalls() {
+        println("\tTesting the function calls...")
+
+        print("\t\tTesting the function calls in valid expressions... ")
+        testParseStatement("procedure()\n", "procedure invoke")
+        testParseStatement("function() + 1\n", "function invoke 1 +")
+        testParseStatement("function()2\n", "function invoke 2 *")
+        testParseStatement("sin(0)\n", "sin 0 put_arg invoke")
+        testParseStatement(
+            "sin(0) + function()2\n",
+            "sin 0 put_arg invoke function invoke 2 * +"
+        )
+        testParseStatement("log(2, 1)\n", "log 2 put_arg 1 put_arg invoke")
+        testParseStatement(
+            "log(5, 1)7 + 5function(1, 2, 3, 4)\n",
+            "log 5 put_arg 1 put_arg invoke 7 * 5 function 1 put_arg 2 put_arg 3 put_arg 4 put_arg invoke * +"
+        )
+        testParseStatement(
+            "log(27^ 2, 8!)8 + function(1 + 2)\n",
+            "log 27 2 ^ put_arg 8 ! put_arg invoke 8 * function 1 2 + put_arg invoke +"
+        )
+        testParseStatement(
+            "log((2 + 3)1, 2)a + function(((1 + 2))(2 - 3))5\n",
+            "log 2 3 + 1 * put_arg 2 put_arg invoke a * function 1 2 + 2 3 - * put_arg invoke 5 * +"
+        )
+        println("OK")
+
+        print("\t\tTesting the function calls in invalid expressions... ")
+        testParseInvalidStatement("log(2 + 3", "Expected ')', got end of file")
+        testParseInvalidStatement("log(2 + 3, 1\n", "Expected ')', got end of line")
+        println("OK")
+
+        println("\tTesting the function calls... OK")
     }
 
     @Test
@@ -230,7 +270,8 @@ internal class TestParser {
     private fun testParseInvalidStatement(inputString: String, expectedMessage: String) {
         val parser = Parser()
 
-        val exception = assertThrows<SyntaxException>(expectedMessage) { parser.parse(StringReader(inputString)) }
+        val exception =
+            assertThrows<SyntaxException>(expectedMessage) { parser.parse(StringReader(inputString)) }
 
         assertEquals(
             expectedMessage, exception.message,
