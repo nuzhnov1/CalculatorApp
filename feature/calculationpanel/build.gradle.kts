@@ -1,18 +1,16 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.sunman.calculatorapp"
         minSdk = 18
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,6 +25,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,11 +41,18 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.fragment)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation(projects.feature.calculationpanel)
     implementation(projects.component.ui.resources)
+    implementation(projects.libcalculator)
+
+    implementation(libs.androidx.viewModel)
+    implementation(libs.androidx.viewModel.savedState)
+    implementation(libs.androidx.liveData)
+
+    kapt(libs.androidx.lifecycleCompiler)
 
     testImplementation(libs.junit4)
 

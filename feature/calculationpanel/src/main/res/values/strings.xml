@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="collapseButtonDescription">Collapse</string>
+    <string name="comma">,</string>
+    <string name="power">^</string>
+    <string name="log">LOG</string>
+    <string name="sqrt">√</string>
+    <string name="factorial">!</string>
+    <string name="inversion">INV</string>
+
+    <string name="dot">.</string>
+    <string name="equal">=</string>
+    <string name="percent">%</string>
+    <string name="addition">+</string>
+    <string name="subtraction">-</string>
+    <string name="multiplication">*</string>
+    <string name="division">÷</string>
+    <string name="clear">C</string>
+    <string name="parenthesis">()</string>
+    <string name="backButtonDescription">Back</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+
+    <string name="sin">SIN</string>
+    <string name="asin">ASIN</string>
+    <string name="cos">COS</string>
+    <string name="acos">ACOS</string>
+    <string name="tan">TAN</string>
+    <string name="atan">ATAN</string>
+    <string name="cot">COT</string>
+    <string name="acot">ACOT</string>
+    <string name="ln">LN</string>
+    <string name="exp">EXP</string>
+    <string name="sinh">SINH</string>
+    <string name="asinh">ASINH</string>
+    <string name="cosh">COSH</string>
+    <string name="acosh">ACOSH</string>
+    <string name="tanh">TANH</string>
+    <string name="atanh">ATANH</string>
+    <string name="coth">COTH</string>
+    <string name="acoth">ACOTH</string>
+    <string name="log2">LOG2</string>
+    <string name="powerOf2">2^X</string>
+    <string name="log10">LOG10</string>
+    <string name="powerOf10">10^X</string>
+    <string name="cbrt">CBRT</string>
+    <string name="root">ROOT</string>
+    <string name="ceil">CEIL</string>
+    <string name="hypot">HYPOT</string>
+    <string name="fraction">FRACTION</string>
+    <string name="abs">ABS</string>
+    <string name="round">ROUND</string>
+    <string name="floor">FLOOR</string>
+    <string name="pi">π</string>
+    <string name="e">e</string>
+
+    <string name="invalidExpression">Invalid expression</string>
+    <string name="illegalArgument">Illegal argument</string>
+    <string name="divisionByZero">Division by zero</string>
+    <string name="unknownError">Error</string>
+</resources>

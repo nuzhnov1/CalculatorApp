@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_padding">6dp</dimen>
+    <dimen name="divider_margin">2dp</dimen>
+    <dimen name="divider_thickness">2dp</dimen>
+    <dimen name="button_padding">2dp</dimen>
+    <dimen name="button_margin">2dp</dimen>
+</resources>

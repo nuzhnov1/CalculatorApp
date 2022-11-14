@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -18,3 +20,5 @@ rootProject.name = "CalculatorApp"
 
 include(":app")
 include(":libcalculator")
+include(":feature:calculationpanel")
+include(":component:ui:resources")

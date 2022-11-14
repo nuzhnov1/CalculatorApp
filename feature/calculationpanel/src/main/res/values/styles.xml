@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.LabelLarge</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="OperationButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="backgroundTint">?attr/colorSecondary</item>
+    </style>
+
+    <style name="ControlButtonStyle" parent="ButtonStyle">
+        <item name="android:textColor">?attr/colorOnTertiary</item>
+        <item name="backgroundTint">?attr/colorTertiary</item>
+    </style>
+
+    <style name="DividerStyle" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerColor">?attr/colorOnBackground</item>
+    </style>
+</resources>
