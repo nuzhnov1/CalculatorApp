@@ -1,4 +1,4 @@
-package com.sunman.libcalculator.internal.parser
+package com.sunman.libcalculator.internal
 
 /**
  * A structure containing the postfix token type and the string representation of this token.
@@ -8,6 +8,6 @@ package com.sunman.libcalculator.internal.parser
  */
 internal data class PostfixItem(val kind: Kind, val lexem: String) {
     enum class Kind {
-        NUMBER, IDENT, OP, ASSIGN, ACTION, COMMAND
+        NUMBER, IDENT, CONSTANT, OP, ACTION
     }
 }

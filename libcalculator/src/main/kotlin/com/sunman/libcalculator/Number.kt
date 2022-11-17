@@ -81,7 +81,7 @@ data class Number(val value: BigDecimal) : Calculator.Operand, CalculationResult
             value < BigDecimal.ZERO && !y.isInteger -> {
                 throw ArithmeticException(
                     "Illegal x^y for x < 0 and non-integer y: " +
-                    "x = $this; y = $y"
+                            "x = $this; y = $y"
                 )
             }
 

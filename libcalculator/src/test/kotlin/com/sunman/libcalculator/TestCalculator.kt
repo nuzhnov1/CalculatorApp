@@ -1,45 +1,24 @@
 package com.sunman.libcalculator
 
-import com.sunman.libcalculator.internal.tokenizer.CR
-import com.sunman.libcalculator.internal.tokenizer.LF
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.AfterClass
+import org.junit.Assert.assertEquals
+import org.junit.BeforeClass
+import org.junit.Test
 import java.math.MathContext
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DisplayName(
-    """
-    Testing methods of the Calculator and Number classes,
-    as well as functions from the Functions.kt file
-    """
-)
 internal class TestCalculator {
+
     private val calculator = Calculator(MathContext.DECIMAL128)
 
 
-    @BeforeAll
-    fun start() {
-        println(
-            """
-            |Testing methods of the Calculator and Number classes,
-            |as well as functions from the Functions.kt file...
-            """.trimMargin().trimIndent()
-        )
-    }
-
     @Test
-    @DisplayName(
-        """
-        Testing the outputs of numbers
-        """
-    )
     fun testOutputOfNumbers() {
         print("\tTesting the outputs of numbers... ")
         testExecutionStatement("123456789", "123456789")
         testExecutionStatement("10^9", "1000000000")
         testExecutionStatement("10^10", "1*10^+10")
-        testExecutionStatement("1.1 * 10^10", "11000000000")
-        testExecutionStatement("10^10 + 0.1", "10000000000.1")
+        testExecutionStatement("1.1*10^10", "11000000000")
+        testExecutionStatement("10^10+0.1", "10000000000.1")
         testExecutionStatement("111111111111111", "111111111111111")
         testExecutionStatement("1111111111111111", "1.11111111111111*10^+15")
         testExecutionStatement("1111111111111115", "1.11111111111112*10^+15")
@@ -48,11 +27,6 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of operators
-        """
-    )
     fun testOperators() {
         println("\tTesting the execution of operators...")
 
@@ -68,37 +42,37 @@ internal class TestCalculator {
         println("OK")
 
         print("\t\tTesting the execution of the addition operator... ")
-        testExecutionStatement("1 + 1", "2")
-        testExecutionStatement("1 + 0", "1")
-        testExecutionStatement("0 + 0", "0")
+        testExecutionStatement("1+1", "2")
+        testExecutionStatement("1+0", "1")
+        testExecutionStatement("0+0", "0")
         println("OK")
 
         print("\t\tTesting the execution of the subtraction operator... ")
-        testExecutionStatement("12.1 - 6.9", "5.2")
-        testExecutionStatement("12.1 - 0.0", "12.1")
-        testExecutionStatement("0.00000 - 0", "0")
+        testExecutionStatement("12.1-6.9", "5.2")
+        testExecutionStatement("12.1-0.0", "12.1")
+        testExecutionStatement("0.00000-0", "0")
         println("OK")
 
         print("\t\tTesting the execution of the multiplication operator... ")
-        testExecutionStatement("6 * 2", "12")
-        testExecutionStatement("0.0 * 0.100", "0")
-        testExecutionStatement("0.000 * 1000000000000.1234", "0")
-        testExecutionStatement("0.0 * 0.00000000", "0")
-        testExecutionStatement("1.0 * 0.0001", "0.0001")
-        testExecutionStatement("1.0 * 10000000.124", "10000000.124")
-        testExecutionStatement("1.0 * 1.0000000000", "1")
+        testExecutionStatement("6*2", "12")
+        testExecutionStatement("0.0*0.100", "0")
+        testExecutionStatement("0.000*1000000000000.1234", "0")
+        testExecutionStatement("0.0*0.00000000", "0")
+        testExecutionStatement("1.0*0.0001", "0.0001")
+        testExecutionStatement("1.0*10000000.124", "10000000.124")
+        testExecutionStatement("1.0*1.0000000000", "1")
         println("OK")
 
         print("\t\tTesting the execution of the division operator... ")
-        testExecutionStatement("6 / 3", "2")
-        testExecutionStatement("1.2 / 3", "0.4")
-        testExecutionStatement("1.2 / 0.4", "3")
-        testExecutionStatement("1 / 5", "0.2")
-        testExecutionStatement("1 / 3", "0.333333333333333")
-        testExecutionStatement("0 / 1", "0")
-        testExecutionStatement("0 / 1000.1", "0")
-        testExecutionStatement("1 / 0", "Division by zero")
-        testExecutionStatement("0 / 0", "Division undefined")
+        testExecutionStatement("6÷3", "2")
+        testExecutionStatement("1.2÷3", "0.4")
+        testExecutionStatement("1.2÷0.4", "3")
+        testExecutionStatement("1÷5", "0.2")
+        testExecutionStatement("1÷3", "0.333333333333333")
+        testExecutionStatement("0÷1", "0")
+        testExecutionStatement("0÷1000.1", "0")
+        testExecutionStatement("1÷0", "Division by zero")
+        testExecutionStatement("0÷0", "Division undefined")
         println("OK")
 
         print("\t\tTesting the execution of the exponentiation operator... ")
@@ -115,8 +89,8 @@ internal class TestCalculator {
         testExecutionStatement("0^-1.2", "Illegal x^y for x = 0 and y < 0: y = -1.2")
         testExecutionStatement("0.0^-2", "Illegal x^y for x = 0 and y < 0: y = -2")
         testExecutionStatement("0.0^0.000", "1")
-        testExecutionStatement("0.0 ^ 0.5", "0")
-        testExecutionStatement("0.0 ^ 1", "0")
+        testExecutionStatement("0.0^0.5", "0")
+        testExecutionStatement("0.0^1", "0")
         testExecutionStatement("1^1000", "1")
         testExecutionStatement("1.1^2", "1.21")
         testExecutionStatement("1.21^0.5", "1.1")
@@ -147,20 +121,15 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of power functions
-        """
-    )
     fun testPowerFunctions() {
         println("\tTesting the execution of power functions...")
 
         print("\t\tTesting the execution of the sqrt function... ")
-        testExecutionStatement("sqrt(-9)", "Illegal sqrt(x) for x < 0: x = -9")
-        testExecutionStatement("sqrt(0)", "0")
-        testExecutionStatement("sqrt(1)", "1")
-        testExecutionStatement("sqrt(2)", "1.4142135623731")
-        testExecutionStatement("sqrt(9)", "3")
+        testExecutionStatement("√(-9)", "Illegal √(x) for x < 0: x = -9")
+        testExecutionStatement("√(0)", "0")
+        testExecutionStatement("√(1)", "1")
+        testExecutionStatement("√(2)", "1.4142135623731")
+        testExecutionStatement("√(9)", "3")
         println("OK")
 
         print("\t\tTesting the execution of the cbrt function... ")
@@ -174,32 +143,32 @@ internal class TestCalculator {
         println("OK")
 
         print("\t\tTesting the execution of the root function... ")
-        testExecutionStatement("root(-2, 3)", "-1.25992104989487")
+        testExecutionStatement("root(-2,3)", "-1.25992104989487")
         testExecutionStatement(
-            "root(-2, 0)",
+            "root(-2,0)",
             "Illegal root(x, n) for x < 0 and even n: x = -2; n = 0"
         )
         testExecutionStatement(
-            "root(-2, 2)",
+            "root(-2,2)",
             "Illegal root(x, n) for x < 0 and even n: x = -2; n = 2"
         )
         testExecutionStatement(
-            "root(-2, 0.5)",
+            "root(-2,0.5)",
             "Illegal root(x, n) for x < 0 and non-integer n: x = -2; n = 0.5"
         )
         testExecutionStatement(
-            "root(0, -2)",
+            "root(0,-2)",
             "Illegal root(x, n) for x = 0 and n < 0: n = -2"
         )
-        testExecutionStatement("root(0, 0)", "0")
-        testExecutionStatement("root(0, 2)", "0")
-        testExecutionStatement("root(0, 2.3)", "0")
-        testExecutionStatement("root(2, -2)", "0.707106781186548")
+        testExecutionStatement("root(0,0)", "0")
+        testExecutionStatement("root(0,2)", "0")
+        testExecutionStatement("root(0,2.3)", "0")
+        testExecutionStatement("root(2,-2)", "0.707106781186548")
         testExecutionStatement(
-            "root(2, 0)",
+            "root(2,0)",
             "Illegal root(x, n) for x > 0 and n = 0: x = 2"
         )
-        testExecutionStatement("root(2, 2)", "1.4142135623731")
+        testExecutionStatement("root(2,2)", "1.4142135623731")
         println("OK")
 
         print("\t\tTesting the execution of the exp function... ")
@@ -214,19 +183,14 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of logarithmic functions
-        """
-    )
     fun testLogarithmicFunctions() {
         println("\tTesting the execution of logarithmic functions...")
 
         print("\t\tTesting the execution of the ln function... ")
         testExecutionStatement("ln(-1)", "Illegal ln(x) for x <= 0: x = -1")
         testExecutionStatement("ln(0)", "Illegal ln(x) for x <= 0: x = 0")
-        testExecutionStatement("ln(1/e^1000)", "-1000")
-        testExecutionStatement("ln(1/e)", "-1")
+        testExecutionStatement("ln(1÷e^1000)", "-1000")
+        testExecutionStatement("ln(1÷e)", "-1")
         testExecutionStatement("ln(1)", "0")
         testExecutionStatement("ln(e)", "1")
         testExecutionStatement("ln(e^1000)", "1000")
@@ -234,33 +198,33 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the log function... ")
         testExecutionStatement(
-            "log(-1, -1)",
+            "log(-1,-1)",
             "Illegal log(b, x) for b <= 0: b = -1"
         )
         testExecutionStatement(
-            "log(0, -1)",
+            "log(0,-1)",
             "Illegal log(b, x) for b <= 0: b = 0"
         )
         testExecutionStatement(
-            "log(1, -1)",
+            "log(1,-1)",
             "Illegal log(b, x) for b = 1"
         )
         testExecutionStatement(
-            "log(3, -1)",
+            "log(3,-1)",
             "Illegal log(b, x) for x <= 0: x = -1"
         )
         testExecutionStatement(
-            "log(3, 0)",
+            "log(3,0)",
             "Illegal log(b, x) for x <= 0: x = 0"
         )
-        testExecutionStatement("log(3, 4)", "1.26185950714291")
+        testExecutionStatement("log(3,4)", "1.26185950714291")
         println("OK")
 
         print("\t\tTesting the execution of the log2 function... ")
         testExecutionStatement("log2(-1)", "Illegal log2(x) for x <= 0: x = -1")
         testExecutionStatement("log2(0)", "Illegal log2(x) for x <= 0: x = 0")
-        testExecutionStatement("log2(1/2^1000)", "-1000")
-        testExecutionStatement("log2(1/2)", "-1")
+        testExecutionStatement("log2(1÷2^1000)", "-1000")
+        testExecutionStatement("log2(1÷2)", "-1")
         testExecutionStatement("log2(1)", "0")
         testExecutionStatement("log2(2)", "1")
         testExecutionStatement("log2(2^1000)", "1000")
@@ -269,8 +233,8 @@ internal class TestCalculator {
         print("\t\tTesting the execution of the log10 function... ")
         testExecutionStatement("log10(-1)", "Illegal log10(x) for x <= 0: x = -1")
         testExecutionStatement("log10(0)", "Illegal log10(x) for x <= 0: x = 0")
-        testExecutionStatement("log10(1/10^1000)", "-1000")
-        testExecutionStatement("log10(1/10)", "-1")
+        testExecutionStatement("log10(1÷10^1000)", "-1000")
+        testExecutionStatement("log10(1÷10)", "-1")
         testExecutionStatement("log10(1)", "0")
         testExecutionStatement("log10(10)", "1")
         testExecutionStatement("log10(10^1000)", "1000")
@@ -280,100 +244,90 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of trigonometric functions
-        """
-    )
     fun testTrigonometricFunctions() {
         println("\tTesting the execution of trigonometric functions...")
 
         print("\t\tTesting the execution of the sin function... ")
-        testExecutionStatement("sin(-1000001pi)", "0")
-        testExecutionStatement("sin(-1000001pi/2)", "-1")
-        testExecutionStatement("sin(-2pi)", "0")
-        testExecutionStatement("sin(-pi)", "0")
+        testExecutionStatement("sin(-1000001π)", "0")
+        testExecutionStatement("sin(-1000001π÷2)", "-1")
+        testExecutionStatement("sin(-2π)", "0")
+        testExecutionStatement("sin(-π)", "0")
         testExecutionStatement("sin(0)", "0")
-        testExecutionStatement("sin(pi/2)", "1")
-        testExecutionStatement("sin(pi)", "0")
-        testExecutionStatement("sin(3pi/2)", "-1")
-        testExecutionStatement("sin(2pi)", "0")
-        testExecutionStatement("sin(1000001pi/2)", "1")
-        testExecutionStatement("sin(1000001pi)", "0")
+        testExecutionStatement("sin(π÷2)", "1")
+        testExecutionStatement("sin(π)", "0")
+        testExecutionStatement("sin(3π÷2)", "-1")
+        testExecutionStatement("sin(2π)", "0")
+        testExecutionStatement("sin(1000001π÷2)", "1")
+        testExecutionStatement("sin(1000001π)", "0")
         println("OK")
 
         print("\t\tTesting the execution of the cos function... ")
-        testExecutionStatement("cos(-1000001pi)", "-1")
-        testExecutionStatement("cos(-1000001pi/2)", "0")
-        testExecutionStatement("cos(-2pi)", "1")
-        testExecutionStatement("cos(-pi)", "-1")
+        testExecutionStatement("cos(-1000001π)", "-1")
+        testExecutionStatement("cos(-1000001π÷2)", "0")
+        testExecutionStatement("cos(-2π)", "1")
+        testExecutionStatement("cos(-π)", "-1")
         testExecutionStatement("cos(0)", "1")
-        testExecutionStatement("cos(pi/2)", "0")
-        testExecutionStatement("cos(pi)", "-1")
-        testExecutionStatement("cos(3pi/2)", "0")
-        testExecutionStatement("cos(2pi)", "1")
-        testExecutionStatement("cos(1000001pi/2)", "0")
-        testExecutionStatement("cos(1000001pi)", "-1")
+        testExecutionStatement("cos(π÷2)", "0")
+        testExecutionStatement("cos(π)", "-1")
+        testExecutionStatement("cos(3π÷2)", "0")
+        testExecutionStatement("cos(2π)", "1")
+        testExecutionStatement("cos(1000001π÷2)", "0")
+        testExecutionStatement("cos(1000001π)", "-1")
         println("OK")
 
         print("\t\tTesting the execution of the tan function... ")
-        testExecutionStatement("tan(-1000001pi)", "0")
+        testExecutionStatement("tan(-1000001π)", "0")
         testExecutionStatement(
-            "tan(-1000001pi/2)",
-            "Illegal tan(x) for x = pi * k / 2, where k is odd: x = -1570797.89759122"
+            "tan(-1000001π÷2)",
+            "Illegal tan(x) for x = π * k / 2, where k is odd: x = -1570797.89759122"
         )
-        testExecutionStatement("tan(-2pi)", "0")
-        testExecutionStatement("tan(-pi)", "0")
+        testExecutionStatement("tan(-2π)", "0")
+        testExecutionStatement("tan(-π)", "0")
         testExecutionStatement("tan(0)", "0")
         testExecutionStatement(
-            "tan(pi/2)",
-            "Illegal tan(x) for x = pi * k / 2, where k is odd: x = 1.5707963267949"
+            "tan(π÷2)",
+            "Illegal tan(x) for x = π * k / 2, where k is odd: x = 1.5707963267949"
         )
-        testExecutionStatement("tan(pi)", "0")
+        testExecutionStatement("tan(π)", "0")
         testExecutionStatement(
-            "tan(3pi/2)",
-            "Illegal tan(x) for x = pi * k / 2, where k is odd: x = 4.71238898038469"
+            "tan(3π÷2)",
+            "Illegal tan(x) for x = π * k / 2, where k is odd: x = 4.71238898038469"
         )
-        testExecutionStatement("tan(2pi)", "0")
+        testExecutionStatement("tan(2π)", "0")
         testExecutionStatement(
-            "tan(1000001pi/2)",
-            "Illegal tan(x) for x = pi * k / 2, where k is odd: x = 1570797.89759122"
+            "tan(1000001π÷2)",
+            "Illegal tan(x) for x = π * k / 2, where k is odd: x = 1570797.89759122"
         )
-        testExecutionStatement("tan(1000001pi)", "0")
+        testExecutionStatement("tan(1000001π)", "0")
         println("OK")
 
         print("\t\tTesting the execution of the cot function... ")
         testExecutionStatement(
-            "cot(-1000001pi)",
-            "Illegal cot(x) for x = pi * k, where k is an integer: x = -3141595.79518245"
+            "cot(-1000001π)",
+            "Illegal cot(x) for x = π * k, where k is an integer: x = -3141595.79518245"
         )
-        testExecutionStatement("cot(-1000001pi/2)", "0")
+        testExecutionStatement("cot(-1000001π÷2)", "0")
         testExecutionStatement(
-            "cot(-2pi)",
-            "Illegal cot(x) for x = pi * k, where k is an integer: x = -6.28318530717959"
+            "cot(-2π)",
+            "Illegal cot(x) for x = π * k, where k is an integer: x = -6.28318530717959"
         )
         testExecutionStatement(
             "cot(0)",
-            "Illegal cot(x) for x = pi * k, where k is an integer: x = 0"
+            "Illegal cot(x) for x = π * k, where k is an integer: x = 0"
         )
-        testExecutionStatement("cot(pi/2)", "0")
+        testExecutionStatement("cot(π÷2)", "0")
         testExecutionStatement(
-            "cot(pi)",
-            "Illegal cot(x) for x = pi * k, where k is an integer: x = 3.14159265358979"
+            "cot(π)",
+            "Illegal cot(x) for x = π * k, where k is an integer: x = 3.14159265358979"
         )
-        testExecutionStatement("cot(3pi/2)", "0")
-        testExecutionStatement("cot(1000001pi/2)", "0")
+        testExecutionStatement("cot(3π÷2)", "0")
+        testExecutionStatement("cot(1000001π÷2)", "0")
         println("OK")
 
         println("\tTesting the execution of trigonometric functions... OK")
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of inverse trigonometric functions
-        """
-    )
     fun testInverseTrigonometricFunctions() {
         println("\tTesting the execution of inverse trigonometric functions...")
 
@@ -413,11 +367,6 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of hyperbolic functions
-        """
-    )
     fun testHyperbolicFunctions() {
         println("\tTesting the execution of hyperbolic functions...")
 
@@ -453,11 +402,6 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of inverse hyperbolic functions
-        """
-    )
     fun testInverseHyperbolicFunctions() {
         println("\tTesting the execution of inverse hyperbolic functions...")
 
@@ -495,11 +439,6 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of rounding functions
-        """
-    )
     fun testRoundingFunctions() {
         println("\tTesting the execution of rounding functions...")
 
@@ -540,11 +479,6 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of other functions: abs, fraction and hypot
-        """
-    )
     fun testOtherFunction() {
         println("\tTesting the execution of other functions...")
 
@@ -558,29 +492,24 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the fraction function... ")
         testExecutionStatement("fraction(1.1)", "0.1")
-        testExecutionStatement("fraction(pi)", "0.141592653589793")
+        testExecutionStatement("fraction(π)", "0.141592653589793")
         testExecutionStatement("fraction(1)", "0")
         testExecutionStatement("fraction(0)", "0")
         testExecutionStatement("fraction(e)", "0.718281828459045")
         println("OK")
 
         print("\t\tTesting the execution of the hypot function... ")
-        testExecutionStatement("hypot(0, 0)", "0")
-        testExecutionStatement("hypot(-1, -1)", "1.4142135623731")
-        testExecutionStatement("hypot(3, 4)", "5")
-        testExecutionStatement("hypot(12, 5)", "13")
-        testExecutionStatement("hypot(4, 4)", "5.65685424949238")
+        testExecutionStatement("hypot(0,0)", "0")
+        testExecutionStatement("hypot(-1,-1)", "1.4142135623731")
+        testExecutionStatement("hypot(3,4)", "5")
+        testExecutionStatement("hypot(12,5)", "13")
+        testExecutionStatement("hypot(4,4)", "5.65685424949238")
         println("OK")
 
         println("\tTesting the execution of other functions... OK")
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of functions with errors
-        """
-    )
     fun testFunctionsWithErrors() {
         println("\tTesting the execution of functions with errors...")
 
@@ -590,7 +519,7 @@ internal class TestCalculator {
             "The function 'sin' expects 1 arguments, but given 0"
         )
         testExecutionStatement(
-            "sin(1, 2)",
+            "sin(1,2)",
             "The function 'sin' expects 1 arguments, but given 2"
         )
         println("OK")
@@ -603,131 +532,82 @@ internal class TestCalculator {
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing methods of the Calculator class
-        """
-    )
-    fun testCalculatorMethods() {
-        println("\tTesting methods of the Calculator class...")
+    fun testSpecialCases() {
+        println("\tTesting special cases of the Calculator class...")
 
-        calculator.declaredVariables.clear()
-
-        print("\t\tTesting the execution of null-statement... ")
-        testExecutionStatement(null, "exit")
-        println("OK")
-
-        print("\t\tTesting the execution of empty statements... ")
+        print("\t\tTesting the execution of empty expressions... ")
         testExecutionStatement("", "")
-        testExecutionStatement("$LF", "")
-        testExecutionStatement("$CR", "")
-        testExecutionStatement("$CR$LF", "")
         println("OK")
-
-        print("\t\tTesting the declaring a variable... ")
-        testExecutionStatement("a = 1 * 0", "")
-        println("OK")
-
-        print("\t\tTesting the using of the declared variable... ")
-        testExecutionStatement("a + 1", "1")
-        testExecutionStatement("a = 2", "")
-        testExecutionStatement("a + 4", "6")
-        println("OK")
-
-        print("\t\tTesting an attempt to assign a constant... ")
-        testExecutionStatement("e = 1", "A constant with name 'e' is already declared")
-        println("OK")
-
-        print("\t\tTesting an attempt to access an undeclared variable... ")
-        testExecutionStatement("b + 22", "Undeclared variable 'b'")
-        println("OK")
-
-        print("\t\tTesting the execution of commands... ")
-        testExecutionStatement("/help", Command.HELP.toString())
-        testExecutionStatement("/functions", Command.FUNCTIONS.toString())
-        testExecutionStatement("/exit", Command.EXIT.toString())
-        println("OK")
-
-        print("\t\tTesting the execution of a unknown command... ")
-        testExecutionStatement("/go", "Unknown command 'go'")
-        println("OK")
-
-        calculator.declaredVariables.clear()
 
         println("\tTesting methods of the Calculator class... OK")
     }
 
     @Test
-    @DisplayName(
-        """
-        Testing the execution of complex expressions
-        """
-    )
     fun testComplexExpressions() {
         println("\tTesting the execution of complex expressions... ")
 
-        calculator.declaredVariables.clear()
-
-        testExecutionStatement("a = (23)[24]", "")
-        testExecutionStatement("10!a", "2003097600")
-        testExecutionStatement("9 + 1 - 2\n", "8")
-        testExecutionStatement("1.2 * 8 / 2.1\n", "4.57142857142857")
-        testExecutionStatement(" +-+++ 1.2", "-1.2")
+        testExecutionStatement("10!(23)(24)", "2003097600")
+        testExecutionStatement("9+1-2", "8")
+        testExecutionStatement("1.2*8÷2.1", "4.57142857142857")
+        testExecutionStatement("+-+++1.2", "-1.2")
         testExecutionStatement("2^3^9", "1.49074943748314*10^+5925")
         testExecutionStatement("2!!%!", "0.988844203263913")
-        testExecutionStatement("--+1.0 +-+-+-+ +-1.3\n", "2.3")
-        testExecutionStatement("var = --1.0 *+ -1.0", "")
-        testExecutionStatement("another_var = -7^+-2!", "")
+        testExecutionStatement("--+1.0+-+-+-++-1.3", "2.3")
         testExecutionStatement(
-            "-7^+-2!!^-7  \t- +- \t4% * --4var/another_var\n",
+            "-7^+-2!!^-7-+-4%*--4(--1.0*+-1.0)÷(-7^+-2!)",
             "6.85508744956883"
         )
-        testExecutionStatement("(1 + 2) * 3\n", "9")
-        testExecutionStatement("(1 - 2)e", "-2.71828182845905")
+        testExecutionStatement("(1+2)*3", "9")
+        testExecutionStatement("(1-2)e", "-2.71828182845905")
         testExecutionStatement(
-            "([(-7)^(+2)!!]^-7 - +-4%) * (--4var/another_var)\n",
+            "(((-7)^(+2)!!)^-7-+-4%)*(--4(--1.0*+-1.0)÷(-7^+-2!))",
             "7.84000000028899"
         )
         testExecutionStatement(
-            "log(27^ 2, 8!)8 + sin(1 + 2)\n",
+            "log(27^2,8!)8+sin(1+2)",
             "13.0114207345659"
         )
-        testExecutionStatement(
-            "log((2 + 3)1, 2)a + sin(((1 + 2))(2 - 3))5",
-            "237.027860016214"
-        )
-
-        calculator.declaredVariables.clear()
 
         println("\tTesting the execution of complex expressions... OK")
     }
 
-    @AfterAll
-    fun finish() {
-        println(
-            """
-            |Testing methods of the Calculator and Number classes,
-            |as well as functions from the Functions.kt file... OK
-            """.trimMargin().trimIndent()
-        )
-        println()
-    }
-
-
-    private fun testExecutionStatement(inputString: String?, expectedResult: String) {
-        val actualResult = try {
-            when (val result = calculator.executeStatement(inputString)) {
-                null -> ""
-                is Number -> result.toString(15, 9)
-                else -> result.toString()
-            }
-        } catch (e: CalculatorException) {
-            e.localizedMessage
+    private fun testExecutionStatement(inputString: String, expectedResult: String) {
+        val actualResult = when (val result = calculator.executeExpression(inputString)) {
+            is Nothing -> ""
+            is Number -> result.toString(15, 9)
+            is Error -> result.e.localizedMessage
+            else -> result.toString()
         }
 
         assertEquals(
-            expectedResult, actualResult,
-            "The actual result is not equal to the expected one"
+            "The actual result is not equal to the expected one",
+            expectedResult, actualResult
         )
+    }
+
+
+    companion object {
+        @BeforeClass
+        @JvmStatic
+        fun start() {
+            println(
+                """
+            |Testing methods of the Calculator and Number classes,
+            |as well as functions from the Functions.kt file...
+            """.trimMargin().trimIndent()
+            )
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun finish() {
+            println(
+                """
+            |Testing methods of the Calculator and Number classes,
+            |as well as functions from the Functions.kt file... OK
+            """.trimMargin().trimIndent()
+            )
+            println()
+        }
     }
 }

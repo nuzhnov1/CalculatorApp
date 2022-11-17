@@ -1,6 +1,4 @@
-package com.sunman.libcalculator.internal.tokenizer
-
-import com.sunman.libcalculator.internal.GrammarSymbol
+package com.sunman.libcalculator.internal
 
 /**
  * A structure containing the token type and the string representation of the token.
@@ -10,8 +8,7 @@ import com.sunman.libcalculator.internal.GrammarSymbol
  */
 internal data class Token(val kind: Kind, val lexem: String) : GrammarSymbol {
     enum class Kind {
-        EOF, EOL, NUMBER, IDENT, OP,
-        COMMA, ASSIGN, SPACES, PARENTHESES,
-        COMMAND
+        EOL, NUMBER, IDENT, CONSTANT,
+        OP, COMMA, PARENTHESES
     }
 }

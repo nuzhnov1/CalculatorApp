@@ -2,12 +2,8 @@ package com.sunman.libcalculator
 
 import ch.obermuhlner.math.big.BigDecimalMath.e
 import ch.obermuhlner.math.big.BigDecimalMath.pi
-import com.sunman.libcalculator.internal.parser.Parser
-import com.sunman.libcalculator.internal.parser.PostfixItem
-import com.sunman.libcalculator.internal.tokenizer.CR
-import com.sunman.libcalculator.internal.tokenizer.LF
-import java.io.Reader
-import java.io.StringReader
+import com.sunman.libcalculator.internal.Parser
+import com.sunman.libcalculator.internal.PostfixItem
 import java.math.BigDecimal
 import java.math.MathContext
 
@@ -21,72 +17,39 @@ import java.math.MathContext
 @Suppress("MemberVisibilityCanBePrivate")
 class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
 
-    /**
-     * The mutable map of declared variables.
-     */
-    val declaredVariables = mutableMapOf<String, Number>()
-
     private val operandStack = ArrayDeque<Operand>()
     private val actualArgumentsStack = ArrayDeque<Number>()
     private val constants: Map<String, Number> = mapOf(
-        "pi" to Number(pi(mc)),
+        "π" to Number(pi(mc)),
         "e" to Number(e(mc))
     )
 
 
     /**
-     * Reads a single statement from the [input] and execute it.
-     * 1. If the [input] is null, the calculator returns [Command.EXIT].
-     * 2. If the [input] is an empty string, a string with only whitespaces or
-     * a variable declaration, the calculator returns null.
-     * 3. If the [input] is an expression, the calculator returns [Number] instance.
-     * 4. If the [input] is a command, the calculator returns one of the objects of the [Command] class
-     * depending on the command entered.
+     * Execute expression from the [expression].
+     * 1. If the [expression] is an empty string, the calculator returns [Nothing].
+     * 2. If the [expression] is valid expression, the calculator returns [Number] instance.
+     * 3. If the [expression] is invalid expression, the calculator returns [Error] instance.
      *
-     * @throws CalculatorException If a syntax or execution error occurs.
+     * @throws UnsupportedOperationException If the [mc] has unlimited precision.
      */
-    fun executeStatement(input: String?): CalculationResult? {
-        // If the input is EOF:
-        if (input == null) {
-            return executeStatement(StringReader(""))
-        }
-
-        return when (input.lastOrNull()) {
-            LF, CR -> executeStatement(StringReader(input))
-            else -> executeStatement(StringReader(input + LF))
-        }
-    }
-
-    /**
-     * Reads a single statement from the [reader] and execute it.
-     * 1. If the [reader] returns EOF, the calculator returns [Command.EXIT].
-     * 2. If the [reader] returns an empty string, a string with only whitespaces or
-     * a variable declaration, the calculator returns null.
-     * 3. If the [reader] returns an expression, the calculator returns [Number] instance.
-     * 4. If the [reader] returns a command, the calculator returns one of the objects of the [Command] class
-     * depending on the command entered.
-     *
-     * @throws CalculatorException If a syntax or execution error occurs.
-     * @throws java.io.IOException If an I/O error occurs.
-     */
-    fun executeStatement(reader: Reader): CalculationResult? {
-        val postfixItems = Parser().parse(reader)
+    fun executeExpression(expression: String): CalculationResult {
+        val postfixItems = Parser().parse(expression)
 
         try {
             postfixItems.forEach {
                 when (it.kind) {
                     PostfixItem.Kind.NUMBER -> operandStack.addFirst(makeNumber(it.lexem))
+                    PostfixItem.Kind.CONSTANT -> operandStack.addFirst(constants[it.lexem]!!)
                     PostfixItem.Kind.IDENT -> operandStack.addFirst(Ident(it.lexem))
                     PostfixItem.Kind.OP -> executeOperator(it.lexem)
-                    PostfixItem.Kind.ASSIGN -> declareVariable()
                     PostfixItem.Kind.ACTION -> performAction(it.lexem)
-                    PostfixItem.Kind.COMMAND -> return executeCommand(it.lexem)
                 }
             }
 
-            return operandStack.popNumberOrNull()
-        } catch (e: ArithmeticException) {
-            throw ExecutionException(e.localizedMessage, e)
+            return operandStack.popNumberOrNull() ?: Nothing
+        } catch (e: RuntimeException) {
+            return Error(e)
         } finally {
             // Reset calculator state:
             operandStack.clear()
@@ -101,17 +64,9 @@ class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
             throw ExecutionException("'$representation' could not be converted to a number", e)
         }
 
-    private fun derefIdent(name: String) =
-        when {
-            constants[name] != null -> constants[name]!!
-            declaredVariables[name] != null -> declaredVariables[name]!!
-            else -> throw ExecutionException("Undeclared variable '$name'")
-        }
-
     private fun ArrayDeque<Operand>.popNumberOrNull() =
         when (val operand = removeFirstOrNull()) {
             is Number -> operand
-            is Ident -> derefIdent(operand.name)
             else -> null
         }
 
@@ -141,7 +96,7 @@ class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
                 operandStack.addFirst(first.multiply(second, mc))
             }
 
-            "/" -> {
+            "÷" -> {
                 val second = operandStack.popNumber()
                 val first = operandStack.popNumber()
 
@@ -172,17 +127,6 @@ class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
         }
     }
 
-    private fun declareVariable() {
-        val number = operandStack.popNumber()
-        val ident = operandStack.popIdent().name
-
-        if (ident in constants) {
-            throw ExecutionException("A constant with name '$ident' is already declared")
-        } else {
-            declaredVariables[ident] = number
-        }
-    }
-
     private fun performAction(actionName: String) {
         when (actionName) {
             "invoke" -> invokeFunction()
@@ -196,14 +140,6 @@ class Calculator(private val mc: MathContext = MathContext.DECIMAL128) {
 
         operandStack.addFirst(result)
     }
-
-    private fun executeCommand(commandName: String) =
-        when (commandName) {
-            "help" -> Command.HELP
-            "functions" -> Command.FUNCTIONS
-            "exit" -> Command.EXIT
-            else -> throw ExecutionException("Unknown command '$commandName'")
-        }
 
 
     internal sealed interface Operand

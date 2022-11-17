@@ -26,7 +26,7 @@ internal fun invokeFunction(
 ) = when (name) {
     // Power functions:
 
-    "sqrt" -> {
+    "√" -> {
         checkArgumentsCount(name, actualArgumentsStack, 1)
         sqrt(actualArgumentsStack.removeFirst(), mc)
     }
@@ -222,7 +222,7 @@ private fun checkArgumentsCount(
 
         throw ExecutionException(
             "The function '$functionName' expects $requiredCount arguments, " +
-            "but given $actualCount"
+                    "but given $actualCount"
         )
     }
 }
@@ -238,7 +238,7 @@ private fun checkArgumentsCount(
  */
 fun sqrt(x: Number, mc: MathContext): Number {
     if (x.value < BigDecimal.ZERO) {
-        throw ArithmeticException("Illegal sqrt(x) for x < 0: x = $x")
+        throw ArithmeticException("Illegal √(x) for x < 0: x = $x")
     }
 
     return Number(sqrt(x.value, mc))
@@ -422,7 +422,7 @@ fun cos(x: Number, mc: MathContext): Number {
  * Returns the tangent of the [x] value, rounding it to
  * the precision specified in the [mc].
  *
- * @throws ArithmeticException If the [x] value is equals to pi * k / 2, where k is odd.
+ * @throws ArithmeticException If the [x] value is equals to π * k / 2, where k is odd.
  * @throws UnsupportedOperationException If the [mc] has unlimited precision.
  */
 fun tan(x: Number, mc: MathContext): Number {
@@ -430,7 +430,7 @@ fun tan(x: Number, mc: MathContext): Number {
     val cosResult = cos(x, mc).value
 
     if (cosResult.signum() == 0) {
-        throw ArithmeticException("Illegal tan(x) for x = pi * k / 2, where k is odd: x = $x")
+        throw ArithmeticException("Illegal tan(x) for x = π * k / 2, where k is odd: x = $x")
     } else {
         return Number(sinResult.divide(cosResult, mc))
     }
@@ -440,7 +440,7 @@ fun tan(x: Number, mc: MathContext): Number {
  * Returns the cotangent of the [x] value, rounding it to
  * the precision specified in the [mc].
  *
- * @throws ArithmeticException If the [x] value is equals to pi * k, where k is an integer.
+ * @throws ArithmeticException If the [x] value is equals to π * k, where k is an integer.
  * @throws UnsupportedOperationException If the [mc] has unlimited precision.
  */
 fun cot(x: Number, mc: MathContext): Number {
@@ -448,7 +448,7 @@ fun cot(x: Number, mc: MathContext): Number {
     val cosResult = cos(x, mc).value
 
     if (sinResult.signum() == 0) {
-        throw ArithmeticException("Illegal cot(x) for x = pi * k, where k is an integer: x = $x")
+        throw ArithmeticException("Illegal cot(x) for x = π * k, where k is an integer: x = $x")
     } else {
         return Number(cosResult.divide(sinResult, mc))
     }
@@ -680,7 +680,7 @@ fun hypot(x: Number, y: Number, mc: MathContext) = sqrt(
 // Auxiliary functions:
 
 /**
- * Returns the remainder of dividing the [x] value by the double pi number.
+ * Returns the remainder of dividing the [x] value by the double π number.
  *
  * @throws UnsupportedOperationException If the [mc] has unlimited precision.
  */

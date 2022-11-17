@@ -7,13 +7,11 @@ plugins {
 }
 
 dependencies {
-    implementation(platform(libs.kotlin.bom))
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlin.bigmath)
     implementation(libs.bigmath)
 
-    testImplementation(platform(libs.junit.bom))
-    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit4)
 
     dokkaHtmlPlugin(libs.dokka.kotlinAsJava)
 }

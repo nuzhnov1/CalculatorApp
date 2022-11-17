@@ -1,6 +1,6 @@
 package com.sunman.libcalculator.internal
 
 /**
- * Interface of calculator grammar elements
+ * Interface of calculator grammar elements.
  */
-internal interface GrammarSymbol
+internal sealed interface GrammarSymbol

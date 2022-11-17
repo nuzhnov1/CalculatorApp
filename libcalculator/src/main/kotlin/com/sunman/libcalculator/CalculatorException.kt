@@ -25,8 +25,6 @@ class SyntaxException : CalculatorException {
 
 /**
  * Runtime calculator exceptions.
- * This exception is thrown, for example, when there
- * is an attempt to access an unknown variable or command.
  */
 class ExecutionException : CalculatorException {
     constructor() : super()

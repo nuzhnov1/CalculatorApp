@@ -2,9 +2,6 @@
 kotlinVersion = "1.7.20+"
 bigMathVersion = "2.3.0"
 
-junitBomVersion = "5.8.2"
-junitJupiterVersion = "5.9.1"
-
 androidApplicationVersion = "7.2.2"
 androidLibraryVersion = "7.2.2"
 androidxCoreKtxVersion = "1.9.0"
@@ -33,13 +30,10 @@ kotlin-gradle = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin",
 android-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "androidApplicationVersion" }
 dokka-gradle = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "kotlinVersion" }
 
-kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom" }
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
 bigmath = { group = "ch.obermuhlner", name = "big-math", version.ref = "bigMathVersion" }
 kotlin-bigmath = { group = "ch.obermuhlner", name = "kotlin-big-math", version.ref = "bigMathVersion" }
 
-junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junitBomVersion" }
-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiterVersion" }
 dokka-kotlinAsJava = { group = "org.jetbrains.dokka", name = "kotlin-as-java-plugin", version.ref = "dokkaKotlinAsJavaVersion" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreKtxVersion" }
