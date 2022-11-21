@@ -6,7 +6,6 @@ import org.junit.AfterClass
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 
 internal class TestTokenizer {
@@ -15,14 +14,33 @@ internal class TestTokenizer {
     fun testState0() {
         print("\tTesting of the zero state of a tokenizer (the 'next' method)... ")
 
-        testReadSingleToken("", Token(Token.Kind.EOL, ""))
-        testReadSingleToken("√", Token(Token.Kind.IDENT, "√"))
-        testReadSingleToken("π", Token(Token.Kind.CONSTANT, "π"))
-        testReadSingleToken("÷", Token(Token.Kind.OP, "÷"))
-        testReadSingleToken(",", Token(Token.Kind.COMMA, ","))
-        testReadSingleToken("(", Token(Token.Kind.PARENTHESES, "("))
+        testReadSingleToken(inputExpression = "", expectedToken = Token(Token.Kind.EOL, ""))
+        testReadSingleToken(
+            inputExpression = "√",
+            expectedToken = Token(kind = Token.Kind.IDENT, lexem = "√")
+        )
+        testReadSingleToken(
+            inputExpression = "π",
+            expectedToken = Token(kind = Token.Kind.CONSTANT, lexem = "π")
+        )
+        testReadSingleToken(
+            inputExpression = "÷",
+            expectedToken = Token(kind = Token.Kind.OP, lexem = "÷")
+        )
+        testReadSingleToken(
+            inputExpression = ",",
+            expectedToken = Token(kind = Token.Kind.COMMA, lexem = ",")
+        )
+        testReadSingleToken(
+            inputExpression = "(",
+            expectedToken = Token(kind = Token.Kind.PARENTHESES, lexem = "(")
+        )
+        testReadSingleToken(
+            inputExpression = " ",
+            expectedToken = Token(kind = Token.Kind.SPACE, lexem = " ")
+        )
 
-        testReadInvalidTokens("@", "Illegal character '@'")
+        testReadInvalidTokens(inputExpression = "@", expectedMessage = "Illegal character '@'")
 
         println("OK")
     }
@@ -31,16 +49,20 @@ internal class TestTokenizer {
     fun testState1() {
         print("\tTesting of the 1st state of a tokenizer (the 'state1' method)... ")
 
-        testReadSingleToken("0110", Token(Token.Kind.NUMBER, "0110"))
+        testReadSingleToken(
+            inputExpression = "0110",
+            expectedToken = Token(kind = Token.Kind.NUMBER, lexem = "0110")
+        )
 
         testReadMultipleTokens(
-            "0123456789π", listOf(
-                Token(Token.Kind.NUMBER, "0123456789"),
-                Token(Token.Kind.CONSTANT, "π")
+            inputExpression = "0123456789π",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.NUMBER, lexem = "0123456789"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "π")
             )
         )
 
-        testReadInvalidTokens("123@", "Illegal character '@'")
+        testReadInvalidTokens(inputExpression = "123@", expectedMessage = "Illegal character '@'")
 
         println("OK")
     }
@@ -48,29 +70,34 @@ internal class TestTokenizer {
     @Test
     fun testState2() {
         print("\tTesting of the 2nd state of a tokenizer (the 'state2' method)... ")
-        testReadInvalidTokens(".@", "Illegal character '.'")
+        testReadInvalidTokens(inputExpression = ".@", expectedMessage = "Illegal character '.'")
         println("OK")
     }
 
     @Test
     fun testState3() {
         print("\tTesting of the 3rd state of a tokenizer (the 'state3' method)... ")
-        testReadSingleToken("1.1", Token(Token.Kind.NUMBER, "1.1"))
+        testReadSingleToken(
+            inputExpression = "1.1",
+            expectedToken = Token(kind = Token.Kind.NUMBER, lexem = "1.1")
+        )
 
         testReadMultipleTokens(
-            ".1+", listOf(
-                Token(Token.Kind.NUMBER, ".1"),
-                Token(Token.Kind.OP, "+")
+            inputExpression = ".1+",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.NUMBER, lexem = ".1"),
+                Token(kind = Token.Kind.OP, lexem = "+")
             )
         )
         testReadMultipleTokens(
-            "1.e", listOf(
-                Token(Token.Kind.NUMBER, "1."),
-                Token(Token.Kind.CONSTANT, "e")
+            inputExpression = "1.e",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.NUMBER, lexem = "1."),
+                Token(kind = Token.Kind.CONSTANT, lexem = "e")
             )
         )
 
-        testReadInvalidTokens("1.@", "Illegal character '@'")
+        testReadInvalidTokens(inputExpression = "1.@", expectedMessage = "Illegal character '@'")
 
         println("OK")
     }
@@ -79,19 +106,29 @@ internal class TestTokenizer {
     fun testState4() {
         print("\tTesting of the 4th state of a tokenizer (the 'state4' method)... ")
 
-        testReadSingleToken("e", Token(Token.Kind.CONSTANT, "e"))
-        testReadSingleToken("exp", Token(Token.Kind.IDENT, "exp"))
-        testReadSingleToken("eπ", Token(Token.Kind.CONSTANT, "e"))
+        testReadSingleToken(
+            inputExpression = "e",
+            expectedToken = Token(kind = Token.Kind.CONSTANT, lexem = "e")
+        )
+        testReadSingleToken(
+            inputExpression = "exp",
+            expectedToken = Token(kind = Token.Kind.IDENT, lexem = "exp")
+        )
+        testReadSingleToken(
+            inputExpression = "eπ",
+            expectedToken = Token(kind = Token.Kind.CONSTANT, lexem = "e")
+        )
 
         testReadMultipleTokens(
-            "eππ", listOf(
-                Token(Token.Kind.CONSTANT, "e"),
-                Token(Token.Kind.CONSTANT, "π"),
-                Token(Token.Kind.CONSTANT, "π")
+            inputExpression = "eππ",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.CONSTANT, lexem = "e"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "π"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "π")
             )
         )
 
-        testReadInvalidTokens("e@", "Illegal character '@'")
+        testReadInvalidTokens(inputExpression = "e@", expectedMessage = "Illegal character '@'")
 
         println("OK")
     }
@@ -100,23 +137,31 @@ internal class TestTokenizer {
     fun testState5() {
         print("\tTesting of the 5th state of a tokenizer (the 'state5' method)... ")
 
-        testReadSingleToken("val", Token(Token.Kind.IDENT, "val"))
-        testReadSingleToken("a1", Token(Token.Kind.IDENT, "a1"))
+        testReadSingleToken(
+            inputExpression = "val",
+            expectedToken = Token(kind = Token.Kind.IDENT, lexem = "val")
+        )
+        testReadSingleToken(
+            inputExpression = "a1",
+            expectedToken = Token(kind = Token.Kind.IDENT, lexem = "a1")
+        )
 
         testReadMultipleTokens(
-            "abe1+", listOf(
+            inputExpression = "abe1+",
+            expectedTokens = listOf(
                 Token(Token.Kind.IDENT, "abe1"),
                 Token(Token.Kind.OP, "+")
             )
         )
         testReadMultipleTokens(
-            "a1(", listOf(
-                Token(Token.Kind.IDENT, "a1"),
-                Token(Token.Kind.PARENTHESES, "(")
+            inputExpression = "a1(",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.IDENT, lexem = "a1"),
+                Token(kind = Token.Kind.PARENTHESES, lexem = "(")
             )
         )
 
-        testReadInvalidTokens("e1@", "Illegal character '@'")
+        testReadInvalidTokens(inputExpression = "e1@", expectedMessage = "Illegal character '@'")
 
         println("OK")
     }
@@ -125,18 +170,19 @@ internal class TestTokenizer {
     fun testExpression1() {
         print("\tTesting the reading expression: '+-+1÷-2*3e1'... ")
         testReadMultipleTokens(
-            "+-+1÷-2*3e1", listOf(
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.NUMBER, "1"),
-                Token(Token.Kind.OP, "÷"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.NUMBER, "2"),
-                Token(Token.Kind.OP, "*"),
-                Token(Token.Kind.NUMBER, "3"),
-                Token(Token.Kind.CONSTANT, "e"),
-                Token(Token.Kind.NUMBER, "1")
+            inputExpression = "+-+1÷-2*3e1",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.NUMBER, lexem = "1"),
+                Token(kind = Token.Kind.OP, lexem = "÷"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.NUMBER, lexem = "2"),
+                Token(kind = Token.Kind.OP, lexem = "*"),
+                Token(kind = Token.Kind.NUMBER, lexem = "3"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "e"),
+                Token(kind = Token.Kind.NUMBER, lexem = "1")
             )
         )
         println("OK")
@@ -146,14 +192,15 @@ internal class TestTokenizer {
     fun testExpression2() {
         print("\tTesting the reading expression: 'sin(1)πeπ'... ")
         testReadMultipleTokens(
-            "sin(1)πeπ", listOf(
-                Token(Token.Kind.IDENT, "sin"),
-                Token(Token.Kind.PARENTHESES, "("),
-                Token(Token.Kind.NUMBER, "1"),
-                Token(Token.Kind.PARENTHESES, ")"),
-                Token(Token.Kind.CONSTANT, "π"),
-                Token(Token.Kind.CONSTANT, "e"),
-                Token(Token.Kind.CONSTANT, "π")
+            inputExpression = "sin(1)πeπ",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.IDENT, lexem = "sin"),
+                Token(kind = Token.Kind.PARENTHESES, lexem = "("),
+                Token(kind = Token.Kind.NUMBER, lexem = "1"),
+                Token(kind = Token.Kind.PARENTHESES, lexem = ")"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "π"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "e"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "π")
             )
         )
         println("OK")
@@ -163,45 +210,50 @@ internal class TestTokenizer {
     fun testExpression3() {
         print("\tTesting the reading expression: '+--+1++++---3e1+-+3ea'... ")
         testReadMultipleTokens(
-            "+--+1++++---3e1+-+3ea", listOf(
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.NUMBER, "1"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.NUMBER, "3"),
-                Token(Token.Kind.CONSTANT, "e"),
-                Token(Token.Kind.NUMBER, "1"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.OP, "-"),
-                Token(Token.Kind.OP, "+"),
-                Token(Token.Kind.NUMBER, "3"),
-                Token(Token.Kind.IDENT, "ea")
+            inputExpression = "+--+1 ++++--- 3e1+-+3ea",
+            expectedTokens = listOf(
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.NUMBER, lexem = "1"),
+                Token(kind = Token.Kind.SPACE, lexem = " "),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.SPACE, lexem = " "),
+                Token(kind = Token.Kind.NUMBER, lexem = "3"),
+                Token(kind = Token.Kind.CONSTANT, lexem = "e"),
+                Token(kind = Token.Kind.NUMBER, lexem = "1"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.OP, lexem = "-"),
+                Token(kind = Token.Kind.OP, lexem = "+"),
+                Token(kind = Token.Kind.NUMBER, lexem = "3"),
+                Token(kind = Token.Kind.IDENT, lexem = "ea")
             )
         )
         println("OK")
     }
 
     @Test
-    @Ignore("Long execution")
     fun testLongIdentifier() {
         print("\tTesting the reading a long identifier... ")
 
         val longIdentifier = "a".repeat(10000)
-        testReadSingleToken(longIdentifier, Token(Token.Kind.IDENT, longIdentifier))
+        testReadSingleToken(
+            inputExpression = longIdentifier,
+            expectedToken = Token(kind = Token.Kind.IDENT, lexem = longIdentifier)
+        )
 
         println("OK")
     }
 
-    private fun testReadSingleToken(inputString: String, expectedToken: Token) {
-        val tokenStream = Tokenizer(inputString)
+    private fun testReadSingleToken(inputExpression: String, expectedToken: Token) {
+        val tokenStream = Tokenizer(inputExpression)
         val token = tokenStream.next()
 
         tokenStream.use {
@@ -212,8 +264,8 @@ internal class TestTokenizer {
         }
     }
 
-    private fun testReadMultipleTokens(inputString: String, expectedTokens: List<Token>) {
-        val tokenStream = Tokenizer(inputString)
+    private fun testReadMultipleTokens(inputExpression: String, expectedTokens: List<Token>) {
+        val tokenStream = Tokenizer(inputExpression)
         val tokens = mutableListOf<Token>()
 
         tokenStream.use {
@@ -238,8 +290,8 @@ internal class TestTokenizer {
         }
     }
 
-    private fun testReadInvalidTokens(inputString: String, expectedMessage: String) {
-        val tokenStream = Tokenizer(inputString)
+    private fun testReadInvalidTokens(inputExpression: String, expectedMessage: String) {
+        val tokenStream = Tokenizer(inputExpression)
 
         tokenStream.use {
             val exception = assertThrows(SyntaxException::class.java) {

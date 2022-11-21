@@ -32,7 +32,8 @@ internal class CharStream(expression: String) : Closeable {
     /**
      * Return a single character to the input by placing them on the LIFO stack.
      *
-     * @throws java.io.IOException If the pushback buffer is full, or if some other I/O error occurs.
+     * @throws java.io.IOException If the pushback buffer is full, or if some other
+     * I/O error occurs.
      */
     fun unread(char: Char) {
         pushbackReader.unread(char.code)

@@ -5,6 +5,10 @@ package com.sunman.libcalculator
  */
 sealed interface CalculationResult
 
-object Nothing : CalculationResult
-class Error(val e: Throwable) : CalculationResult
+object Nothing : CalculationResult {
+    override fun toString() = ""
+}
 
+class Error(val e: Throwable) : CalculationResult {
+    override fun toString() = e.localizedMessage.toString()
+}
