@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="collapseButtonDescription">Collapse</string>
+    <string name="toolbar_calculationpanel_title" />
+
+    <!-- Menu items -->
+    <string name="functionsItem">Functions</string>
+    <string name="calculationHistoryItem">Calculation history</string>
+    <string name="settingsItem">Settings</string>
+    <string name="aboutItem">About program</string>
+
+    <!-- UI strings -->
+    <string name="calculationField">Current expression</string>
+
+    <!-- Angle units -->
+    <string name="rad">RAD</string>
+    <string name="deg">DEG</string>
+    <string name="grad">GRAD</string>
+
+    <!-- Descriptions of the expression subpanel items -->
+    <string name="angleUnitDescription">Angle unit</string>
+
+    <!-- Main subpanel items -->
     <string name="comma">,</string>
     <string name="power">^</string>
     <string name="log">LOG</string>
     <string name="sqrt">√</string>
+    <string name="sqr">X^2</string>
     <string name="factorial">!</string>
     <string name="inversion">INV</string>
-
-    <string name="dot">.</string>
-    <string name="equal">=</string>
-    <string name="percent">%</string>
-    <string name="addition">+</string>
-    <string name="subtraction">-</string>
-    <string name="multiplication">*</string>
-    <string name="division">÷</string>
     <string name="clear">C</string>
     <string name="parenthesis">()</string>
-    <string name="backButtonDescription">Back</string>
+    <string name="percent">%</string>
+    <string name="division">÷</string>
+    <string name="multiplication">*</string>
+    <string name="subtraction">-</string>
+    <string name="addition">+</string>
+    <string name="equal">=</string>
+    <string name="dot">.</string>
     <string name="zero">0</string>
     <string name="one">1</string>
     <string name="two">2</string>
@@ -29,41 +47,112 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
 
+    <!-- Descriptions of the main subpanel items -->
+    <string name="collapseDescription">Collapse</string>
+    <string name="powerDescription">Exponentiation operation</string>
+    <string name="logDescription">Logarithm on an arbitrary basis</string>
+    <string name="sqrtDescription">Square root</string>
+    <string name="sqrDescription">Squaring operation</string>
+    <string name="factorialDescription">Factorial</string>
+    <string name="inversionDescription">Inversion</string>
+    <string name="clearDescription">Clearing</string>
+    <string name="parenthesesDescription">Parentheses</string>
+    <string name="divDescription">Division</string>
+    <string name="mulDescription">Multiplication</string>
+    <string name="subDescription">Subtraction</string>
+    <string name="addDescription">Addition</string>
+    <string name="backDescription">Back</string>
+
+    <!-- Functions subpanel items -->
     <string name="sin">SIN</string>
-    <string name="asin">ASIN</string>
     <string name="cos">COS</string>
-    <string name="acos">ACOS</string>
     <string name="tan">TAN</string>
-    <string name="atan">ATAN</string>
     <string name="cot">COT</string>
+    <string name="sec">SEC</string>
+    <string name="cosec">COSEC</string>
+    <string name="asin">ASIN</string>
+    <string name="acos">ACOS</string>
+    <string name="atan">ATAN</string>
     <string name="acot">ACOT</string>
-    <string name="ln">LN</string>
-    <string name="exp">EXP</string>
+    <string name="asec">ASEC</string>
+    <string name="acosec">ACOSEC</string>
     <string name="sinh">SINH</string>
-    <string name="asinh">ASINH</string>
     <string name="cosh">COSH</string>
-    <string name="acosh">ACOSH</string>
     <string name="tanh">TANH</string>
-    <string name="atanh">ATANH</string>
     <string name="coth">COTH</string>
+    <string name="sech">SECH</string>
+    <string name="csch">CSCH</string>
+    <string name="asinh">ASINH</string>
+    <string name="acosh">ACOSH</string>
+    <string name="atanh">ATANH</string>
     <string name="acoth">ACOTH</string>
+    <string name="asech">ASECH</string>
+    <string name="acsch">ACSCH</string>
+    <string name="ln">LN</string>
     <string name="log2">LOG2</string>
-    <string name="powerOf2">2^X</string>
     <string name="log10">LOG10</string>
+    <string name="exp">EXP</string>
+    <string name="powerOf2">2^X</string>
     <string name="powerOf10">10^X</string>
     <string name="cbrt">CBRT</string>
+    <string name="cube">X^3</string>
     <string name="root">ROOT</string>
-    <string name="ceil">CEIL</string>
     <string name="hypot">HYPOT</string>
-    <string name="fraction">FRACTION</string>
+    <string name="ceil">CEIL</string>
     <string name="abs">ABS</string>
-    <string name="round">ROUND</string>
     <string name="floor">FLOOR</string>
+    <string name="round">ROUND</string>
+    <string name="fraction">FRACTION</string>
     <string name="pi">π</string>
     <string name="e">e</string>
 
+    <!-- Descriptions of functions and constants -->
+    <string name="sinDescription">Sine function</string>
+    <string name="cosDescription">Cosine function</string>
+    <string name="tanDescription">Tangent function</string>
+    <string name="cotDescription">Cotangent function</string>
+    <string name="secDescription">Secant function</string>
+    <string name="cosecDescription">Cosecant function</string>
+    <string name="asinDescription">Arcsine function</string>
+    <string name="acosDescription">Arccosine function</string>
+    <string name="atanDescription">Arctangent function</string>
+    <string name="acotDescription">Arccotangent function</string>
+    <string name="asecDescription">Arcsecant function</string>
+    <string name="acosecDescription">Arccosecant function</string>
+    <string name="sinhDescription">Hyperbolic sine function</string>
+    <string name="coshDescription">Hyperbolic cosine function</string>
+    <string name="tanhDescription">Hyperbolic tangent function</string>
+    <string name="cothDescription">Hyperbolic cotangent function</string>
+    <string name="sechDescription">Hyperbolic secant function</string>
+    <string name="cschDescription">Hyperbolic cosecant function</string>
+    <string name="asinhDescription">Inverse hyperbolic sine function</string>
+    <string name="acoshDescription">Inverse hyperbolic cosine function</string>
+    <string name="atanhDescription">Inverse hyperbolic tangent function</string>
+    <string name="acothDescription">Inverse hyperbolic cotangent function</string>
+    <string name="asechDescription">Inverse hyperbolic secant function</string>
+    <string name="acschDescription">Inverse hyperbolic cosecant function</string>
+    <string name="lnDescription">Natural logarithm function</string>
+    <string name="log2Description">Logarithm function with base 2</string>
+    <string name="log10Description">Logarithm function with base 10</string>
+    <string name="expDescription">Exponent function</string>
+    <string name="powerOf2Description">Exponentiation function 2</string>
+    <string name="powerOf10Description">Exponentiation function 10</string>
+    <string name="cbrtDescription">Cube root function</string>
+    <string name="cubeDescription">Cubing operation</string>
+    <string name="rootDescription">Root function with an arbitrary basis</string>
+    <string name="hypotDescription">Hypotenuse function</string>
+    <string name="ceilDescription">Ceil function</string>
+    <string name="absDescription">Absolute value function</string>
+    <string name="floorDescription">Floor function</string>
+    <string name="roundDescription">Round function</string>
+    <string name="fractionDescription">Fraction function</string>
+    <string name="piDescription">Pi constant</string>
+    <string name="eDescription">Euler constant</string>
+
+    <!-- Error messages -->
     <string name="invalidExpression">Invalid expression</string>
-    <string name="illegalArgument">Illegal argument</string>
+    <string name="invalidArgument">Invalid argument</string>
+    <string name="invalidArgumentsNumber">Invalid number of arguments</string>
     <string name="divisionByZero">Division by zero</string>
-    <string name="unknownError">Error</string>
+    <string name="genericError">Error</string>
 </resources>

@@ -1,27 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Widget.CalculationPanel.ToolbarStyle.Primary" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
 
-    <style name="ButtonStyle" parent="Widget.Material3.Button">
-        <item name="android:padding">@dimen/button_padding</item>
+    <style name="Widget.CalculationPanel.TextView.CalculationFieldLabel" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="Widget.CalculationPanel.TextView.CalculationField" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">?attr/textAppearanceTitleLarge</item>
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:singleLine">true</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:layout_margin">@dimen/button_margin</item>
-        <item name="android:textAppearance">@style/TextAppearance.Material3.LabelLarge</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">0dp</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:gravity">end|center_vertical</item>
     </style>
 
-    <style name="OperationButtonStyle" parent="ButtonStyle">
-        <item name="android:textColor">?attr/colorOnSecondary</item>
+    <style name="Widget.CalculationPanel.TextView.CalculationField.Result">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Widget.CalculationPanel.Button" parent="">
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:minWidth">@dimen/minTouchableWidth</item>
+        <item name="android:minHeight">@dimen/minTouchableHeight</item>
+        <item name="elevation">0dp</item>
+
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="android:lines">1</item>
+        <item name="android:textAllCaps">true</item>
+
+        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:scaleType">fitCenter</item>
+
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+        <item name="backgroundTintMode">src_atop</item>
+        <item name="tintMode">src_atop</item>
+    </style>
+
+    <style name="Widget.CalculationPanel.Button.Operation">
         <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="tint">?attr/colorOnSecondary</item>
     </style>
 
-    <style name="ControlButtonStyle" parent="ButtonStyle">
-        <item name="android:textColor">?attr/colorOnTertiary</item>
+    <style name="Widget.CalculationPanel.Button.Control">
         <item name="backgroundTint">?attr/colorTertiary</item>
+        <item name="android:textColor">?attr/colorOnTertiary</item>
+        <item name="tint">?attr/colorOnTertiary</item>
     </style>
 
-    <style name="DividerStyle" parent="Widget.Material3.MaterialDivider">
-        <item name="dividerColor">?attr/colorOnBackground</item>
+    <style name="Widget.CalculationPanel.Button.Function">
+        <item name="android:textAppearance">?attr/textAppearanceLabelMedium</item>
+    </style>
+
+    <style name="Widget.CalculationPanel.Button.Control.AngleUnit">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelSmall</item>
+    </style>
+
+    <style name="Widget.CalculationPanel.MaterialDivider" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerThickness">@dimen/strokeWidth</item>
     </style>
 </resources>

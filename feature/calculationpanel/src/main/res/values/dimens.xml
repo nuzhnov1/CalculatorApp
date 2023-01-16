@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="layout_padding">6dp</dimen>
-    <dimen name="divider_margin">2dp</dimen>
-    <dimen name="divider_thickness">2dp</dimen>
-    <dimen name="button_padding">2dp</dimen>
-    <dimen name="button_margin">2dp</dimen>
+    <dimen name="layoutPadding">4dp</dimen>
+    <dimen name="minTouchableWidth">88dp</dimen>
+    <dimen name="minTouchableHeight">48dp</dimen>
+    <dimen name="strokeWidth">2dp</dimen>
+    <dimen name="buttonStrokeWidth">1dp</dimen>
+    <dimen name="cornerRadius">28dp</dimen>
 </resources>

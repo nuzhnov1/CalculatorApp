@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/functions"
+        android:title="@string/functionsItem"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/history"
+        android:title="@string/calculationHistoryItem"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settingsItem"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/aboutItem"
+        app:showAsAction="never" />
+</menu>
