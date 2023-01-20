@@ -28,7 +28,7 @@
 
     <style name="Widget.CalculationPanel.Button" parent="">
         <item name="android:layout_margin">4dp</item>
-        <item name="android:padding">2dp</item>
+        <item name="android:padding">0dp</item>
         <item name="android:minWidth">@dimen/minTouchableWidth</item>
         <item name="android:minHeight">@dimen/minTouchableHeight</item>
         <item name="elevation">0dp</item>
@@ -37,7 +37,7 @@
         <item name="android:focusable">true</item>
         <item name="android:gravity">center</item>
 
-        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelSmall</item>
         <item name="autoSizeTextType">uniform</item>
         <item name="android:lines">1</item>
         <item name="android:textAllCaps">true</item>
@@ -64,14 +64,10 @@
         <item name="tint">?attr/colorOnTertiary</item>
     </style>
 
-    <style name="Widget.CalculationPanel.Button.Function">
-        <item name="android:textAppearance">?attr/textAppearanceLabelMedium</item>
-    </style>
+    <style name="Widget.CalculationPanel.Button.Function" />
 
     <style name="Widget.CalculationPanel.Button.Control.AngleUnit">
         <item name="android:layout_margin">0dp</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:textAppearance">?attr/textAppearanceLabelSmall</item>
     </style>
 
     <style name="Widget.CalculationPanel.MaterialDivider" parent="Widget.Material3.MaterialDivider">

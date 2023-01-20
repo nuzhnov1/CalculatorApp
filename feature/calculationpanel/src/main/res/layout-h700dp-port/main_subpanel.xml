@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="fragment" type="com.sunman.feature.calculationpanel.ui.CalculationPanelFragment" />
@@ -22,7 +23,6 @@
             <ImageButton
                 android:id="@+id/collapseButton"
                 style="@style/Widget.CalculationPanel.Button.Control"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/collapseDescription"
@@ -31,7 +31,6 @@
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Operation"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/comma"
@@ -39,7 +38,6 @@
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Operation"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/powerDescription"
@@ -48,7 +46,6 @@
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Operation"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/sqrtDescription"
@@ -57,7 +54,6 @@
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Operation"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/factorialDescription"
@@ -66,7 +62,6 @@
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Control"
-                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/inversionDescription"
@@ -76,7 +71,9 @@
 
         <include
             android:id="@+id/functionsSubpanel"
-            layout="@layout/functions_subpanel" />
+            layout="@layout/functions_subpanel"
+            android:visibility="GONE"
+            tools:visibility="VISIBLE" />
 
         <TableRow
             android:layout_weight="1"

@@ -35,7 +35,6 @@
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/comma"
@@ -43,7 +42,6 @@
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/powerDescription"
@@ -52,7 +50,6 @@
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/sqrtDescription"
@@ -61,7 +58,6 @@
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/factorialDescription"
@@ -70,7 +66,6 @@
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Control"
-                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/inversionDescription"

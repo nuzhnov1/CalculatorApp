@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="3"
     tools:context=".ui.CalculationPanelFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -20,15 +19,12 @@
 
     <include
         android:id="@+id/expressionSubpanel"
-        layout="@layout/expression_subpanel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        layout="@layout/expression_subpanel" />
 
     <include
         android:id="@+id/mainSubpanel"
         layout="@layout/main_subpanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2" />
+        android:layout_weight="1" />
 </LinearLayout>
