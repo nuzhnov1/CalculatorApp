@@ -235,6 +235,7 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:padding="@dimen/iconPadding"
                     android:contentDescription="@string/backDescription"
                     app:srcCompat="@drawable/ic_baseline_backspace_24"
                     android:onClick="@{() -> viewModel.removeOneItemFromCalculationString()" />

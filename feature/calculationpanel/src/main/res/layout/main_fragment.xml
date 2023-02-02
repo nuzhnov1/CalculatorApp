@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="4"
     tools:context=".ui.CalculationPanelFragment">
 
+    <!-- TODO: move that to activity layout -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
         style="@style/Widget.CalculationPanel.ToolbarStyle.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/toolbar_menu"
-        app:title="@string/toolbar_calculationpanel_title"
-        tools:title="Calculator" />
+        tools:menu="@menu/toolbar_menu"
+        tools:title="@string/calculationpanelTitle"
+        tools:visibility="visible" />
 
     <include
-        android:id="@+id/expressionSubpanel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        layout="@layout/expression_subpanel" />
+        android:id="@+id/calculationPanel"
+        layout="@layout/calculation_panel" />
 
-    <include
-        android:id="@+id/mainSubpanel"
-        layout="@layout/main_subpanel"
+    <!-- TODO: replace this to fragment -->
+    <View
+        android:id="@+id/historyFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3" />
+        android:layout_weight="1" />
 </LinearLayout>

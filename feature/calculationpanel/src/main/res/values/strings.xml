@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="toolbar_calculationpanel_title" />
-
     <!-- Menu items -->
     <string name="functionsItem">Functions</string>
     <string name="calculationHistoryItem">Calculation history</string>
