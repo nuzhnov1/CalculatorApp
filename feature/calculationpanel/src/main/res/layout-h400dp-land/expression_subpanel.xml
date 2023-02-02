@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.sunman.feature.calculationpanel.ui.UtilKt" />
+        <variable name="fragment" type="com.sunman.feature.calculationpanel.ui.CalculationPanelFragment" />
+        <variable name="viewModel" type="com.sunman.feature.calculationpanel.presentation.CalculationPanelViewModel" />
+    </data>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/calculation_field_shape"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <TableRow
+            android:layout_weight="1"
+            android:padding="@dimen/layoutPadding"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Widget.CalculationPanel.TextView.CalculationFieldLabel"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/layoutPadding"
+                android:paddingEnd="@dimen/layoutPadding"
+                android:text="@string/calculationField" />
+
+            <Button
+                style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment)}"
+                android:onClick="@{() -> fragment.changeAngleUnit()}"
+                tools:text="@string/rad" />
+        </TableRow>
+
+        <com.google.android.material.divider.MaterialDivider
+            style="@style/Widget.CalculationPanel.MaterialDivider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/Widget.CalculationPanel.TextView.CalculationField"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/layoutPadding"
+            android:paddingBottom="@dimen/layoutPadding"
+            android:paddingStart="@dimen/halfCornerRadius"
+            android:paddingEnd="@dimen/halfCornerRadius"
+            android:minHeight="@dimen/minTouchableHeight"
+            android:text="@{viewModel.calculationString}"
+            tools:text="1 * 2 + 3" />
+
+        <TextView
+            style="@style/Widget.CalculationPanel.TextView.CalculationField.Result"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/layoutPadding"
+            android:paddingBottom="@dimen/layoutPadding"
+            android:paddingStart="@dimen/halfCornerRadius"
+            android:paddingEnd="@dimen/halfCornerRadius"
+            android:minHeight="@dimen/minTouchableHeight"
+            android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment)}"
+            tools:text="5" />
+    </TableLayout>
+</layout>

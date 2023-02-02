@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:keepScreenOn="true"
     android:orientation="vertical"
     tools:context=".ui.CalculationPanelFragment">
-
-    <!-- TODO: move that to activity layout -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        style="@style/Widget.CalculationPanel.ToolbarStyle.Primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/toolbar_menu"
-        app:title="@string/toolbar_calculationpanel_title"
-        tools:title="Calculator" />
 
     <include
         android:id="@+id/expressionSubpanel"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.sunman.feature.calculationpanel.ui.UtilKt" />
+        <variable name="fragment" type="com.sunman.feature.calculationpanel.ui.CalculationPanelFragment" />
+        <variable name="viewModel" type="com.sunman.feature.calculationpanel.presentation.CalculationPanelViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layoutPadding"
+        android:background="@drawable/calculation_field_shape"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment)}"
+            android:onClick="@{() -> fragment.changeAngleUnit()}"
+            tools:text="@string/rad" />
+
+        <TextView
+            style="@style/Widget.CalculationPanel.TextView.CalculationField"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/halfCornerRadius"
+            android:paddingEnd="@dimen/halfCornerRadius"
+            android:minHeight="@dimen/minTouchableHeight"
+            android:text="@{viewModel.calculationString}"
+            tools:text="1 * 2 + 3" />
+    </LinearLayout>
+</layout>
