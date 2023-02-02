@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/layoutPadding"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
         <TableRow
             android:layout_weight="1"
@@ -72,8 +72,8 @@
         <include
             android:id="@+id/functionsSubpanel"
             layout="@layout/inversion_functions_subpanel"
-            android:visibility="GONE"
-            tools:visibility="VISIBLE" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TableRow
             android:layout_weight="1"

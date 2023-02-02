@@ -5,7 +5,7 @@
     </style>
 
     <style name="Widget.CalculationPanel.TextView.CalculationFieldLabel" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="android:textAppearance">?attr/textAppearanceTitleLarge</item>
         <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
         <item name="autoSizeTextType">uniform</item>
         <item name="android:gravity">start|center_vertical</item>

@@ -11,21 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layoutPadding"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/functionsSubpanel"
-            layout="@layout/inversion_functions_subpanel"
+            layout="@layout/functions_subpanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content" />
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:padding="@dimen/layoutPadding"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="6">
 
@@ -45,16 +41,16 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:contentDescription="@string/logDescription"
-                    android:text="@string/log"
+                    android:contentDescription="@string/powerDescription"
+                    android:text="@string/power"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:contentDescription="@string/sqrDescription"
-                    android:text="@string/sqr"
+                    android:contentDescription="@string/sqrtDescription"
+                    android:text="@string/sqrt"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
                 <Button

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="layoutPadding">4dp</dimen>
+    <dimen name="iconPadding">4dp</dimen>
     <dimen name="minTouchableWidth">88dp</dimen>
     <dimen name="minTouchableHeight">48dp</dimen>
     <dimen name="strokeWidth">2dp</dimen>
     <dimen name="buttonStrokeWidth">1dp</dimen>
     <dimen name="cornerRadius">28dp</dimen>
+    <dimen name="halfCornerRadius">14dp</dimen>
 </resources>

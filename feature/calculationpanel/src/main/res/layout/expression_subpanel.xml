@@ -46,7 +46,10 @@
             style="@style/Widget.CalculationPanel.TextView.CalculationField"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/layoutPadding"
+            android:paddingTop="@dimen/layoutPadding"
+            android:paddingBottom="@dimen/layoutPadding"
+            android:paddingStart="@dimen/halfCornerRadius"
+            android:paddingEnd="@dimen/halfCornerRadius"
             android:minHeight="@dimen/minTouchableHeight"
             android:text="@{viewModel.calculationString}"
             tools:text="1 * 2 + 3" />
@@ -55,7 +58,10 @@
             style="@style/Widget.CalculationPanel.TextView.CalculationField.Result"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:padding="@dimen/layoutPadding"
+            android:paddingTop="@dimen/layoutPadding"
+            android:paddingBottom="@dimen/layoutPadding"
+            android:paddingStart="@dimen/halfCornerRadius"
+            android:paddingEnd="@dimen/halfCornerRadius"
             android:minHeight="@dimen/minTouchableHeight"
             android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment)}"
             tools:text="5" />
