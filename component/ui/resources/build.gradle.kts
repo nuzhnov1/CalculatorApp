@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "com.sunman.component.ui.resources"
     compileSdk = 33
 
     defaultConfig {

@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    namespace = "com.sunman.feature.main"
     compileSdk = 33
 
     defaultConfig {

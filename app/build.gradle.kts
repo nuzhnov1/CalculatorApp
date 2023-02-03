@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "com.sunman.calculatorapp"
     compileSdk = 33
 
     defaultConfig {
