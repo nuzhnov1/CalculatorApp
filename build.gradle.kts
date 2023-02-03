@@ -13,6 +13,6 @@ buildscript {
 }
 
 group = "com.sunman"
-version = "0.3"
+version = "0.5"
 status = "in progress"
 description = "Yet another implementation of the calculator for Android"

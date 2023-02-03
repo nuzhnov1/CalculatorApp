@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -20,5 +22,5 @@ rootProject.name = "CalculatorApp"
 
 include(":app")
 include(":libcalculator")
-include(":feature:calculationpanel")
+include(":feature:main")
 include(":component:ui:resources")
