@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">CalculatorApp</string>
-    <string name="title_calculationpanel">CalculationPanel</string>
+    <string name="mainTitle">Calculator</string>
 </resources>

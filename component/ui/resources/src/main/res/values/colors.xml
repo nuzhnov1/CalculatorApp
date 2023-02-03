@@ -31,6 +31,7 @@
     <color name="md_theme_light_surfaceTint">#00696B</color>
     <color name="md_theme_light_outlineVariant">#BEC8C8</color>
     <color name="md_theme_light_scrim">#000000</color>
+    <color name="md_theme_light_accent">#6F7979</color>
     <color name="md_theme_dark_primary">#4CDADD</color>
     <color name="md_theme_dark_onPrimary">#003738</color>
     <color name="md_theme_dark_primaryContainer">#004F51</color>
@@ -61,4 +62,5 @@
     <color name="md_theme_dark_surfaceTint">#4CDADD</color>
     <color name="md_theme_dark_outlineVariant">#3F4949</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="md_theme_dark_accent">#6F7979</color>
 </resources>

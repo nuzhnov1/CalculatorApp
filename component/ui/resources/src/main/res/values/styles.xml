@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.CalculatorApp.PopupMenu.Overflow" parent="Widget.Material3.PopupMenu.Overflow">
+        <item name="popupMenuBackground">@drawable/overflow_popup_background</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+</resources>

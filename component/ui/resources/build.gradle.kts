@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id(libs.plugins.android.library.get().pluginId)
@@ -8,7 +10,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 18
+        minSdk = 14
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -17,10 +19,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles("proguard-rules.pro")
         }
     }
 
@@ -37,9 +36,4 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
-
-    testImplementation(libs.junit4)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso)
 }
