@@ -32,7 +32,7 @@
                 style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment)}"
+                android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
                 android:onClick="@{() -> fragment.changeAngleUnit()}"
                 tools:text="@string/rad" />
         </TableRow>
@@ -63,7 +63,7 @@
             android:paddingStart="@dimen/halfCornerRadius"
             android:paddingEnd="@dimen/halfCornerRadius"
             android:minHeight="@dimen/minTouchableHeight"
-            android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment)}"
+            android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment.getActivity())}"
             tools:text="5" />
     </TableLayout>
 </layout>
