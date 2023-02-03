@@ -8,8 +8,8 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
-    implementation(libs.kotlin.bigmath)
     implementation(libs.bigmath)
+    implementation(libs.bigmath.kotlin)
 
     testImplementation(libs.junit4)
 

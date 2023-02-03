@@ -5,7 +5,7 @@ bigMathVersion = "2.3.0"
 androidApplicationVersion = "7.2.2"
 androidGradleVersion = "7.4.0"
 androidLibraryVersion = "7.2.2"
-androidxCoreKtxVersion = "1.9.0"
+androidxCoreVersion = "1.9.0"
 androidxAppcompatVersion = "1.5.1"
 materialVersion = "1.7.0"
 androidxFragmentVersion = "1.5.4"
@@ -34,17 +34,21 @@ dokka-gradle = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", ve
 
 kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
 bigmath = { group = "ch.obermuhlner", name = "big-math", version.ref = "bigMathVersion" }
-kotlin-bigmath = { group = "ch.obermuhlner", name = "kotlin-big-math", version.ref = "bigMathVersion" }
+bigmath-kotlin = { group = "ch.obermuhlner", name = "kotlin-big-math", version.ref = "bigMathVersion" }
 
 dokka-kotlinAsJava = { group = "org.jetbrains.dokka", name = "kotlin-as-java-plugin", version.ref = "dokkaKotlinAsJavaVersion" }
 
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreKtxVersion" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompatVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
-androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidxFragmentVersion" }
-androidx-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycleVersion" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "androidxCoreVersion" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreVersion" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompatVersion" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "androidxFragmentVersion" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidxFragmentVersion" }
+androidx-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidxLifecycleVersion" }
+androidx-viewModel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycleVersion" }
 androidx-viewModel-savedState = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "androidxLifecycleVersion" }
-androidx-liveData = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycleVersion" }
+androidx-liveData = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "androidxLifecycleVersion" }
+androidx-liveData-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycleVersion" }
 androidx-lifecycleCompiler = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "androidxLifecycleVersion" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4Version" }
 androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidxCoreTesting" }

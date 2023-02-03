@@ -42,17 +42,20 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.fragment)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
     implementation(projects.component.ui.resources)
     implementation(projects.libcalculator)
 
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
     implementation(libs.androidx.viewModel)
+    implementation(libs.androidx.viewModel.ktx)
     implementation(libs.androidx.viewModel.savedState)
     implementation(libs.androidx.liveData)
+    implementation(libs.androidx.liveData.ktx)
 
     kapt(libs.androidx.lifecycleCompiler)
 
