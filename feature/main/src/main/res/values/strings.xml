@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Menu items -->
-    <string name="functionsItem">Functions</string>
+    <string name="functionsMenuItem">Functions</string>
     <string name="calculationHistoryItem">Calculation history</string>
-    <string name="settingsItem">Settings</string>
-    <string name="aboutItem">About program</string>
+    <string name="settingsMenuItem">Settings</string>
+    <string name="aboutMenuItem">About program</string>
 
     <!-- UI strings -->
     <string name="calculationField">Current expression</string>

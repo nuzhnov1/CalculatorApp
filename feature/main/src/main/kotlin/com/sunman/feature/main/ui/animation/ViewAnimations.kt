@@ -5,34 +5,30 @@ import android.view.View
 import android.view.ViewGroup
 import com.sunman.feature.main.R
 
-fun View.animateVerticalCollapse() {
-    layoutParams = ViewGroup.LayoutParams(width, height)
+fun View.getAnimatorOfVerticalCollapse(): ValueAnimator = ValueAnimator.ofInt(height, 0).apply {
+    addUpdateListener {
+        layoutParams.height = it.animatedValue as Int
+        requestLayout()
+        invalidate()
+    }
 
-    ValueAnimator.ofInt(height, 0).apply {
-        addUpdateListener {
-            layoutParams.height = it.animatedValue as Int
-            requestLayout()
-            invalidate()
+    addListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationStart(animation: Animator) {
+            isFocusable = false
         }
 
-        addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator) {
-                isFocusable = false
-            }
+        override fun onAnimationEnd(animation: Animator) {
+            visibility = View.GONE
+        }
+    })
 
-            override fun onAnimationEnd(animation: Animator) {
-                visibility = View.GONE
-            }
-        })
-
-        duration = context.resources.getInteger(R.integer.animationDuration).toLong()
-    }.start()
+    duration = context.resources.getInteger(R.integer.animationDuration).toLong()
 }
 
-fun View.animateVerticalExpand(layoutParameters: ViewGroup.LayoutParams) {
+fun View.getAnimatorOfVerticalExpand(layoutParameters: ViewGroup.LayoutParams): ValueAnimator {
     measure(layoutParameters.width, layoutParameters.height)
 
-    ValueAnimator.ofInt(0, measuredHeight).apply {
+    return ValueAnimator.ofInt(0, measuredHeight).apply {
         visibility = View.VISIBLE
         layoutParams.height = 1
 
@@ -44,7 +40,6 @@ fun View.animateVerticalExpand(layoutParameters: ViewGroup.LayoutParams) {
 
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
-                layoutParams = layoutParameters
                 requestLayout()
                 invalidate()
 
@@ -53,16 +48,15 @@ fun View.animateVerticalExpand(layoutParameters: ViewGroup.LayoutParams) {
         })
 
         duration = context.resources.getInteger(R.integer.animationDuration).toLong()
-    }.start()
+    }
 }
 
-fun View.animateReplaceView(newView: View, replaceView: () -> Unit) {
+fun View.getAnimatorOfReplaceView(newView: View, replaceView: () -> Unit): AnimatorSet {
     val animationDuration = context.resources.getInteger(R.integer.animationDuration).toLong()
 
     val hideOldViewAnimator = ObjectAnimator
         .ofFloat(this, "alpha", alpha, 0f)
         .apply {
-            duration = animationDuration / 2
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator) {
                     isFocusable = false
@@ -72,12 +66,13 @@ fun View.animateReplaceView(newView: View, replaceView: () -> Unit) {
                     replaceView()
                 }
             })
+
+            duration = animationDuration / 2
         }
 
     val showNewViewAnimator = ObjectAnimator
         .ofFloat(newView, "alpha", 0f, 1f)
         .apply {
-            duration = animationDuration / 2
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator) {
                     isFocusable = false
@@ -87,9 +82,9 @@ fun View.animateReplaceView(newView: View, replaceView: () -> Unit) {
                     isFocusable = true
                 }
             })
+
+            duration = animationDuration / 2
         }
 
-    AnimatorSet().apply {
-        play(showNewViewAnimator).after(hideOldViewAnimator)
-    }.start()
+    return AnimatorSet().apply { play(showNewViewAnimator).after(hideOldViewAnimator) }
 }

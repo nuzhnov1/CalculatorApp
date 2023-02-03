@@ -1,24 +1,32 @@
 package com.sunman.feature.main.ui
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.sunman.feature.main.R
 import com.sunman.feature.main.databinding.InversionMainSubpanelBinding
 import com.sunman.feature.main.databinding.MainFragmentBinding
 import com.sunman.feature.main.databinding.MainSubpanelBinding
-import com.sunman.feature.main.presentation.CalculationPanelViewModel
-import com.sunman.feature.main.ui.animation.animateReplaceView
-import com.sunman.feature.main.ui.animation.animateVerticalCollapse
-import com.sunman.feature.main.ui.animation.animateVerticalExpand
+import com.sunman.feature.main.presentation.HISTORY_FRAGMENT_MIN_HEIGHT
+import com.sunman.feature.main.presentation.MainViewModel
+import com.sunman.feature.main.ui.animation.getAnimatorOfReplaceView
+import com.sunman.feature.main.ui.animation.getAnimatorOfVerticalCollapse
+import com.sunman.feature.main.ui.animation.getAnimatorOfVerticalExpand
 import com.sunman.feature.main.ui.animation.setAnimationsOnAllButtons
 import com.sunman.libcalculator.AngleUnit
 
-class CalculationPanelFragment : Fragment() {
+class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
@@ -26,7 +34,7 @@ class CalculationPanelFragment : Fragment() {
     private var isFunctionSubpanelVisible = false
     private var isInverseFunctionsUsed = false
 
-    private val viewModel: CalculationPanelViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -41,14 +49,22 @@ class CalculationPanelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.root.setAnimationsOnAllButtons()
 
+        binding.toolbar.apply {
+            inflateMenu(R.menu.toolbar_menu)
+            setOnMenuItemClickListener(::onMenuItemClicked)
+        }
+
         binding.calculationPanel.apply {
-            expressionSubpanel.fragment = this@CalculationPanelFragment
+            expressionSubpanel.fragment = this@MainFragment
             expressionSubpanel.viewModel = viewModel
-            mainSubpanel.fragment = this@CalculationPanelFragment
+            mainSubpanel.fragment = this@MainFragment
             mainSubpanel.viewModel = viewModel
-            mainSubpanel.functionsSubpanel?.fragment = this@CalculationPanelFragment
+            mainSubpanel.functionsSubpanel?.fragment = this@MainFragment
             mainSubpanel.functionsSubpanel?.viewModel = viewModel
         }
+
+        hideToolbarOnSmallLandscapeScreens()
+        hideHistoryFragmentOnSmallScreens()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -86,15 +102,25 @@ class CalculationPanelFragment : Fragment() {
         binding.calculationPanel.mainSubpanel.functionsSubpanel?.root?.apply {
             isFunctionSubpanelVisible = !isFunctionSubpanelVisible
 
-            if (isFunctionSubpanelVisible) {
-                animateVerticalExpand(
+            val functionSubpanelAnimator = if (isFunctionSubpanelVisible) {
+                getAnimatorOfVerticalExpand(
                     LayoutParams(
                         LayoutParams.MATCH_PARENT,
                         LayoutParams.WRAP_CONTENT
                     )
                 )
             } else {
-                animateVerticalCollapse()
+                getAnimatorOfVerticalCollapse()
+            }
+
+            functionSubpanelAnimator.apply {
+                addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        binding.historyFragment.getAnimatorOfHistoryFragment()?.start()
+                    }
+                })
+
+                start()
             }
         }
     }
@@ -116,16 +142,82 @@ class CalculationPanelFragment : Fragment() {
                     .root
             }
 
-            animateReplaceView(newView) {
+            getAnimatorOfReplaceView(newView) {
                 parent.removeViewAt(index)
                 parent.addView(newView, index)
-            }
+            }.start()
         }
     }
 
     fun addButtonTextToInputString(view: View) {
         val buttonText = (view as Button).text.toString()
         viewModel.addItemToCalculationString(buttonText.toDisplayableRepresentation())
+    }
+
+    private fun onMenuItemClicked(menuItem: MenuItem) = when (menuItem.itemId) {
+        R.id.functionsMenuItem -> {
+            // TODO: implemented navigate to functions fragment
+            true
+        }
+
+        R.id.historyMenuItem -> {
+            // TODO: implemented navigate to history fragment
+            true
+        }
+
+        R.id.settingsMenuItem -> {
+            // TODO: implemented navigate to settings fragment
+            true
+        }
+
+        R.id.aboutMenuItem -> {
+            // TODO: implemented navigate to about fragment
+            true
+        }
+
+        else -> false
+    }
+
+    private fun hideToolbarOnSmallLandscapeScreens() {
+        val activity = requireActivity()
+        val resources = activity.resources
+        val orientation = resources.configuration.orientation
+        val windowHeight = resources.displayMetrics.heightPixels.toDP(activity)
+
+        if ((orientation == Configuration.ORIENTATION_LANDSCAPE) &&
+            (windowHeight < 360 || windowHeight in 400..479)) {
+
+            binding.toolbar.visibility = View.GONE
+        }
+    }
+
+    private fun hideHistoryFragmentOnSmallScreens() {
+        val windowHeight = binding.historyFragment.height.toDP(requireActivity())
+
+        if (windowHeight < 150) {
+            binding.historyFragment.visibility = View.GONE
+        }
+    }
+
+    private fun View.getAnimatorOfHistoryFragment(): ValueAnimator? {
+        val height = height.toDP(requireActivity())
+
+        return when {
+            visibility == View.VISIBLE && height < HISTORY_FRAGMENT_MIN_HEIGHT -> {
+                getAnimatorOfVerticalCollapse()
+            }
+
+            visibility == View.GONE && height >= HISTORY_FRAGMENT_MIN_HEIGHT -> {
+                getAnimatorOfVerticalExpand(
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                )
+            }
+
+            else -> null
+        }
     }
 
     private fun String.toDisplayableRepresentation() =

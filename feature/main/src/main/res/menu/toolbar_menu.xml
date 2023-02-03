@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/functions"
-        android:title="@string/functionsItem"
+        android:id="@+id/functionsMenuItem"
+        android:title="@string/functionsMenuItem"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/history"
+        android:id="@+id/historyMenuItem"
         android:title="@string/calculationHistoryItem"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/settings"
-        android:title="@string/settingsItem"
+        android:id="@+id/settingsMenuItem"
+        android:title="@string/settingsMenuItem"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/about"
-        android:title="@string/aboutItem"
+        android:id="@+id/aboutMenuItem"
+        android:title="@string/aboutMenuItem"
         app:showAsAction="never" />
 </menu>

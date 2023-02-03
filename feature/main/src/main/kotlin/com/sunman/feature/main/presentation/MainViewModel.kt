@@ -8,7 +8,7 @@ import com.sunman.libcalculator.*
 import com.sunman.libcalculator.Nothing
 import com.sunman.libcalculator.Number
 
-class CalculationPanelViewModel(private val state: SavedStateHandle) : ViewModel() {
+class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     private val _calculationString = state.getLiveData(CALCULATION_STRING, "")
     val calculationString = Transformations.map(_calculationString) {

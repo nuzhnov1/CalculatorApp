@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="fragment" type="com.sunman.feature.main.ui.CalculationPanelFragment" />
-        <variable name="viewModel" type="com.sunman.feature.main.presentation.CalculationPanelViewModel" />
+        <variable name="fragment" type="com.sunman.feature.main.ui.MainFragment" />
+        <variable name="viewModel" type="com.sunman.feature.main.presentation.MainViewModel" />
     </data>
 
     <TableLayout

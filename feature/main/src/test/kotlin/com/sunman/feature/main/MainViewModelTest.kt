@@ -3,27 +3,27 @@ package com.sunman.feature.main
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
-import com.sunman.feature.main.presentation.CalculationPanelViewModel
+import com.sunman.feature.main.presentation.MainViewModel
 import com.sunman.libcalculator.AngleUnit
 import com.sunman.libcalculator.CalculationResult
 import org.junit.*
 import org.junit.Assert.assertEquals
 
-class CalculationPanelViewModelTest {
+class MainViewModelTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: CalculationPanelViewModel
+    private lateinit var viewModel: MainViewModel
     private val calculationStringObserver = Observer<String> {}
     private val calculationResultObserver = Observer<CalculationResult> {}
 
     @Before
     fun beforeEach() {
-        val initialState = mapOf(CalculationPanelViewModel.CALCULATION_STRING to "")
+        val initialState = mapOf(MainViewModel.CALCULATION_STRING to "")
         val savedStateHandle = SavedStateHandle(initialState)
 
-        viewModel = CalculationPanelViewModel(savedStateHandle).apply {
+        viewModel = MainViewModel(savedStateHandle).apply {
             calculationString.observeForever(calculationStringObserver)
             calculationResult.observeForever(calculationResultObserver)
         }
@@ -200,13 +200,13 @@ class CalculationPanelViewModelTest {
         @BeforeClass
         @JvmStatic
         fun start() {
-            println("Testing methods of the CalculationPanelViewModel class...")
+            println("Testing methods of the MainViewModel class...")
         }
 
         @AfterClass
         @JvmStatic
         fun finish() {
-            println("Testing methods of the CalculationPanelViewModel class... OK")
+            println("Testing methods of the MainViewModel class... OK")
         }
     }
 }

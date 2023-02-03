@@ -34,17 +34,16 @@ fun ViewGroup.setAnimationsOnAllButtons(): Unit = children.forEach {
 
 private fun View.animateOnClick(motionEvent: MotionEvent) = when (motionEvent.actionMasked) {
     MotionEvent.ACTION_DOWN -> {
-        performClick()
-
-        if (id == R.id.collapseButton) {
-            (this as ImageButton).animateArrowRotation()
-        }
-
         buttonCornerResizeAnimator.start()
         buttonChangingAlphaAnimator?.start()
     }
 
     MotionEvent.ACTION_UP -> {
+        performClick()
+        if (id == R.id.collapseButton) {
+            (this as ImageButton).animateArrowRotation()
+        }
+
         buttonCornerResizeAnimator.reverse()
         buttonChangingAlphaAnimator?.reverse()
     }
@@ -81,6 +80,7 @@ private fun ImageButton.animateArrowRotation() {
                 setImageDrawable(nextAnimation)
             }
         })
+
         start()
     }
 }
@@ -90,13 +90,14 @@ private val View.buttonCornerResizeAnimator: ValueAnimator get() {
     val pressedButtonCornerRadius = buttonCornerRadius / 4
 
     return ValueAnimator.ofFloat(buttonCornerRadius, pressedButtonCornerRadius).apply {
-        duration = context.resources.getInteger(R.integer.animationDuration).toLong()
         addUpdateListener {
             val shape = background as GradientDrawable
 
             shape.cornerRadius = it.animatedValue as Float
             invalidate()
         }
+
+        duration = context.resources.getInteger(R.integer.animationDuration).toLong()
     }
 }
 
