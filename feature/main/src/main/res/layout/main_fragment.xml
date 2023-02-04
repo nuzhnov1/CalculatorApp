@@ -16,8 +16,12 @@
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/calculationPanel"
-        layout="@layout/calculation_panel" />
+        android:id="@+id/expressionSubpanel"
+        layout="@layout/expression_subpanel" />
+
+    <include
+        android:id="@+id/mainSubpanel"
+        layout="@layout/main_subpanel" />
 
     <!-- TODO: replace this to fragment -->
     <View

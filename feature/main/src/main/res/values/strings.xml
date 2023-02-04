@@ -6,16 +6,15 @@
     <string name="settingsMenuItem">Settings</string>
     <string name="aboutMenuItem">About program</string>
 
-    <!-- UI strings -->
-    <string name="calculationField">Current expression</string>
+    <!-- Descriptions and hints of the expression subpanel items -->
+    <string name="angleUnitDescription">Angle unit</string>
+    <string name="calculationFieldHint">Current expression</string>
+    <string name="calculationResultHint">Calculation result</string>
 
     <!-- Angle units -->
     <string name="rad">RAD</string>
     <string name="deg">DEG</string>
     <string name="grad">GRAD</string>
-
-    <!-- Descriptions of the expression subpanel items -->
-    <string name="angleUnitDescription">Angle unit</string>
 
     <!-- Main subpanel items -->
     <string name="comma">,</string>

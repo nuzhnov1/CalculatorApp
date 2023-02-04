@@ -8,34 +8,39 @@
         <variable name="viewModel" type="com.sunman.feature.main.presentation.MainViewModel" />
     </data>
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/calculation_field_shape"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:orientation="vertical">
 
-        <TableRow
-            android:layout_weight="1"
-            android:padding="@dimen/layoutPadding"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/Widget.CalculationPanel.TextView.CalculationFieldLabel"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingStart="@dimen/layoutPadding"
-                android:paddingEnd="@dimen/layoutPadding"
-                android:text="@string/calculationField" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <Button
                 style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
                 android:onClick="@{() -> fragment.changeAngleUnit()}"
                 tools:text="@string/rad" />
-        </TableRow>
+
+            <TextView
+                style="@style/Widget.CalculationPanel.TextView.CalculationField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/layout_padding"
+                android:hint="@string/calculationFieldHint"
+                android:text="@{viewModel.calculationString}"
+                tools:text="1 * 2 + 3" />
+        </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
             style="@style/Widget.CalculationPanel.MaterialDivider"
@@ -43,27 +48,15 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            style="@style/Widget.CalculationPanel.TextView.CalculationField"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:paddingTop="@dimen/layoutPadding"
-            android:paddingBottom="@dimen/layoutPadding"
-            android:paddingStart="@dimen/halfCornerRadius"
-            android:paddingEnd="@dimen/halfCornerRadius"
-            android:minHeight="@dimen/minTouchableHeight"
-            android:text="@{viewModel.calculationString}"
-            tools:text="1 * 2 + 3" />
-
-        <TextView
             style="@style/Widget.CalculationPanel.TextView.CalculationField.Result"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:paddingTop="@dimen/layoutPadding"
-            android:paddingBottom="@dimen/layoutPadding"
-            android:paddingStart="@dimen/halfCornerRadius"
-            android:paddingEnd="@dimen/halfCornerRadius"
-            android:minHeight="@dimen/minTouchableHeight"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingBottom="@dimen/layout_padding"
+            android:paddingStart="@dimen/btn_corner_half_radius"
+            android:paddingEnd="@dimen/btn_corner_half_radius"
+            android:hint="@string/calculationResultHint"
             android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment.getActivity())}"
             tools:text="5" />
-    </TableLayout>
+    </LinearLayout>
 </layout>

@@ -11,14 +11,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layoutPadding"
+        android:padding="@dimen/layout_padding"
         android:background="@drawable/calculation_field_shape"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <Button
             style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_padding"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
             android:onClick="@{() -> fragment.changeAngleUnit()}"
             tools:text="@string/rad" />
@@ -26,11 +30,10 @@
         <TextView
             style="@style/Widget.CalculationPanel.TextView.CalculationField"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingStart="@dimen/halfCornerRadius"
-            android:paddingEnd="@dimen/halfCornerRadius"
-            android:minHeight="@dimen/minTouchableHeight"
+            android:padding="@dimen/layout_padding"
+            android:hint="@string/calculationFieldHint"
             android:text="@{viewModel.calculationString}"
             tools:text="1 * 2 + 3" />
     </LinearLayout>

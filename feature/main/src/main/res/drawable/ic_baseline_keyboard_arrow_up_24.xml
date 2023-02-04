@@ -28,7 +28,7 @@
                 android:propertyName="rotation"
                 android:valueFrom="180"
                 android:valueTo="0"
-                android:duration="@integer/animationDuration" />
+                android:duration="@integer/btn_anim_duration" />
         </aapt:attr>
     </target>
 </animated-vector>

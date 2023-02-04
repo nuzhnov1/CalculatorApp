@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layoutPadding"
+        android:padding="@dimen/layout_padding"
         android:orientation="vertical">
 
         <include
@@ -34,6 +34,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/comma"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -41,6 +43,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/powerDescription"
                     android:text="@string/power"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -49,6 +53,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/sqrtDescription"
                     android:text="@string/sqrt"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -57,6 +63,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/factorialDescription"
                     android:text="@string/factorial"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -65,6 +73,8 @@
                     style="@style/Widget.CalculationPanel.Button.Control"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/inversionDescription"
                     android:text="@string/inversion"
                     android:onClick="@{() -> fragment.changeUsingInverseFunctions()}" />
@@ -79,6 +89,8 @@
                     style="@style/Widget.CalculationPanel.Button.Control"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/clearDescription"
                     android:text="@string/clear"
                     android:onClick="@{() -> viewModel.clearInputString()}" />
@@ -87,6 +99,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/parenthesesDescription"
                     android:text="@string/parenthesis"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -95,6 +109,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/percent"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -102,6 +118,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/divDescription"
                     android:text="@string/division"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -116,6 +134,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/seven"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -123,6 +143,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/eight"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -130,6 +152,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/nine"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -137,6 +161,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/mulDescription"
                     android:text="@string/multiplication"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -151,6 +177,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/four"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -158,6 +186,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/five"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -165,6 +195,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/six"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -172,6 +204,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/subDescription"
                     android:text="@string/subtraction"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -186,6 +220,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/one"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -193,6 +229,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/two"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -200,6 +238,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/three"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -207,6 +247,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/addDescription"
                     android:text="@string/addition"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
@@ -221,6 +263,8 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/zero"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
@@ -228,24 +272,31 @@
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/dot"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-                <ImageButton
+                <Button
                     style="@style/Widget.CalculationPanel.Button"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="@dimen/iconPadding"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:contentDescription="@string/backDescription"
-                    app:srcCompat="@drawable/ic_baseline_backspace_24"
-                    android:onClick="@{() -> viewModel.removeOneItemFromCalculationString()" />
+                    app:iconGravity="textStart"
+                    app:iconSize="@dimen/btn_icon_size"
+                    app:icon="@drawable/ic_baseline_backspace_24"
+                    android:onClick="@{() -> viewModel.removeOneItemFromCalculationString()}" />
 
                 <Button
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/equal"
-                    android:onClick="@{() -> viewModel.executeCalculation()" />
+                    android:onClick="@{() -> viewModel.executeCalculation()}" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
