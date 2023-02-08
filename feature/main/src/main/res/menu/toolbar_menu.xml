@@ -4,21 +4,21 @@
 
     <item
         android:id="@+id/functionsMenuItem"
-        android:title="@string/functionsMenuItem"
+        android:title="@string/functions_menu_item"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/historyMenuItem"
-        android:title="@string/calculationHistoryItem"
+        android:title="@string/calculation_history_item"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/settingsMenuItem"
-        android:title="@string/settingsMenuItem"
+        android:title="@string/settings_menu_item"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/aboutMenuItem"
-        android:title="@string/aboutMenuItem"
+        android:title="@string/about_menu_item"
         app:showAsAction="never" />
 </menu>

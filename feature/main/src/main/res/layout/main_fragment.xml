@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:menu="@menu/toolbar_menu"
-        tools:title="@string/mainTitle"
-        tools:visibility="visible" />
+        tools:title="@string/mainTitle" />
 
     <include
         android:id="@+id/expressionSubpanel"

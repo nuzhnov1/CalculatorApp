@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.sunman.feature.main.ui.UtilKt" />
+        <import type="com.sunman.feature.main.ui.ExtensionsKt" />
         <variable name="fragment" type="com.sunman.feature.main.ui.MainFragment" />
         <variable name="viewModel" type="com.sunman.feature.main.presentation.MainViewModel" />
     </data>
@@ -21,13 +21,11 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@{UtilKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
+                android:text="@{ExtensionsKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
                 android:onClick="@{() -> fragment.changeAngleUnit()}"
                 tools:text="@string/rad" />
 
@@ -36,10 +34,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="@dimen/layout_padding"
-                android:hint="@string/calculationFieldHint"
-                android:text="@{viewModel.calculationString}"
-                tools:text="1 * 2 + 3" />
+                android:hint="@string/calculation_field_hint"
+                android:text="@{viewModel.calculationString}" />
         </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
@@ -47,16 +43,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            style="@style/Widget.CalculationPanel.TextView.CalculationField.Result"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/layout_padding"
-            android:paddingBottom="@dimen/layout_padding"
-            android:paddingStart="@dimen/btn_corner_half_radius"
-            android:paddingEnd="@dimen/btn_corner_half_radius"
-            android:hint="@string/calculationResultHint"
-            android:text="@{UtilKt.toDisplayableString(viewModel.calculationResult, fragment.getActivity())}"
-            tools:text="5" />
+            android:padding="@dimen/layout_padding"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                style="@style/Widget.CalculationPanel.TextView.CalculationResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/calculation_result_hint"
+                android:text="@{ExtensionsKt.toDisplayableString(viewModel.calculationResult, fragment.getActivity())}" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

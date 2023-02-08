@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Menu items -->
-    <string name="functionsMenuItem">Functions</string>
-    <string name="calculationHistoryItem">Calculation history</string>
-    <string name="settingsMenuItem">Settings</string>
-    <string name="aboutMenuItem">About program</string>
+    <string name="functions_menu_item">Functions</string>
+    <string name="calculation_history_item">Calculation history</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="about_menu_item">About program</string>
 
     <!-- Descriptions and hints of the expression subpanel items -->
-    <string name="angleUnitDescription">Angle unit</string>
-    <string name="calculationFieldHint">Current expression</string>
-    <string name="calculationResultHint">Calculation result</string>
+    <string name="angle_unit_description">Angle unit</string>
+    <string name="calculation_field_hint">Current expression</string>
+    <string name="calculation_result_hint">Calculation result</string>
 
     <!-- Angle units -->
     <string name="rad">RAD</string>
@@ -45,20 +45,20 @@
     <string name="nine">9</string>
 
     <!-- Descriptions of the main subpanel items -->
-    <string name="collapseDescription">Collapse</string>
-    <string name="powerDescription">Exponentiation operation</string>
-    <string name="logDescription">Logarithm on an arbitrary basis</string>
-    <string name="sqrtDescription">Square root</string>
-    <string name="sqrDescription">Squaring operation</string>
-    <string name="factorialDescription">Factorial</string>
-    <string name="inversionDescription">Inversion</string>
-    <string name="clearDescription">Clearing</string>
-    <string name="parenthesesDescription">Parentheses</string>
-    <string name="divDescription">Division</string>
-    <string name="mulDescription">Multiplication</string>
-    <string name="subDescription">Subtraction</string>
-    <string name="addDescription">Addition</string>
-    <string name="backDescription">Back</string>
+    <string name="collapse_description">Collapse functions subpanel</string>
+    <string name="power_description">Exponentiation operation</string>
+    <string name="log_description">Logarithm on an arbitrary basis</string>
+    <string name="sqrt_description">Square root</string>
+    <string name="sqr_description">Squaring operation</string>
+    <string name="factorial_description">Factorial</string>
+    <string name="inversion_description">Inversion</string>
+    <string name="clear_description">Clearing</string>
+    <string name="parentheses_description">Parentheses</string>
+    <string name="div_description">Division</string>
+    <string name="mul_description">Multiplication</string>
+    <string name="sub_description">Subtraction</string>
+    <string name="add_description">Addition</string>
+    <string name="back_description">Back</string>
 
     <!-- Functions subpanel items -->
     <string name="sin">SIN</string>
@@ -87,10 +87,10 @@
     <string name="acsch">ACSCH</string>
     <string name="ln">LN</string>
     <string name="log2">LOG2</string>
-    <string name="log10">LOG10</string>
+    <string name="lg">LG</string>
     <string name="exp">EXP</string>
-    <string name="powerOf2">2^X</string>
-    <string name="powerOf10">10^X</string>
+    <string name="power_of_2">2^X</string>
+    <string name="power_of_10">10^X</string>
     <string name="cbrt">CBRT</string>
     <string name="cube">X^3</string>
     <string name="root">ROOT</string>
@@ -104,52 +104,52 @@
     <string name="e">e</string>
 
     <!-- Descriptions of functions and constants -->
-    <string name="sinDescription">Sine function</string>
-    <string name="cosDescription">Cosine function</string>
-    <string name="tanDescription">Tangent function</string>
-    <string name="cotDescription">Cotangent function</string>
-    <string name="secDescription">Secant function</string>
-    <string name="cosecDescription">Cosecant function</string>
-    <string name="asinDescription">Arcsine function</string>
-    <string name="acosDescription">Arccosine function</string>
-    <string name="atanDescription">Arctangent function</string>
-    <string name="acotDescription">Arccotangent function</string>
-    <string name="asecDescription">Arcsecant function</string>
-    <string name="acosecDescription">Arccosecant function</string>
-    <string name="sinhDescription">Hyperbolic sine function</string>
-    <string name="coshDescription">Hyperbolic cosine function</string>
-    <string name="tanhDescription">Hyperbolic tangent function</string>
-    <string name="cothDescription">Hyperbolic cotangent function</string>
-    <string name="sechDescription">Hyperbolic secant function</string>
-    <string name="cschDescription">Hyperbolic cosecant function</string>
-    <string name="asinhDescription">Inverse hyperbolic sine function</string>
-    <string name="acoshDescription">Inverse hyperbolic cosine function</string>
-    <string name="atanhDescription">Inverse hyperbolic tangent function</string>
-    <string name="acothDescription">Inverse hyperbolic cotangent function</string>
-    <string name="asechDescription">Inverse hyperbolic secant function</string>
-    <string name="acschDescription">Inverse hyperbolic cosecant function</string>
-    <string name="lnDescription">Natural logarithm function</string>
-    <string name="log2Description">Logarithm function with base 2</string>
-    <string name="log10Description">Logarithm function with base 10</string>
-    <string name="expDescription">Exponent function</string>
-    <string name="powerOf2Description">Exponentiation function 2</string>
-    <string name="powerOf10Description">Exponentiation function 10</string>
-    <string name="cbrtDescription">Cube root function</string>
-    <string name="cubeDescription">Cubing operation</string>
-    <string name="rootDescription">Root function with an arbitrary basis</string>
-    <string name="hypotDescription">Hypotenuse function</string>
-    <string name="ceilDescription">Ceil function</string>
-    <string name="absDescription">Absolute value function</string>
-    <string name="floorDescription">Floor function</string>
-    <string name="roundDescription">Round function</string>
-    <string name="fractionDescription">Fraction function</string>
-    <string name="piDescription">Pi constant</string>
-    <string name="eDescription">Euler constant</string>
+    <string name="sin_description">Sine function</string>
+    <string name="cos_description">Cosine function</string>
+    <string name="tan_description">Tangent function</string>
+    <string name="cot_description">Cotangent function</string>
+    <string name="sec_description">Secant function</string>
+    <string name="cosec_description">Cosecant function</string>
+    <string name="asin_description">Arcsine function</string>
+    <string name="acos_description">Arccosine function</string>
+    <string name="atan_description">Arctangent function</string>
+    <string name="acot_description">Arccotangent function</string>
+    <string name="asec_description">Arcsecant function</string>
+    <string name="acosec_description">Arccosecant function</string>
+    <string name="sinh_description">Hyperbolic sine function</string>
+    <string name="cosh_description">Hyperbolic cosine function</string>
+    <string name="tanh_description">Hyperbolic tangent function</string>
+    <string name="coth_description">Hyperbolic cotangent function</string>
+    <string name="sech_description">Hyperbolic secant function</string>
+    <string name="csch_description">Hyperbolic cosecant function</string>
+    <string name="asinh_description">Inverse hyperbolic sine function</string>
+    <string name="acosh_description">Inverse hyperbolic cosine function</string>
+    <string name="atanh_description">Inverse hyperbolic tangent function</string>
+    <string name="acoth_description">Inverse hyperbolic cotangent function</string>
+    <string name="asech_description">Inverse hyperbolic secant function</string>
+    <string name="acsch_description">Inverse hyperbolic cosecant function</string>
+    <string name="ln_description">Natural logarithm function</string>
+    <string name="log2_description">Logarithm function with base 2</string>
+    <string name="lg_description">Logarithm function with base 10</string>
+    <string name="exp_description">Exponent function</string>
+    <string name="power_of_2_description">Exponentiation function 2</string>
+    <string name="power_of_10_description">Exponentiation function 10</string>
+    <string name="cbrt_description">Cube root function</string>
+    <string name="cube_description">Cubing operation</string>
+    <string name="root_description">Root function with an arbitrary basis</string>
+    <string name="hypot_description">Hypotenuse function</string>
+    <string name="ceil_description">Ceil function</string>
+    <string name="abs_description">Absolute value function</string>
+    <string name="floor_description">Floor function</string>
+    <string name="round_description">Round function</string>
+    <string name="fraction_description">Fraction function</string>
+    <string name="pi_description">Pi constant</string>
+    <string name="e_description">Euler constant</string>
 
     <!-- Error messages -->
-    <string name="invalidExpression">Invalid expression</string>
-    <string name="invalidArgument">Invalid argument</string>
-    <string name="invalidArgumentsNumber">Invalid number of arguments</string>
-    <string name="divisionByZero">Division by zero</string>
-    <string name="genericError">Error</string>
+    <string name="invalid_expression">Invalid expression</string>
+    <string name="invalid_argument">Invalid argument</string>
+    <string name="invalid_arguments_number">Invalid number of arguments</string>
+    <string name="division_by_zero">Division by zero</string>
+    <string name="generic_error">Error</string>
 </resources>

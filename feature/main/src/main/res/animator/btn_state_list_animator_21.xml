@@ -5,13 +5,18 @@
         <set>
             <objectAnimator
                 android:duration="@integer/btn_anim_duration"
+                android:propertyName="cornerRadius"
+                android:valueTo="@dimen/btn_corner_radius"
+                android:valueType="intType" />
+            <objectAnimator
+                android:duration="@integer/btn_anim_duration"
                 android:propertyName="translationZ"
-                android:valueTo="1dp"
+                android:valueTo="@dimen/btn_hovered_translationZ"
                 android:valueType="floatType" />
             <objectAnimator
                 android:duration="0"
                 android:propertyName="elevation"
-                android:valueTo="0"
+                android:valueTo="@dimen/btn_elevation"
                 android:valueType="floatType" />
         </set>
     </item>
@@ -22,17 +27,17 @@
             <objectAnimator
                 android:duration="@integer/btn_anim_duration"
                 android:propertyName="cornerRadius"
-                android:valueTo="@dimen/btn_corner_half_radius"
-                android:valueType="floatType" />
+                android:valueTo="@dimen/btn_pressed_corner_radius"
+                android:valueType="intType" />
             <objectAnimator
                 android:duration="@integer/btn_anim_duration"
                 android:propertyName="translationZ"
-                android:valueTo="4dp"
+                android:valueTo="@dimen/btn_pressed_translationZ"
                 android:valueType="floatType" />
             <objectAnimator
                 android:duration="0"
                 android:propertyName="elevation"
-                android:valueTo="0"
+                android:valueTo="@dimen/btn_elevation"
                 android:valueType="floatType" />
         </set>
     </item>
@@ -42,13 +47,18 @@
         <set>
             <objectAnimator
                 android:duration="@integer/btn_anim_duration"
+                android:propertyName="cornerRadius"
+                android:valueTo="@dimen/btn_corner_radius"
+                android:valueType="intType" />
+            <objectAnimator
+                android:duration="@integer/btn_anim_duration"
                 android:propertyName="translationZ"
-                android:valueTo="0dp"
+                android:valueTo="@dimen/btn_translationZ"
                 android:valueType="floatType" />
             <objectAnimator
                 android:duration="0"
                 android:propertyName="elevation"
-                android:valueTo="0dp"
+                android:valueTo="@dimen/btn_elevation"
                 android:valueType="floatType" />
         </set>
     </item>
@@ -58,13 +68,18 @@
         <set>
             <objectAnimator
                 android:duration="0"
+                android:propertyName="cornerRadius"
+                android:valueTo="@dimen/btn_corner_radius"
+                android:valueType="intType" />
+            <objectAnimator
+                android:duration="0"
                 android:propertyName="translationZ"
-                android:valueTo="0dp"
+                android:valueTo="@dimen/btn_translationZ"
                 android:valueType="floatType"/>
             <objectAnimator
                 android:duration="0"
                 android:propertyName="elevation"
-                android:valueTo="0dp"
+                android:valueTo="@dimen/btn_elevation"
                 android:valueType="floatType"/>
         </set>
     </item>

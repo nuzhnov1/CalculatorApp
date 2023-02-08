@@ -9,118 +9,103 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
-        android:orientation="vertical"
-        android:weightSum="2">
+        android:orientation="vertical">
 
         <TableRow
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="5">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sinButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/sinDescription"
+                android:contentDescription="@string/sin_description"
                 android:text="@string/sin"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cosButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/cosDescription"
+                android:contentDescription="@string/cos_description"
                 android:text="@string/cos"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tanButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/tanDescription"
+                android:contentDescription="@string/tan_description"
                 android:text="@string/tan"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cotButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/cotDescription"
+                android:contentDescription="@string/cot_description"
                 android:text="@string/cot"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/piDescription"
+                android:contentDescription="@string/pi_description"
                 android:text="@string/pi"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
         </TableRow>
 
         <TableRow
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="5">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lnButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/lnDescription"
+                android:contentDescription="@string/ln_description"
                 android:text="@string/ln"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/log2Button"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/log2Description"
+                android:contentDescription="@string/log2_description"
                 android:text="@string/log2"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/lgButton"
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/log10Description"
-                android:text="@string/log10"
+                android:contentDescription="@string/lg_description"
+                android:text="@string/lg"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/roundDescription"
-                android:text="@string/round"
+                android:contentDescription="@string/root_description"
+                android:text="@string/root"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:contentDescription="@string/eDescription"
+                android:contentDescription="@string/e_description"
                 android:text="@string/e"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
         </TableRow>

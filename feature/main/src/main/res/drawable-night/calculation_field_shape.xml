@@ -6,6 +6,6 @@
         android:bottomLeftRadius="@dimen/calculation_field_shape_corner_radius"
         android:bottomRightRadius="@dimen/calculation_field_shape_corner_radius" />
 
-    <solid android:color="@color/md_theme_light_primaryContainer" />
-    <stroke android:width="@dimen/calculation_field_shape_stroke_width" android:color="@color/md_theme_light_outline" />
+    <solid android:color="@color/md_theme_dark_primaryContainer" />
+    <stroke android:width="@dimen/calculation_field_shape_stroke_width" android:color="@color/md_theme_dark_outline" />
 </shape>
