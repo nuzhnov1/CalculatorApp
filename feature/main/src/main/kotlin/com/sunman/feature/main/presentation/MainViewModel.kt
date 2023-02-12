@@ -8,17 +8,15 @@ import com.sunman.libcalculator.*
 import com.sunman.libcalculator.Nothing
 import com.sunman.libcalculator.Number
 
-class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
+internal class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     private val _calculationString = state.getLiveData(CALCULATION_STRING, "")
-    val calculationString = Transformations.map(_calculationString) {
-        it.replace(" ", "")  // Remove all whitespaces
-    }
+    val calculationString = Transformations.map(_calculationString) { it.removeSeparators() }
 
     val calculationResult = Transformations.map(calculationString) {
-        val calculationString = (it + ")".repeat(it.openBracketsCount))
-        val result = calculator.calculateExpression(calculationString)
+        val result = calculateResult()
 
+        // If the calculation string is just a number
         if (result is Number && result.toString() == it) {
             Nothing
         } else {
@@ -26,72 +24,70 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
         }
     }
 
-    private val _angleUnit = state.getLiveData(ANGLE_UNIT, DEFAULT_ANGLE_UNIT)
-    val angleUnit: LiveData<AngleUnit> = _angleUnit
+    private val _angleUnit = state.getLiveData(ANGLE_UNIT, DEFAULT_ANGLE_UNIT.ordinal)
+    val angleUnit: LiveData<AngleUnit> = Transformations.map(_angleUnit) { it.toAngleUnit() }
 
     private val calculator = Calculator(CALCULATOR_MATH_CONTEXT).apply {
-        angleUnit = _angleUnit.value!!
-    }
-
-    private val String.openBracketsCount: Int get() {
-        val totalOpenBracket = count { chr -> chr == '(' }
-        val totalClosedBracket = count { chr -> chr == ')' }
-
-        return totalOpenBracket - totalClosedBracket
+        angleUnit = _angleUnit.value!!.toAngleUnit()
     }
 
 
     fun addItemToCalculationString(item: CharSequence) {
         // If the item is an opening or closing parenthesis:
-        state[CALCULATION_STRING] = if (item == "()") {
+        val addingItem = if (item == "()") {
             val calculationString = _calculationString.value!!
-            // Dropping a trailing whitespace and trying to get a last char:
-            val lastChar = calculationString.dropLast(1).lastOrNull()
+            val lastChar = calculationString.dropLastSeparator().lastOrNull()
 
-            // Adding a trailing whitespace to separate input items
-            if (calculationString.openBracketsCount == 0 || lastChar == '(') {
-                "$calculationString( "
+            if (calculationString.openParenthesisCount == 0 || lastChar == '(') {
+                "$calculationString("
             } else {
-                "$calculationString) "
+                "$calculationString)"
             }
         } else {
-            // Adding a trailing whitespace to separate input items
-            _calculationString.value!! + "$item "
+            _calculationString.value!! + item
         }
+
+        state[CALCULATION_STRING] = addingItem + ITEM_SEPARATOR
     }
 
     fun removeOneItemFromCalculationString() {
         state[CALCULATION_STRING] = _calculationString.value!!
-            .dropLast(1) // Drop one whitespace
-            .dropLastWhile { it != ' ' } // Drop the item until whitespace
+            .dropLastSeparator()
+            .dropLastWhile { it != ITEM_SEPARATOR } // Drop the item until separator
     }
 
     fun clearInputString() {
         state[CALCULATION_STRING] = ""
     }
 
-    fun executeCalculation() = when (val result = calculationResult.value) {
-        is Number -> {
+    fun executeCalculation() {
+        val result = calculateResult()
+
+        if (result is Number) {
             state[CALCULATION_STRING] = result.toString()
                 .map { it }
-                .joinToString(separator = " ", postfix = " ")
+                .joinToString(
+                    separator = ITEM_SEPARATOR.toString(),
+                    postfix = ITEM_SEPARATOR.toString()
+                )
         }
-
-        is Error -> {
-            state[CALCULATION_STRING] = result.toString()
-        }
-
-        null, is Nothing -> Unit
     }
-
 
     fun setAngleUnit(angleUnit: AngleUnit) {
         calculator.angleUnit = angleUnit
         state[ANGLE_UNIT] = angleUnit.ordinal
     }
 
+    private fun calculateResult(): CalculationResult? {
+        val completedCalculationString = calculationString.value
+            ?.completeCalculationString()
+            ?: return null
 
-    internal companion object {
+        return calculator.calculateExpression(expression = completedCalculationString)
+    }
+
+
+    private companion object {
         const val CALCULATION_STRING = "CALCULATION_STRING"
         const val ANGLE_UNIT = "ANGLE_UNIT"
     }

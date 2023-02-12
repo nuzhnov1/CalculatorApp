@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="fragment" type="com.sunman.feature.main.ui.MainFragment" />
@@ -66,6 +67,7 @@
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/inversionButton"
                     style="@style/Widget.CalculationPanel.Button.Control"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -155,8 +157,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:contentDescription="@string/power_description"
-                    android:text="@string/power"
+                    tools:contentDescription="@string/power_description"
+                    tools:text="@string/power"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
             </TableRow>
 
@@ -199,8 +201,8 @@
                     style="@style/Widget.CalculationPanel.Button.Operation"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:contentDescription="@string/sqrt_description"
-                    android:text="@string/sqrt"
+                    tools:contentDescription="@string/sqrt_description"
+                    tools:text="@string/sqrt"
                     android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
             </TableRow>
 

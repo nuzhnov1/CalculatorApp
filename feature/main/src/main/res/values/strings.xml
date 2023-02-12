@@ -148,8 +148,8 @@
 
     <!-- Error messages -->
     <string name="invalid_expression">Invalid expression</string>
+    <string name="division_by_zero">Division by zero</string>
     <string name="invalid_argument">Invalid argument</string>
     <string name="invalid_arguments_number">Invalid number of arguments</string>
-    <string name="division_by_zero">Division by zero</string>
     <string name="generic_error">Error</string>
 </resources>

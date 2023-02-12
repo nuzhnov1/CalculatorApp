@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="fragment" type="com.sunman.feature.main.ui.MainFragment" />
@@ -21,8 +22,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/sin_description"
-                android:text="@string/sin"
+                tools:contentDescription="@string/sin_description"
+                tools:text="@string/sin"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -30,8 +31,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/cos_description"
-                android:text="@string/cos"
+                tools:contentDescription="@string/cos_description"
+                tools:text="@string/cos"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -39,8 +40,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/tan_description"
-                android:text="@string/tan"
+                tools:contentDescription="@string/tan_description"
+                tools:text="@string/tan"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -48,8 +49,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/cot_description"
-                android:text="@string/cot"
+                tools:contentDescription="@string/cot_description"
+                tools:text="@string/cot"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -71,8 +72,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/sinh_description"
-                android:text="@string/sinh"
+                tools:contentDescription="@string/sinh_description"
+                tools:text="@string/sinh"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -80,8 +81,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/cosh_description"
-                android:text="@string/cosh"
+                tools:contentDescription="@string/cosh_description"
+                tools:text="@string/cosh"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -89,8 +90,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/tanh_description"
-                android:text="@string/tanh"
+                tools:contentDescription="@string/tanh_description"
+                tools:text="@string/tanh"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -98,8 +99,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/coth_description"
-                android:text="@string/coth"
+                tools:contentDescription="@string/coth_description"
+                tools:text="@string/coth"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -121,8 +122,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/ln_description"
-                android:text="@string/ln"
+                tools:contentDescription="@string/ln_description"
+                tools:text="@string/ln"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -130,8 +131,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/log2_description"
-                android:text="@string/log2"
+                tools:contentDescription="@string/log2_description"
+                tools:text="@string/log2"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -139,8 +140,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/lg_description"
-                android:text="@string/lg"
+                tools:contentDescription="@string/lg_description"
+                tools:text="@string/lg"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -156,8 +157,8 @@
                 style="@style/Widget.CalculationPanel.Button.Function"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/cbrt_description"
-                android:text="@string/cbrt"
+                tools:contentDescription="@string/cbrt_description"
+                tools:text="@string/cbrt"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
         </TableRow>
 

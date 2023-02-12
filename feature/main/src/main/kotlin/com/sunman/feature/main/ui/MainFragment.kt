@@ -1,35 +1,24 @@
 package com.sunman.feature.main.ui
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ValueAnimator
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams
-import android.widget.Button
-import android.widget.LinearLayout
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.button.MaterialButton
 import com.sunman.feature.main.R
-import com.sunman.feature.main.databinding.InversionMainSubpanelBinding
 import com.sunman.feature.main.databinding.MainFragmentBinding
-import com.sunman.feature.main.databinding.MainSubpanelBinding
-import com.sunman.feature.main.presentation.HISTORY_FRAGMENT_MIN_HEIGHT
 import com.sunman.feature.main.presentation.MainViewModel
-import com.sunman.feature.main.ui.animation.getAnimatorOfReplaceView
-import com.sunman.feature.main.ui.animation.getAnimatorOfVerticalCollapse
-import com.sunman.feature.main.ui.animation.getAnimatorOfVerticalExpand
-import com.sunman.feature.main.ui.animation.setAnimationsOnAllButtons
+import com.sunman.feature.main.ui.animations.*
 import com.sunman.libcalculator.AngleUnit
 
 class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
-    private val binding get() = _binding!!
+    internal val binding get() = _binding!!
 
     private var isFunctionSubpanelVisible = false
     private var isInverseFunctionsUsed = false
@@ -42,19 +31,25 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = MainFragmentBinding.inflate(
+            /* inflater = */ inflater,
+            /* parent = */ container,
+            /* attachToParent = */ false
+        )
         return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.root.setAnimationsOnAllButtons()
-
         binding.toolbar.apply {
             inflateMenu(R.menu.toolbar_menu)
             setOnMenuItemClickListener(::onMenuItemClicked)
         }
 
-        binding.calculationPanel.apply {
+        binding.apply {
+            expressionSubpanel.lifecycleOwner = viewLifecycleOwner
+            mainSubpanel.lifecycleOwner = viewLifecycleOwner
+            mainSubpanel.functionsSubpanel?.lifecycleOwner = viewLifecycleOwner
+
             expressionSubpanel.fragment = this@MainFragment
             expressionSubpanel.viewModel = viewModel
             mainSubpanel.fragment = this@MainFragment
@@ -63,8 +58,12 @@ class MainFragment : Fragment() {
             mainSubpanel.functionsSubpanel?.viewModel = viewModel
         }
 
-        hideToolbarOnSmallLandscapeScreens()
-        hideHistoryFragmentOnSmallScreens()
+        binding.historyFragment.doOnLayout {
+            binding.historyFragment.changeVisibilityImmediately()
+            binding.historyFragment.addOnLayoutChangeListener(HistoryFragmentOnLayoutChangeListener)
+        }
+
+        setAnimationsOnAllMaterialButtons()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -73,6 +72,22 @@ class MainFragment : Fragment() {
         if (savedInstanceState != null) {
             isFunctionSubpanelVisible = savedInstanceState.getBoolean(IS_FUNCTION_SUBPANEL_SHOWN)
             isInverseFunctionsUsed = savedInstanceState.getBoolean(IS_USING_INVERSE_FUNCTIONS)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (isFunctionSubpanelVisible) {
+            binding.mainSubpanel.functionsSubpanel?.root?.visibility = View.VISIBLE
+        } else {
+            binding.mainSubpanel.functionsSubpanel?.root?.visibility = View.GONE
+        }
+
+        if (isInverseFunctionsUsed) {
+            binding.mainSubpanel.switchToInversionModeImmediately()
+        } else {
+            binding.mainSubpanel.switchToNormalModeImmediately()
         }
     }
 
@@ -99,59 +114,28 @@ class MainFragment : Fragment() {
     }
 
     fun changeShowingFunctionsSubpanel() {
-        binding.calculationPanel.mainSubpanel.functionsSubpanel?.root?.apply {
-            isFunctionSubpanelVisible = !isFunctionSubpanelVisible
+        isFunctionSubpanelVisible = !isFunctionSubpanelVisible
 
-            val functionSubpanelAnimator = if (isFunctionSubpanelVisible) {
-                getAnimatorOfVerticalExpand(
-                    LayoutParams(
-                        LayoutParams.MATCH_PARENT,
-                        LayoutParams.WRAP_CONTENT
-                    )
-                )
-            } else {
-                getAnimatorOfVerticalCollapse()
-            }
-
-            functionSubpanelAnimator.apply {
-                addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        binding.historyFragment.getAnimatorOfHistoryFragment()?.start()
-                    }
-                })
-
-                start()
-            }
+        if (isFunctionSubpanelVisible) {
+            binding.mainSubpanel.functionsSubpanel?.animateExpand()
+        } else {
+            binding.mainSubpanel.functionsSubpanel?.animateCollapse()
         }
     }
 
     fun changeUsingInverseFunctions() {
-        binding.calculationPanel.mainSubpanel.root.apply {
-            isInverseFunctionsUsed = !isInverseFunctionsUsed
+        isInverseFunctionsUsed = !isInverseFunctionsUsed
 
-            val parent = parent as ViewGroup
-            val index = parent.indexOfChild(this)
-
-            val newView = if (isInverseFunctionsUsed) {
-                InversionMainSubpanelBinding
-                    .inflate(layoutInflater, parent, false)
-                    .root
-            } else {
-                MainSubpanelBinding
-                    .inflate(layoutInflater, parent, false)
-                    .root
-            }
-
-            getAnimatorOfReplaceView(newView) {
-                parent.removeViewAt(index)
-                parent.addView(newView, index)
-            }.start()
+        if (isInverseFunctionsUsed) {
+            binding.mainSubpanel.animateSwitchToInversionMode()
+        } else {
+            binding.mainSubpanel.animateSwitchToNormalMode()
         }
     }
 
     fun addButtonTextToInputString(view: View) {
-        val buttonText = (view as Button).text.toString()
-        viewModel.addItemToCalculationString(buttonText.toDisplayableRepresentation())
+        val buttonText = (view as MaterialButton).text.toString()
+        viewModel.addItemToCalculationString(buttonText.toDisplayableString())
     }
 
     private fun onMenuItemClicked(menuItem: MenuItem) = when (menuItem.itemId) {
@@ -178,60 +162,8 @@ class MainFragment : Fragment() {
         else -> false
     }
 
-    private fun hideToolbarOnSmallLandscapeScreens() {
-        val activity = requireActivity()
-        val resources = activity.resources
-        val orientation = resources.configuration.orientation
-        val windowHeight = resources.displayMetrics.heightPixels.toDP(activity)
 
-        if ((orientation == Configuration.ORIENTATION_LANDSCAPE) &&
-            (windowHeight < 360 || windowHeight in 400..479)) {
-
-            binding.toolbar.visibility = View.GONE
-        }
-    }
-
-    private fun hideHistoryFragmentOnSmallScreens() {
-        val windowHeight = binding.historyFragment.height.toDP(requireActivity())
-
-        if (windowHeight < 150) {
-            binding.historyFragment.visibility = View.GONE
-        }
-    }
-
-    private fun View.getAnimatorOfHistoryFragment(): ValueAnimator? {
-        val height = height.toDP(requireActivity())
-
-        return when {
-            visibility == View.VISIBLE && height < HISTORY_FRAGMENT_MIN_HEIGHT -> {
-                getAnimatorOfVerticalCollapse()
-            }
-
-            visibility == View.GONE && height >= HISTORY_FRAGMENT_MIN_HEIGHT -> {
-                getAnimatorOfVerticalExpand(
-                    LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                    )
-                )
-            }
-
-            else -> null
-        }
-    }
-
-    private fun String.toDisplayableRepresentation() =
-        when (val label = lowercase()) {
-            in "0".."9", ".", "+", "-", "*", "÷", "%", "()", ",", "^", "!", "π", "e" -> label
-            "2^x" -> "2^("
-            "10^x" -> "10^("
-            "x^2" -> "^2"
-            "x^3" -> "^3"
-            else -> "$label("
-        }
-
-
-    companion object {
+    private companion object {
         const val IS_FUNCTION_SUBPANEL_SHOWN = "isFunctionSubpanelFolded"
         const val IS_USING_INVERSE_FUNCTIONS = "isUsingInverseFunctions"
     }

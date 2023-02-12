@@ -26,8 +26,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/collapse_description"
-                app:icon="@drawable/ic_baseline_keyboard_arrow_down_24"
-                android:onClick="@{() -> fragment.changeShowingFunctionsSubpanel()}" />
+                android:onClick="@{() -> fragment.changeShowingFunctionsSubpanel()}"
+                tools:icon="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -41,8 +41,8 @@
                 style="@style/Widget.CalculationPanel.Button.Operation"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/power_description"
-                android:text="@string/power"
+                tools:contentDescription="@string/power_description"
+                tools:text="@string/power"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -50,8 +50,8 @@
                 style="@style/Widget.CalculationPanel.Button.Operation"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/sqrt_description"
-                android:text="@string/sqrt"
+                tools:contentDescription="@string/sqrt_description"
+                tools:text="@string/sqrt"
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
@@ -63,6 +63,7 @@
                 android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/inversionButton"
                 style="@style/Widget.CalculationPanel.Button.Control"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -73,9 +74,7 @@
 
         <include
             android:id="@+id/functionsSubpanel"
-            layout="@layout/functions_subpanel"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            layout="@layout/functions_subpanel" />
 
         <TableRow
             android:layout_weight="1"

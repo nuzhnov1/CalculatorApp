@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Common -->
     <dimen name="layout_padding">4dp</dimen>
-    <dimen name="margin_between_views">4dp</dimen>
+    <dimen name="divider_height">2dp</dimen>
+    <integer name="anim_duration">300</integer>
+
+    <!-- Expression subpanel -->
     <dimen name="calculation_field_shape_corner_radius">28dp</dimen>
     <dimen name="calculation_field_shape_stroke_width">2dp</dimen>
     <dimen name="calculation_result_field_margin">7dp</dimen>
     <dimen name="min_touchable_height">48dp</dimen>
-    <dimen name="history_fragment_min_height">150dp</dimen>
-    <dimen name="divider_height">2dp</dimen>
 
     <!-- Buttons -->
     <dimen name="btn_margin">4dp</dimen>
@@ -15,15 +17,18 @@
     <dimen name="btn_text_size">20sp</dimen>
     <dimen name="func_btn_text_size">16sp</dimen>
     <dimen name="btn_icon_size">28dp</dimen>
-    <dimen name="btn_corner_radius">28dp</dimen>
-    <dimen name="btn_pressed_corner_radius">14dp</dimen>
     <dimen name="btn_elevation">0dp</dimen>
+    <dimen name="btn_alpha" format="float" type="dimen">1.0</dimen>
+    <item name="btn_hovered_alpha" format="float" type="dimen">0.9</item>
+    <item name="btn_pressed_alpha" format="float" type="dimen">0.7</item>
+    <dimen name="btn_corner_radius">28dp</dimen>
+    <dimen name="btn_hovered_corner_radius">28dp</dimen>
+    <dimen name="btn_pressed_corner_radius">14dp</dimen>
     <dimen name="btn_translationZ">0dp</dimen>
     <dimen name="btn_hovered_translationZ">1dp</dimen>
     <dimen name="btn_pressed_translationZ">4dp</dimen>
-    <item name="btn_pressed_alpha" format="float" type="dimen">0.7</item>
     <integer name="btn_anim_duration">100</integer>
 
-    <integer name="arrow_rotate_anim_duration">300</integer>
-    <integer name="anim_duration">300</integer>
+    <!-- History fragment -->
+    <dimen name="history_fragment_min_height">150dp</dimen>
 </resources>
