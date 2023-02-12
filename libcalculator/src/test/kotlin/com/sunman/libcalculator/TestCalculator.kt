@@ -293,20 +293,20 @@ internal class TestCalculator {
         testCalculateExpression(inputExpression = "log2(2^1000)", expectedResult = "1000")
         println("OK")
 
-        print("\t\tTesting the execution of the log10 function... ")
+        print("\t\tTesting the execution of the lg function... ")
         testCalculateExpression(
-            inputExpression = "log10(-1)",
-            expectedResult = "Illegal log10(x) for x <= 0: x = -1"
+            inputExpression = "lg(-1)",
+            expectedResult = "Illegal lg(x) for x <= 0: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "log10(0)",
-            expectedResult = "Illegal log10(x) for x <= 0: x = 0"
+            inputExpression = "lg(0)",
+            expectedResult = "Illegal lg(x) for x <= 0: x = 0"
         )
-        testCalculateExpression(inputExpression = "log10(1÷10^1000)", expectedResult = "-1000")
-        testCalculateExpression(inputExpression = "log10(1÷10)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "log10(1)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "log10(10)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "log10(10^1000)", expectedResult = "1000")
+        testCalculateExpression(inputExpression = "lg(1÷10^1000)", expectedResult = "-1000")
+        testCalculateExpression(inputExpression = "lg(1÷10)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "lg(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "lg(10)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "lg(10^1000)", expectedResult = "1000")
         println("OK")
 
         println("\tTesting the execution of logarithmic functions... OK")

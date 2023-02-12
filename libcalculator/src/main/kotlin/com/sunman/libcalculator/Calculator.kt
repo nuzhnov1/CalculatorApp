@@ -50,7 +50,7 @@ class Calculator(mc: MathContext = MathContext.DECIMAL128) {
             }
 
             return operandStack.popNumberOrNull() ?: Nothing
-        } catch (e: RuntimeException) {
+        } catch (e: Throwable) {
             return Error(e)
         } finally {
             // Reset calculator state:

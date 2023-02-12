@@ -94,9 +94,9 @@ internal class CalculatorContext(
             log2(x = actualArgumentsStack.removeFirst())
         }
 
-        "log10" -> {
+        "lg" -> {
             checkArgumentsCount(functionName = name, requiredCount = 1)
-            log10(x = actualArgumentsStack.removeFirst())
+            lg(x = actualArgumentsStack.removeFirst())
         }
 
         // Trigonometric functions:
@@ -417,9 +417,9 @@ internal class CalculatorContext(
      * @throws ArithmeticException If the [x] value is less than or equal to zero.
      * @throws UnsupportedOperationException If the [mc] has unlimited precision.
      */
-    private fun log10(x: Number): Number =
+    private fun lg(x: Number): Number =
         if (x.value <= zero) {
-            throw ArithmeticException("Illegal log10(x) for x <= 0: x = $x")
+            throw ArithmeticException("Illegal lg(x) for x <= 0: x = $x")
         } else {
             Number(value = log10(x.value, mc))
         }

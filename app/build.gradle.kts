@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sunman.calculatorapp"
-        minSdk = 18
+        minSdk = 14
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -38,6 +38,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
