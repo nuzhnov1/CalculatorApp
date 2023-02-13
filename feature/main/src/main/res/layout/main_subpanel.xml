@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/comma"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/powerButton"
@@ -34,7 +34,7 @@
                 android:layout_weight="1"
                 tools:contentDescription="@string/power_description"
                 tools:text="@string/power"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sqrtButton"
@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 tools:contentDescription="@string/sqrt_description"
                 tools:text="@string/sqrt"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/factorial_description"
                 android:text="@string/factorial"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/inversionButton"
@@ -60,7 +60,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/inversion_description"
                 android:text="@string/inversion"
-                android:onClick="@{() -> fragment.changeUsingInverseFunctions()}" />
+                android:onClick="@{() -> fragment.onChangeUsingInverseFunctions()}" />
         </TableRow>
 
         <TableRow
@@ -82,14 +82,14 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/parentheses_description"
                 android:text="@string/parenthesis"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/percent"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -97,7 +97,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/div_description"
                 android:text="@string/division"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
         </TableRow>
 
         <TableRow
@@ -110,21 +110,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/seven"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/eight"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/nine"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -132,7 +132,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/mul_description"
                 android:text="@string/multiplication"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
         </TableRow>
 
         <TableRow
@@ -145,21 +145,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/four"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/five"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/six"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -167,7 +167,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/sub_description"
                 android:text="@string/subtraction"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
         </TableRow>
 
         <TableRow
@@ -180,21 +180,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/one"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/two"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/three"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"
@@ -202,7 +202,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/add_description"
                 android:text="@string/addition"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
         </TableRow>
 
         <TableRow
@@ -215,14 +215,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/zero"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/dot"
-                android:onClick="@{(view) -> fragment.addButtonTextToInputString(view)}" />
+                android:onClick="@{fragment::onAddButtonTextToInputString}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button"
@@ -230,7 +230,8 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/back_description"
                 app:icon="@drawable/ic_baseline_backspace_24"
-                android:onClick="@{() -> viewModel.removeOneItemFromCalculationString()}" />
+                android:onClick="@{() -> viewModel.removeOneItemFromCalculationString()}"
+                android:onLongClick="@{() -> fragment.onLongClickToBackButton()}" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.CalculationPanel.Button.Operation"

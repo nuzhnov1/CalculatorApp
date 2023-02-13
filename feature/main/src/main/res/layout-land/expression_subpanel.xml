@@ -20,8 +20,8 @@
             style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{ExtensionsKt.toDisplayableString(viewModel.angleUnit, fragment.getActivity())}"
-            android:onClick="@{() -> fragment.changeAngleUnit()}"
+            android:text="@{ExtensionsKt.toDisplayableString(viewModel.angleUnit, fragment.requireContext())}"
+            android:onClick="@{() -> fragment.onChangeAngleUnit()}"
             tools:text="@string/rad" />
 
         <TextView

@@ -42,29 +42,42 @@ private fun MaterialButton.setCollapseButtonAnimation() {
                         isEnabled = true
                     }
                 })
-                start()
             }
         }
 
         animateOnClick(motionEvent)
-        true
     }
 }
 
-private fun MaterialButton.animateOnClick(motionEvent: MotionEvent): Boolean {
+private fun MaterialButton.animateOnClick(motionEvent: MotionEvent) =
     when (motionEvent.actionMasked) {
-        MotionEvent.ACTION_HOVER_ENTER -> hoveredAnimatorSet.start()
-        MotionEvent.ACTION_HOVER_EXIT -> defaultAnimatorSet.start()
-        MotionEvent.ACTION_DOWN -> pressedAnimatorSet.start()
+        MotionEvent.ACTION_HOVER_ENTER -> {
+            hoveredAnimatorSet.start()
+            true
+        }
+
+        MotionEvent.ACTION_HOVER_EXIT -> {
+            defaultAnimatorSet.start()
+            true
+        }
+
+        MotionEvent.ACTION_DOWN -> {
+            pressedAnimatorSet.start()
+            false
+        }
+
         MotionEvent.ACTION_UP -> {
             defaultAnimatorSet.start()
-            performClick()
+            false
         }
-        MotionEvent.ACTION_CANCEL -> setToDefaultStateImmediately()
-    }
 
-    return true
-}
+        MotionEvent.ACTION_CANCEL -> {
+            setToDefaultStateImmediately()
+            true
+        }
+
+        else -> false
+    }
 
 private fun MaterialButton.setToDefaultStateImmediately() = context.resources.run {
     alpha = btnAlpha

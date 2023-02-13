@@ -104,7 +104,13 @@ private fun MaterialButton.getReplaceTextAnimator(
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator) { isEnabled = false }
             override fun onAnimationEnd(animation: Animator) { isEnabled = true }
-            override fun onAnimationCancel(animation: Animator) { isEnabled = true }
+
+            override fun onAnimationCancel(animation: Animator) {
+                text = newText
+                contentDescription = newContentDescription
+                setTextColor(textColor)
+                isEnabled = true
+            }
         })
     }
 }

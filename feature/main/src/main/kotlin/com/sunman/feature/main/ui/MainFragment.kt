@@ -103,7 +103,7 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    fun changeAngleUnit() {
+    fun onChangeAngleUnit() {
         val newUnit = when (viewModel.angleUnit.value) {
             AngleUnit.RADIAN -> AngleUnit.DEGREE
             AngleUnit.DEGREE -> AngleUnit.GRADIAN
@@ -113,17 +113,17 @@ class MainFragment : Fragment() {
         viewModel.setAngleUnit(newUnit)
     }
 
-    fun changeShowingFunctionsSubpanel() {
-        isFunctionSubpanelVisible = !isFunctionSubpanelVisible
-
-        if (isFunctionSubpanelVisible) {
-            binding.mainSubpanel.functionsSubpanel?.animateExpand()
-        } else {
-            binding.mainSubpanel.functionsSubpanel?.animateCollapse()
-        }
+    fun onAddButtonTextToInputString(view: View) {
+        val buttonText = (view as MaterialButton).text.toString()
+        viewModel.addItemToCalculationString(buttonText.toDisplayableString())
     }
 
-    fun changeUsingInverseFunctions() {
+    fun onLongClickToBackButton(): Boolean {
+        viewModel.clearInputString()
+        return true
+    }
+
+    fun onChangeUsingInverseFunctions() {
         isInverseFunctionsUsed = !isInverseFunctionsUsed
 
         if (isInverseFunctionsUsed) {
@@ -133,9 +133,14 @@ class MainFragment : Fragment() {
         }
     }
 
-    fun addButtonTextToInputString(view: View) {
-        val buttonText = (view as MaterialButton).text.toString()
-        viewModel.addItemToCalculationString(buttonText.toDisplayableString())
+    fun onChangeShowingFunctionsSubpanel() {
+        isFunctionSubpanelVisible = !isFunctionSubpanelVisible
+
+        if (isFunctionSubpanelVisible) {
+            binding.mainSubpanel.functionsSubpanel?.animateExpand()
+        } else {
+            binding.mainSubpanel.functionsSubpanel?.animateCollapse()
+        }
     }
 
     private fun onMenuItemClicked(menuItem: MenuItem) = when (menuItem.itemId) {
