@@ -1,14 +1,18 @@
 package com.sunman.libcalculator
 
-/**
- * Sealed interface of calculation results. Inheritors: [Nothing], [Number] and [Error].
- */
-sealed interface CalculationResult
+import java.io.Serializable
 
-object Nothing : CalculationResult {
+
+/**
+ * Sealed interface of calculation results. Inheritors: [CalculationNothing], [CalculationNumber]
+ * and [CalculationError].
+ */
+sealed interface CalculationResult : Serializable
+
+object CalculationNothing : CalculationResult {
     override fun toString() = ""
 }
 
-class Error(val e: Throwable) : CalculationResult {
-    override fun toString() = e.localizedMessage.toString()
+data class CalculationError(val error: Throwable) : CalculationResult {
+    override fun toString() = error.localizedMessage.toString()
 }

@@ -85,15 +85,15 @@ internal class TestCalculator {
         println("OK")
 
         print("\t\tTesting the execution of the division operator... ")
-        testCalculateExpression(inputExpression = "6÷3", expectedResult = "2")
-        testCalculateExpression(inputExpression = "1.2 ÷ 3", expectedResult = "0.4")
-        testCalculateExpression(inputExpression = "1.2÷0.4", expectedResult = "3")
-        testCalculateExpression(inputExpression = "1÷5", expectedResult = "0.2")
-        testCalculateExpression(inputExpression = "1÷3", expectedResult = "0.333333333333333")
-        testCalculateExpression(inputExpression = "0÷1", expectedResult = "0")
-        testCalculateExpression(inputExpression = "0÷1000.1", expectedResult = "0")
-        testCalculateExpression(inputExpression = "1÷0", expectedResult = "Division by zero")
-        testCalculateExpression(inputExpression = "0÷0", expectedResult = "Division undefined")
+        testCalculateExpression(inputExpression = "6/3", expectedResult = "2")
+        testCalculateExpression(inputExpression = "1.2 / 3", expectedResult = "0.4")
+        testCalculateExpression(inputExpression = "1.2/0.4", expectedResult = "3")
+        testCalculateExpression(inputExpression = "1/5", expectedResult = "0.2")
+        testCalculateExpression(inputExpression = "1/3", expectedResult = "0.333333333333333")
+        testCalculateExpression(inputExpression = "0/1", expectedResult = "0")
+        testCalculateExpression(inputExpression = "0/1000.1", expectedResult = "0")
+        testCalculateExpression(inputExpression = "1/0", expectedResult = "Division by zero")
+        testCalculateExpression(inputExpression = "0/0", expectedResult = "Division undefined")
         println("OK")
 
         print("\t\tTesting the execution of the exponentiation operator... ")
@@ -159,70 +159,73 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the sqrt function... ")
         testCalculateExpression(
-            inputExpression = "√(-9)",
-            expectedResult = "Illegal √(x) for x < 0: x = -9"
+            inputExpression = "$SQRT_CHAR(-9)",
+            expectedResult = "Illegal $SQRT(x) for x < 0: x = -9"
         )
-        testCalculateExpression(inputExpression = "√(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "√(1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "√(2)", expectedResult = "1.4142135623731")
-        testCalculateExpression(inputExpression = "√(9)", expectedResult = "3")
+        testCalculateExpression(inputExpression = "$SQRT_CHAR(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SQRT_CHAR(1)", expectedResult = "1")
+        testCalculateExpression(
+            inputExpression = "$SQRT_CHAR(2)",
+            expectedResult = "1.4142135623731"
+        )
+        testCalculateExpression(inputExpression = "$SQRT_CHAR(9)", expectedResult = "3")
         println("OK")
 
         print("\t\tTesting the execution of the cbrt function... ")
-        testCalculateExpression(inputExpression = "cbrt(-8)", expectedResult = "-2")
-        testCalculateExpression(inputExpression = "cbrt(-2)", expectedResult = "-1.25992104989487")
-        testCalculateExpression(inputExpression = "cbrt(-1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "cbrt(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cbrt(1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cbrt(2)", expectedResult = "1.25992104989487")
-        testCalculateExpression(inputExpression = "cbrt(8)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$CBRT(-8)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$CBRT(-2)", expectedResult = "-1.25992104989487")
+        testCalculateExpression(inputExpression = "$CBRT(-1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$CBRT(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$CBRT(1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$CBRT(2)", expectedResult = "1.25992104989487")
+        testCalculateExpression(inputExpression = "$CBRT(8)", expectedResult = "2")
         println("OK")
 
         print("\t\tTesting the execution of the root function... ")
         testCalculateExpression(
-            inputExpression = "root(-2, 3)",
+            inputExpression = "$ROOT(-2, 3)",
             expectedResult = "-1.25992104989487"
         )
         testCalculateExpression(
-            inputExpression = "root(-2, 0)",
-            expectedResult = "Illegal root(x, n) for x < 0 and even n: x = -2; n = 0"
+            inputExpression = "$ROOT(-2, 0)",
+            expectedResult = "Illegal $ROOT(x, n) for x < 0 and even n: x = -2; n = 0"
         )
         testCalculateExpression(
-            inputExpression = "root(-2, 2)",
-            expectedResult = "Illegal root(x, n) for x < 0 and even n: x = -2; n = 2"
+            inputExpression = "$ROOT(-2, 2)",
+            expectedResult = "Illegal $ROOT(x, n) for x < 0 and even n: x = -2; n = 2"
         )
         testCalculateExpression(
-            inputExpression = "root(-2, 0.5)",
-            expectedResult = "Illegal root(x, n) for x < 0 and non-integer n: x = -2; n = 0.5"
+            inputExpression = "$ROOT(-2, 0.5)",
+            expectedResult = "Illegal $ROOT(x, n) for x < 0 and non-integer n: x = -2; n = 0.5"
         )
         testCalculateExpression(
-            inputExpression = "root(0, -2)",
-            expectedResult = "Illegal root(x, n) for x = 0 and n < 0: n = -2"
+            inputExpression = "$ROOT(0, -2)",
+            expectedResult = "Illegal $ROOT(x, n) for x = 0 and n < 0: n = -2"
         )
-        testCalculateExpression(inputExpression = "root(0, 0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "root(0, 2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "root(0, 2.3)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ROOT(0, 0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ROOT(0, 2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ROOT(0, 2.3)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "root(2, -2)",
+            inputExpression = "$ROOT(2, -2)",
             expectedResult = "0.707106781186548"
         )
         testCalculateExpression(
-            inputExpression = "root(2, 0)",
-            expectedResult = "Illegal root(x, n) for x > 0 and n = 0: x = 2"
+            inputExpression = "$ROOT(2, 0)",
+            expectedResult = "Illegal $ROOT(x, n) for x > 0 and n = 0: x = 2"
         )
-        testCalculateExpression(inputExpression = "root(2,2)", expectedResult = "1.4142135623731")
+        testCalculateExpression(inputExpression = "$ROOT(2,2)", expectedResult = "1.4142135623731")
         println("OK")
 
         print("\t\tTesting the execution of the exp function... ")
         testCalculateExpression(
-            inputExpression = "exp(-10000000000000000000000)",
+            inputExpression = "$EXP(-10000000000000000000000)",
             expectedResult = "Overflow"
         )
-        testCalculateExpression(inputExpression = "exp(-1)", expectedResult = "0.367879441171442")
-        testCalculateExpression(inputExpression = "exp(0)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "exp(1)", expectedResult = "2.71828182845905")
+        testCalculateExpression(inputExpression = "$EXP(-1)", expectedResult = "0.367879441171442")
+        testCalculateExpression(inputExpression = "$EXP(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$EXP(1)", expectedResult = "2.71828182845905")
         testCalculateExpression(
-            inputExpression = "exp(10000000000000000)",
+            inputExpression = "$EXP(10000000000000000)",
             expectedResult = "Overflow"
         )
         println("OK")
@@ -236,77 +239,77 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the ln function... ")
         testCalculateExpression(
-            inputExpression = "ln(-1)",
-            expectedResult = "Illegal ln(x) for x <= 0: x = -1"
+            inputExpression = "$LN(-1)",
+            expectedResult = "Illegal $LN(x) for x <= 0: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "ln(0)",
-            expectedResult = "Illegal ln(x) for x <= 0: x = 0"
+            inputExpression = "$LN(0)",
+            expectedResult = "Illegal $LN(x) for x <= 0: x = 0"
         )
-        testCalculateExpression(inputExpression = "ln(1 ÷ e^1000)", expectedResult = "-1000")
-        testCalculateExpression(inputExpression = "ln(1÷e)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "ln(1)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "ln(e)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "ln(e^1000)", expectedResult = "1000")
+        testCalculateExpression(inputExpression = "$LN(1 / $E^1000)", expectedResult = "-1000")
+        testCalculateExpression(inputExpression = "$LN(1/$E)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$LN(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$LN($E)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$LN($E^1000)", expectedResult = "1000")
         println("OK")
 
         print("\t\tTesting the execution of the log function... ")
         testCalculateExpression(
-            inputExpression = "log(-1, -1)",
-            expectedResult = "Illegal log(b, x) for b <= 0: b = -1"
+            inputExpression = "$LOG(-1, -1)",
+            expectedResult = "Illegal $LOG(b, x) for b <= 0: b = -1"
         )
         testCalculateExpression(
-            inputExpression = "log(0, -1)",
-            expectedResult = "Illegal log(b, x) for b <= 0: b = 0"
+            inputExpression = "$LOG(0, -1)",
+            expectedResult = "Illegal $LOG(b, x) for b <= 0: b = 0"
         )
         testCalculateExpression(
-            inputExpression = "log(1, -1)",
-            expectedResult = "Illegal log(b, x) for b = 1"
+            inputExpression = "$LOG(1, -1)",
+            expectedResult = "Illegal $LOG(b, x) for b = 1"
         )
         testCalculateExpression(
-            inputExpression = "log(3, -1)",
-            expectedResult = "Illegal log(b, x) for x <= 0: x = -1"
+            inputExpression = "$LOG(3, -1)",
+            expectedResult = "Illegal $LOG(b, x) for x <= 0: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "log(3, 0)",
-            expectedResult = "Illegal log(b, x) for x <= 0: x = 0"
+            inputExpression = "$LOG(3, 0)",
+            expectedResult = "Illegal $LOG(b, x) for x <= 0: x = 0"
         )
         testCalculateExpression(
-            inputExpression = "log(3, 4)",
+            inputExpression = "$LOG(3, 4)",
             expectedResult = "1.26185950714291"
         )
         println("OK")
 
         print("\t\tTesting the execution of the log2 function... ")
         testCalculateExpression(
-            inputExpression = "log2(-1)",
-            expectedResult = "Illegal log2(x) for x <= 0: x = -1"
+            inputExpression = "$LOG2(-1)",
+            expectedResult = "Illegal $LOG2(x) for x <= 0: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "log2(0)",
-            expectedResult = "Illegal log2(x) for x <= 0: x = 0"
+            inputExpression = "$LOG2(0)",
+            expectedResult = "Illegal $LOG2(x) for x <= 0: x = 0"
         )
-        testCalculateExpression(inputExpression = "log2(1÷2^1000)", expectedResult = "-1000")
-        testCalculateExpression(inputExpression = "log2(1÷2)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "log2(1)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "log2(2)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "log2(2^1000)", expectedResult = "1000")
+        testCalculateExpression(inputExpression = "$LOG2(1/2^1000)", expectedResult = "-1000")
+        testCalculateExpression(inputExpression = "$LOG2(1/2)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$LOG2(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$LOG2(2)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$LOG2(2^1000)", expectedResult = "1000")
         println("OK")
 
         print("\t\tTesting the execution of the lg function... ")
         testCalculateExpression(
-            inputExpression = "lg(-1)",
-            expectedResult = "Illegal lg(x) for x <= 0: x = -1"
+            inputExpression = "$LG(-1)",
+            expectedResult = "Illegal $LG(x) for x <= 0: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "lg(0)",
-            expectedResult = "Illegal lg(x) for x <= 0: x = 0"
+            inputExpression = "$LG(0)",
+            expectedResult = "Illegal $LG(x) for x <= 0: x = 0"
         )
-        testCalculateExpression(inputExpression = "lg(1÷10^1000)", expectedResult = "-1000")
-        testCalculateExpression(inputExpression = "lg(1÷10)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "lg(1)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "lg(10)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "lg(10^1000)", expectedResult = "1000")
+        testCalculateExpression(inputExpression = "$LG(1/10^1000)", expectedResult = "-1000")
+        testCalculateExpression(inputExpression = "$LG(1/10)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$LG(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$LG(10)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$LG(10^1000)", expectedResult = "1000")
         println("OK")
 
         println("\tTesting the execution of logarithmic functions... OK")
@@ -317,140 +320,140 @@ internal class TestCalculator {
         println("\tTesting the execution of trigonometric functions...")
 
         print("\t\tTesting the execution of the sin function... ")
-        testCalculateExpression(inputExpression = "sin(-1000001π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(-1000001π÷2)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "sin(-2π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(-π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(π÷2)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "sin(π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(3π÷2)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "sin(2π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(1000001π÷2)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "sin(1000001π)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(-1000001$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(-1000001$PI/2)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$SIN(-2$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(-$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN($PI/2)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$SIN($PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(3$PI/2)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$SIN(2$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(1000001$PI/2)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$SIN(1000001$PI)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the cos function... ")
-        testCalculateExpression(inputExpression = "cos(-1000001π)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "cos(-1000001π÷2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(-2π)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cos(-π)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "cos(0)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cos(π÷2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(π)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "cos(3π÷2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(2π)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cos(1000001π÷2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(1000001π)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COS(-1000001$PI)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COS(-1000001$PI/2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS(-2$PI)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COS(-$PI)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COS(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COS($PI/2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS($PI)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COS(3$PI/2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS(2$PI)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COS(1000001$PI/2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS(1000001$PI)", expectedResult = "-1")
         println("OK")
 
         print("\t\tTesting the execution of the tan function... ")
-        testCalculateExpression(inputExpression = "tan(-1000001π)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(-1000001$PI)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "tan(-1000001π÷2)",
-            expectedResult = "Illegal tan(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "$TAN(-1000001$PI/2)",
+            expectedResult = "Illegal $TAN(x) for x = $PI * k / 2, where k is odd: " +
                     "x = -1570797.89759122"
         )
-        testCalculateExpression(inputExpression = "tan(-2π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "tan(-π)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "tan(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(-2$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(-$PI)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(0)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "tan(π÷2)",
-            expectedResult = "Illegal tan(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "$TAN($PI/2)",
+            expectedResult = "Illegal $TAN(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 1.5707963267949"
         )
-        testCalculateExpression(inputExpression = "tan(π)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN($PI)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "tan(3π÷2)",
-            expectedResult = "Illegal tan(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "$TAN(3$PI/2)",
+            expectedResult = "Illegal $TAN(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 4.71238898038469"
         )
-        testCalculateExpression(inputExpression = "tan(2π)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(2$PI)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "tan(1000001π÷2)",
-            expectedResult = "Illegal tan(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "$TAN(1000001$PI/2)",
+            expectedResult = "Illegal $TAN(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 1570797.89759122"
         )
-        testCalculateExpression(inputExpression = "tan(1000001π)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(1000001$PI)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the cot function... ")
         testCalculateExpression(
-            inputExpression = "cot(-1000001π)",
-            expectedResult = "Illegal cot(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COT(-1000001$PI)",
+            expectedResult = "Illegal $COT(x) for x = $PI * k, where k is an integer: " +
                     "x = -3141595.79518245"
         )
-        testCalculateExpression(inputExpression = "cot(-1000001π÷2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT(-1000001$PI/2)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "cot(-2π)",
-            expectedResult = "Illegal cot(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COT(-2$PI)",
+            expectedResult = "Illegal $COT(x) for x = $PI * k, where k is an integer: " +
                     "x = -6.28318530717959"
         )
         testCalculateExpression(
-            inputExpression = "cot(0)",
-            expectedResult = "Illegal cot(x) for x = π * k, where k is an integer: x = 0"
+            inputExpression = "$COT(0)",
+            expectedResult = "Illegal $COT(x) for x = $PI * k, where k is an integer: x = 0"
         )
-        testCalculateExpression(inputExpression = "cot(π÷2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT($PI/2)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "cot(π)",
-            expectedResult = "Illegal cot(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COT($PI)",
+            expectedResult = "Illegal $COT(x) for x = $PI * k, where k is an integer: " +
                     "x = 3.14159265358979"
         )
-        testCalculateExpression(inputExpression = "cot(3π÷2)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cot(1000001π÷2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT(3$PI/2)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT(1000001$PI/2)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the sec function... ")
-        testCalculateExpression(inputExpression = "sec(-1000001π)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$SEC(-1000001$PI)", expectedResult = "-1")
         testCalculateExpression(
-            inputExpression = "sec(-1000001π÷2)",
-            expectedResult = "Illegal sec(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "sec(-1000001$PI/2)",
+            expectedResult = "Illegal sec(x) for x = $PI * k / 2, where k is odd: " +
                     "x = -1570797.89759122"
         )
-        testCalculateExpression(inputExpression = "sec(-2π)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "sec(-2$PI)", expectedResult = "1")
         testCalculateExpression(inputExpression = "sec(0)", expectedResult = "1")
         testCalculateExpression(
-            inputExpression = "sec(π÷2)",
-            expectedResult = "Illegal sec(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "sec($PI/2)",
+            expectedResult = "Illegal sec(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 1.5707963267949"
         )
-        testCalculateExpression(inputExpression = "sec(π)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "sec($PI)", expectedResult = "-1")
         testCalculateExpression(
-            inputExpression = "sec(3π÷2)",
-            expectedResult = "Illegal sec(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "sec(3$PI/2)",
+            expectedResult = "Illegal sec(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 4.71238898038469"
         )
         testCalculateExpression(
-            inputExpression = "sec(1000001π÷2)",
-            expectedResult = "Illegal sec(x) for x = π * k / 2, where k is odd: " +
+            inputExpression = "sec(1000001$PI/2)",
+            expectedResult = "Illegal sec(x) for x = $PI * k / 2, where k is odd: " +
                     "x = 1570797.89759122"
         )
         println("OK")
 
         print("\t\tTesting the execution of the cosec function... ")
         testCalculateExpression(
-            inputExpression = "cosec(-1000001π)",
-            expectedResult = "Illegal cosec(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COSEC(-1000001$PI)",
+            expectedResult = "Illegal $COSEC(x) for x = $PI * k, where k is an integer: " +
                     "x = -3141595.79518245"
         )
-        testCalculateExpression(inputExpression = "cosec(-1000001π÷2)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COSEC(-1000001$PI/2)", expectedResult = "-1")
         testCalculateExpression(
-            inputExpression = "cosec(-2π)",
-            expectedResult = "Illegal cosec(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COSEC(-2$PI)",
+            expectedResult = "Illegal $COSEC(x) for x = $PI * k, where k is an integer: " +
                     "x = -6.28318530717959"
         )
         testCalculateExpression(
-            inputExpression = "cosec(0)",
-            expectedResult = "Illegal cosec(x) for x = π * k, where k is an integer: x = 0"
+            inputExpression = "$COSEC(0)",
+            expectedResult = "Illegal $COSEC(x) for x = $PI * k, where k is an integer: x = 0"
         )
-        testCalculateExpression(inputExpression = "cosec(π÷2)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COSEC($PI/2)", expectedResult = "1")
         testCalculateExpression(
-            inputExpression = "cosec(π)",
-            expectedResult = "Illegal cosec(x) for x = π * k, where k is an integer: " +
+            inputExpression = "$COSEC($PI)",
+            expectedResult = "Illegal $COSEC(x) for x = $PI * k, where k is an integer: " +
                     "x = 3.14159265358979"
         )
-        testCalculateExpression(inputExpression = "cosec(3π÷2)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "cosec(1000001π÷2)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COSEC(3$PI/2)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COSEC(1000001$PI/2)", expectedResult = "1")
         println("OK")
 
         println("\tTesting the execution of trigonometric functions... OK")
@@ -462,87 +465,87 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the sin function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "sin(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sin(90)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "sin(180)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(90)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$SIN(180)", expectedResult = "0")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "sin(300)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "sin(400)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SIN(300)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$SIN(400)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the cos function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "cos(0)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cos(90)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(180)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COS(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COS(90)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS(180)", expectedResult = "-1")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "cos(300)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "cos(400)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COS(300)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COS(400)", expectedResult = "1")
         println("OK")
 
         print("\t\tTesting the execution of the tan function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "tan(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(0)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "tan(90)",
-            expectedResult = "Illegal tan(x) for x = 90° * k, where k is odd: x = 90"
+            inputExpression = "$TAN(90)",
+            expectedResult = "Illegal $TAN(x) for x = 90° * k, where k is odd: x = 90"
         )
-        testCalculateExpression(inputExpression = "tan(180)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(180)", expectedResult = "0")
         calculator.angleUnit = AngleUnit.GRADIAN
         testCalculateExpression(
-            inputExpression = "tan(300)",
-            expectedResult = "Illegal tan(x) for x = 100g * k, where k is odd: x = 300"
+            inputExpression = "$TAN(300)",
+            expectedResult = "Illegal $TAN(x) for x = 100g * k, where k is odd: x = 300"
         )
-        testCalculateExpression(inputExpression = "tan(400)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TAN(400)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the cot function... ")
         calculator.angleUnit = AngleUnit.DEGREE
         testCalculateExpression(
-            inputExpression = "cot(0)",
-            expectedResult = "Illegal cot(x) for x = 180° * k, where k is an integer: x = 0"
+            inputExpression = "$COT(0)",
+            expectedResult = "Illegal $COT(x) for x = 180° * k, where k is an integer: x = 0"
         )
-        testCalculateExpression(inputExpression = "cot(90)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT(90)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "cot(180)",
-            expectedResult = "Illegal cot(x) for x = 180° * k, where k is an integer: x = 180"
+            inputExpression = "$COT(180)",
+            expectedResult = "Illegal $COT(x) for x = 180° * k, where k is an integer: x = 180"
         )
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "cot(300)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$COT(300)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "cot(400)",
-            expectedResult = "Illegal cot(x) for x = 200g * k, where k is an integer: x = 400"
+            inputExpression = "$COT(400)",
+            expectedResult = "Illegal $COT(x) for x = 200g * k, where k is an integer: x = 400"
         )
         println("OK")
 
         print("\t\tTesting the execution of the sec function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "sec(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$SEC(0)", expectedResult = "1")
         testCalculateExpression(
-            inputExpression = "sec(90)",
-            expectedResult = "Illegal sec(x) for x = 90° * k, where k is odd: x = 90"
+            inputExpression = "$SEC(90)",
+            expectedResult = "Illegal $SEC(x) for x = 90° * k, where k is odd: x = 90"
         )
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "sec(200)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$SEC(200)", expectedResult = "-1")
         testCalculateExpression(
-            inputExpression = "sec(300)",
-            expectedResult = "Illegal sec(x) for x = 100g * k, where k is odd: x = 300"
+            inputExpression = "$SEC(300)",
+            expectedResult = "Illegal $SEC(x) for x = 100g * k, where k is odd: x = 300"
         )
         println("OK")
 
         print("\t\tTesting the execution of the cosec function... ")
         calculator.angleUnit = AngleUnit.DEGREE
         testCalculateExpression(
-            inputExpression = "cosec(0)",
-            expectedResult = "Illegal cosec(x) for x = 180° * k, where k is an integer: x = 0"
+            inputExpression = "$COSEC(0)",
+            expectedResult = "Illegal $COSEC(x) for x = 180° * k, where k is an integer: x = 0"
         )
-        testCalculateExpression(inputExpression = "cosec(90)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COSEC(90)", expectedResult = "1")
         calculator.angleUnit = AngleUnit.GRADIAN
         testCalculateExpression(
-            inputExpression = "cosec(200)",
-            expectedResult = "Illegal cosec(x) for x = 200g * k, where k is an integer: x = 200"
+            inputExpression = "$COSEC(200)",
+            expectedResult = "Illegal $COSEC(x) for x = 200g * k, where k is an integer: x = 200"
         )
-        testCalculateExpression(inputExpression = "cosec(300)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COSEC(300)", expectedResult = "-1")
         println("OK")
 
         println("\tTesting the execution of trigonometric functions with other angle units... OK")
@@ -554,93 +557,93 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the asin function... ")
         testCalculateExpression(
-            inputExpression = "asin(-2)",
-            expectedResult = "Illegal asin(x) for x < -1: x = -2"
+            inputExpression = "$ASIN(-2)",
+            expectedResult = "Illegal $ASIN(x) for x < -1: x = -2"
         )
-        testCalculateExpression(inputExpression = "asin(-1)", expectedResult = "-1.5707963267949")
-        testCalculateExpression(inputExpression = "asin(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "asin(1)", expectedResult = "1.5707963267949")
+        testCalculateExpression(inputExpression = "$ASIN(-1)", expectedResult = "-1.5707963267949")
+        testCalculateExpression(inputExpression = "$ASIN(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASIN(1)", expectedResult = "1.5707963267949")
         testCalculateExpression(
-            inputExpression = "asin(2)",
-            expectedResult = "Illegal asin(x) for x > 1: x = 2"
+            inputExpression = "$ASIN(2)",
+            expectedResult = "Illegal $ASIN(x) for x > 1: x = 2"
         )
         println("OK")
 
         print("\t\tTesting the execution of the acos function... ")
         testCalculateExpression(
-            inputExpression = "acos(-2)",
-            expectedResult = "Illegal acos(x) for x < -1: x = -2"
+            inputExpression = "$ACOS(-2)",
+            expectedResult = "Illegal $ACOS(x) for x < -1: x = -2"
         )
-        testCalculateExpression(inputExpression = "acos(-1)", expectedResult = "3.14159265358979")
-        testCalculateExpression(inputExpression = "acos(0)", expectedResult = "1.5707963267949")
-        testCalculateExpression(inputExpression = "acos(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ACOS(-1)", expectedResult = "3.14159265358979")
+        testCalculateExpression(inputExpression = "$ACOS(0)", expectedResult = "1.5707963267949")
+        testCalculateExpression(inputExpression = "$ACOS(1)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "acos(2)",
-            expectedResult = "Illegal acos(x) for x > 1: x = 2"
+            inputExpression = "$ACOS(2)",
+            expectedResult = "Illegal $ACOS(x) for x > 1: x = 2"
         )
         println("OK")
 
         print("\t\tTesting the execution of the atan function... ")
         testCalculateExpression(
-            inputExpression = "atan(-10^50)",
+            inputExpression = "$ATAN(-10^50)",
             expectedResult = "-1.5707963267949"
         )
         testCalculateExpression(
-            inputExpression = "atan(-1)",
+            inputExpression = "$ATAN(-1)",
             expectedResult = "-0.785398163397448"
         )
-        testCalculateExpression(inputExpression = "atan(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "atan(1)", expectedResult = "0.785398163397448")
+        testCalculateExpression(inputExpression = "$ATAN(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ATAN(1)", expectedResult = "0.785398163397448")
         testCalculateExpression(
-            inputExpression = "atan(10^50)",
+            inputExpression = "$ATAN(10^50)",
             expectedResult = "1.5707963267949"
         )
         println("OK")
 
         print("\t\tTesting the execution of the acot function... ")
         testCalculateExpression(
-            inputExpression = "acot(-10^50)",
+            inputExpression = "$ACOT(-10^50)",
             expectedResult = "3.14159265358979"
         )
-        testCalculateExpression(inputExpression = "acot(-1)", expectedResult = "2.35619449019234")
-        testCalculateExpression(inputExpression = "acot(0)", expectedResult = "1.5707963267949")
-        testCalculateExpression(inputExpression = "acot(1)", expectedResult = "0.785398163397448")
-        testCalculateExpression(inputExpression = "acot(10^50)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ACOT(-1)", expectedResult = "2.35619449019234")
+        testCalculateExpression(inputExpression = "$ACOT(0)", expectedResult = "1.5707963267949")
+        testCalculateExpression(inputExpression = "$ACOT(1)", expectedResult = "0.785398163397448")
+        testCalculateExpression(inputExpression = "$ACOT(10^50)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the asec function... ")
-        testCalculateExpression(inputExpression = "asec(-2)", expectedResult = "2.0943951023932")
-        testCalculateExpression(inputExpression = "asec(-1)", expectedResult = "3.14159265358979")
+        testCalculateExpression(inputExpression = "$ASEC(-2)", expectedResult = "2.0943951023932")
+        testCalculateExpression(inputExpression = "$ASEC(-1)", expectedResult = "3.14159265358979")
         testCalculateExpression(
-            inputExpression = "asec(0)",
-            expectedResult = "Illegal asec(x) for x > -1 and x < 1: x = 0"
+            inputExpression = "$ASEC(0)",
+            expectedResult = "Illegal $ASEC(x) for x > -1 and x < 1: x = 0"
         )
-        testCalculateExpression(inputExpression = "asec(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASEC(1)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "asec(2)",
+            inputExpression = "$ASEC(2)",
             expectedResult = "1.0471975511966"
         )
         println("OK")
 
         print("\t\tTesting the execution of the acosec function... ")
         testCalculateExpression(
-            inputExpression = "acosec(-2)",
+            inputExpression = "$ACOSEC(-2)",
             expectedResult = "-0.523598775598299"
         )
         testCalculateExpression(
-            inputExpression = "acosec(-1)",
+            inputExpression = "$ACOSEC(-1)",
             expectedResult = "-1.5707963267949"
         )
         testCalculateExpression(
-            inputExpression = "acosec(0)",
-            expectedResult = "Illegal acosec(x) for x > -1 and x < 1: x = 0"
+            inputExpression = "$ACOSEC(0)",
+            expectedResult = "Illegal $ACOSEC(x) for x > -1 and x < 1: x = 0"
         )
         testCalculateExpression(
-            inputExpression = "acosec(1)",
+            inputExpression = "$ACOSEC(1)",
             expectedResult = "1.5707963267949"
         )
         testCalculateExpression(
-            inputExpression = "acosec(2)",
+            inputExpression = "$ACOSEC(2)",
             expectedResult = "0.523598775598299"
         )
         println("OK")
@@ -655,73 +658,66 @@ internal class TestCalculator {
                     "other angle units..."
         )
 
-        print("\t\tTesting the execution of the asin function... ")
+        print("\t\tTesting the execution of the $ASIN function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "asin(-1)", expectedResult = "-90")
-        testCalculateExpression(inputExpression = "asin(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASIN(-1)", expectedResult = "-90")
+        testCalculateExpression(inputExpression = "$ASIN(0)", expectedResult = "0")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "asin(1)", expectedResult = "100")
+        testCalculateExpression(inputExpression = "$ASIN(1)", expectedResult = "100")
         println("OK")
 
         print("\t\tTesting the execution of the acos function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "acos(-1)", expectedResult = "180")
+        testCalculateExpression(inputExpression = "$ACOS(-1)", expectedResult = "180")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "acos(0)", expectedResult = "100")
-        testCalculateExpression(inputExpression = "acos(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ACOS(0)", expectedResult = "100")
+        testCalculateExpression(inputExpression = "$ACOS(1)", expectedResult = "0")
         println("OK")
 
         print("\t\tTesting the execution of the atan function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "atan(-1)", expectedResult = "-45")
-        testCalculateExpression(inputExpression = "atan(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ATAN(-1)", expectedResult = "-45")
+        testCalculateExpression(inputExpression = "$ATAN(0)", expectedResult = "0")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "atan(1)", expectedResult = "50")
+        testCalculateExpression(inputExpression = "$ATAN(1)", expectedResult = "50")
         println("OK")
 
         print("\t\tTesting the execution of the acot function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "acot(-1)", expectedResult = "135")
-        testCalculateExpression(inputExpression = "acot(0)", expectedResult = "90")
+        testCalculateExpression(inputExpression = "$ACOT(-1)", expectedResult = "135")
+        testCalculateExpression(inputExpression = "$ACOT(0)", expectedResult = "90")
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "acot(1)", expectedResult = "50")
+        testCalculateExpression(inputExpression = "$ACOT(1)", expectedResult = "50")
         println("OK")
 
         print("\t\tTesting the execution of the asec function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "asec(-2)", expectedResult = "120")
-        testCalculateExpression(inputExpression = "asec(-1)", expectedResult = "180")
+        testCalculateExpression(inputExpression = "$ASEC(-2)", expectedResult = "120")
+        testCalculateExpression(inputExpression = "$ASEC(-1)", expectedResult = "180")
         testCalculateExpression(
-            inputExpression = "asec(0)",
-            expectedResult = "Illegal asec(x) for x > -1 and x < 1: x = 0"
+            inputExpression = "$ASEC(0)",
+            expectedResult = "Illegal $ASEC(x) for x > -1 and x < 1: x = 0"
         )
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "asec(1)", expectedResult = "0")
-        testCalculateExpression(
-            inputExpression = "asec(2)",
-            expectedResult = "66.6666666666667"
-        )
+        testCalculateExpression(inputExpression = "$ASEC(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASEC(2)", expectedResult = "66.6666666666667")
         println("OK")
 
         print("\t\tTesting the execution of the acosec function... ")
         calculator.angleUnit = AngleUnit.DEGREE
-        testCalculateExpression(inputExpression = "acosec(-2)", expectedResult = "-30")
-        testCalculateExpression(inputExpression = "acosec(-1)", expectedResult = "-90")
+        testCalculateExpression(inputExpression = "$ACOSEC(-2)", expectedResult = "-30")
+        testCalculateExpression(inputExpression = "$ACOSEC(-1)", expectedResult = "-90")
         testCalculateExpression(
-            inputExpression = "acosec(0)",
-            expectedResult = "Illegal acosec(x) for x > -1 and x < 1: x = 0"
+            inputExpression = "$ACOSEC(0)",
+            expectedResult = "Illegal $ACOSEC(x) for x > -1 and x < 1: x = 0"
         )
         calculator.angleUnit = AngleUnit.GRADIAN
-        testCalculateExpression(inputExpression = "acosec(1)", expectedResult = "100")
-        testCalculateExpression(
-            inputExpression = "acosec(2)",
-            expectedResult = "33.3333333333333"
-        )
+        testCalculateExpression(inputExpression = "$ACOSEC(1)", expectedResult = "100")
+        testCalculateExpression(inputExpression = "$ACOSEC(2)", expectedResult = "33.3333333333333")
         println("OK")
 
         println(
-            "\tTesting the execution of inverse trigonometric functions with " +
-                    "other angle units... OK"
+            "\tTesting the execution of inverse trigonometric functions with other angle units... OK"
         )
     }
 
@@ -730,71 +726,56 @@ internal class TestCalculator {
         println("\tTesting the execution of hyperbolic functions...")
 
         print("\t\tTesting the execution of the sinh function... ")
-        testCalculateExpression(
-            inputExpression = "sinh(-10)",
-            expectedResult = "-11013.2328747034"
-        )
-        testCalculateExpression(inputExpression = "sinh(-1)", expectedResult = "-1.1752011936438")
-        testCalculateExpression(inputExpression = "sinh(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "sinh(1)", expectedResult = "1.1752011936438")
-        testCalculateExpression(inputExpression = "sinh(10)", expectedResult = "11013.2328747034")
+        testCalculateExpression(inputExpression = "$SINH(-10)", expectedResult = "-11013.2328747034")
+        testCalculateExpression(inputExpression = "$SINH(-1)", expectedResult = "-1.1752011936438")
+        testCalculateExpression(inputExpression = "$SINH(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$SINH(1)", expectedResult = "1.1752011936438")
+        testCalculateExpression(inputExpression = "$SINH(10)", expectedResult = "11013.2328747034")
         println("OK")
 
         print("\t\tTesting the execution of the cosh function... ")
-        testCalculateExpression(inputExpression = "cosh(-10)", expectedResult = "11013.2329201033")
-        testCalculateExpression(inputExpression = "cosh(-1)", expectedResult = "1.54308063481524")
-        testCalculateExpression(inputExpression = "cosh(0)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "cosh(1)", expectedResult = "1.54308063481524")
-        testCalculateExpression(inputExpression = "cosh(10)", expectedResult = "11013.2329201033")
+        testCalculateExpression(inputExpression = "$COSH(-10)", expectedResult = "11013.2329201033")
+        testCalculateExpression(inputExpression = "$COSH(-1)", expectedResult = "1.54308063481524")
+        testCalculateExpression(inputExpression = "$COSH(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COSH(1)", expectedResult = "1.54308063481524")
+        testCalculateExpression(inputExpression = "$COSH(10)", expectedResult = "11013.2329201033")
         println("OK")
 
         print("\t\tTesting the execution of the tanh function... ")
-        testCalculateExpression(inputExpression = "tanh(-100)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "tanh(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "tanh(100)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$TANH(-100)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$TANH(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$TANH(100)", expectedResult = "1")
         println("OK")
 
         print("\t\tTesting the execution of the coth function... ")
-        testCalculateExpression(inputExpression = "coth(-100)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$COTH(-100)", expectedResult = "-1")
         testCalculateExpression(
-            inputExpression = "coth(0)",
-            expectedResult = "Illegal coth(x) for x = 0"
+            inputExpression = "$COTH(0)",
+            expectedResult = "Illegal $COTH(x) for x = 0"
         )
-        testCalculateExpression(inputExpression = "coth(100)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$COTH(100)", expectedResult = "1")
         println("OK")
 
         print("\t\tTesting the execution of the sech function... ")
         testCalculateExpression(
-            inputExpression = "sech(-10)",
+            inputExpression = "$SECH(-10)",
             expectedResult = "0.000090799859338"
         )
-        testCalculateExpression(inputExpression = "sech(-1)", expectedResult = "0.648054273663885")
-        testCalculateExpression(inputExpression = "sech(0)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "sech(1)", expectedResult = "0.648054273663885")
-        testCalculateExpression(inputExpression = "sech(10)", expectedResult = "0.000090799859338")
+        testCalculateExpression(inputExpression = "$SECH(-1)", expectedResult = "0.648054273663885")
+        testCalculateExpression(inputExpression = "$SECH(0)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$SECH(1)", expectedResult = "0.648054273663885")
+        testCalculateExpression(inputExpression = "$SECH(10)", expectedResult = "0.000090799859338")
         println("OK")
 
         print("\t\tTesting the execution of the csch function... ")
+        testCalculateExpression(inputExpression = "$CSCH(-10)", expectedResult = "-0.000090799859712")
+        testCalculateExpression(inputExpression = "$CSCH(-1)", expectedResult = "-0.850918128239322")
         testCalculateExpression(
-            inputExpression = "csch(-10)",
-            expectedResult = "-0.000090799859712"
+            inputExpression = "$CSCH(0)",
+            expectedResult = "Illegal $CSCH(x) for x = 0"
         )
-        testCalculateExpression(
-            inputExpression = "csch(-1)",
-            expectedResult = "-0.850918128239322"
-        )
-        testCalculateExpression(
-            inputExpression = "csch(0)",
-            expectedResult = "Illegal csch(x) for x = 0"
-        )
-        testCalculateExpression(
-            inputExpression = "csch(1)",
-            expectedResult = "0.850918128239322"
-        )
-        testCalculateExpression(
-            inputExpression = "csch(10)",
-            expectedResult = "0.000090799859712"
-        )
+        testCalculateExpression(inputExpression = "$CSCH(1)", expectedResult = "0.850918128239322")
+        testCalculateExpression(inputExpression = "$CSCH(10)", expectedResult = "0.000090799859712")
         println("OK")
 
         println("\tTesting the execution of hyperbolic functions... OK")
@@ -806,119 +787,116 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of the asinh function... ")
         testCalculateExpression(
-            inputExpression = "asinh(-100)",
+            inputExpression = "$ASINH(-100)",
             expectedResult = "-5.29834236561059"
         )
-        testCalculateExpression(inputExpression = "asinh(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "asinh(1)", expectedResult = "0.881373587019543")
+        testCalculateExpression(inputExpression = "$ASINH(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASINH(1)", expectedResult = "0.881373587019543")
         println("OK")
 
         print("\t\tTesting the execution of the acosh function... ")
         testCalculateExpression(
-            inputExpression = "acosh(0)",
-            expectedResult = "Illegal acosh(x) for x < 1: x = 0"
+            inputExpression = "$ACOSH(0)",
+            expectedResult = "Illegal $ACOSH(x) for x < 1: x = 0"
         )
-        testCalculateExpression(inputExpression = "acosh(1)", expectedResult = "0")
-        testCalculateExpression(
-            inputExpression = "acosh(100)",
-            expectedResult = "5.29829236561048"
-        )
+        testCalculateExpression(inputExpression = "$ACOSH(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ACOSH(100)", expectedResult = "5.29829236561048")
         println("OK")
 
         print("\t\tTesting the execution of the atanh function... ")
         testCalculateExpression(
-            inputExpression = "atanh(-2)",
-            expectedResult = "Illegal atanh(x) for x <= -1: x = -2"
+            inputExpression = "$ATANH(-2)",
+            expectedResult = "Illegal $ATANH(x) for x <= -1: x = -2"
         )
         testCalculateExpression(
-            inputExpression = "atanh(-1)",
-            expectedResult = "Illegal atanh(x) for x <= -1: x = -1"
+            inputExpression = "$ATANH(-1)",
+            expectedResult = "Illegal $ATANH(x) for x <= -1: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "atanh(-0.5)",
+            inputExpression = "$ATANH(-0.5)",
             expectedResult = "-0.549306144334055"
         )
-        testCalculateExpression(inputExpression = "atanh(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ATANH(0)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "atanh(0.5)",
+            inputExpression = "$ATANH(0.5)",
             expectedResult = "0.549306144334055"
         )
         testCalculateExpression(
-            inputExpression = "atanh(1)",
-            expectedResult = "Illegal atanh(x) for x >= 1: x = 1"
+            inputExpression = "$ATANH(1)",
+            expectedResult = "Illegal $ATANH(x) for x >= 1: x = 1"
         )
         testCalculateExpression(
-            inputExpression = "atanh(2)",
-            expectedResult = "Illegal atanh(x) for x >= 1: x = 2"
+            inputExpression = "$ATANH(2)",
+            expectedResult = "Illegal $ATANH(x) for x >= 1: x = 2"
         )
         println("OK")
 
         print("\t\tTesting the execution of the acoth function... ")
         testCalculateExpression(
-            inputExpression = "acoth(-2)",
+            inputExpression = "$ACOTH(-2)",
             expectedResult = "-0.549306144334055"
         )
         testCalculateExpression(
-            inputExpression = "acoth(-1)",
-            expectedResult = "Illegal acoth(x) for x >= -1 or x <= 1: x = -1"
+            inputExpression = "$ACOTH(-1)",
+            expectedResult = "Illegal $ACOTH(x) for x >= -1 or x <= 1: x = -1"
         )
         testCalculateExpression(
-            inputExpression = "acoth(0)",
-            expectedResult = "Illegal acoth(x) for x >= -1 or x <= 1: x = 0"
+            inputExpression = "$ACOTH(0)",
+            expectedResult = "Illegal $ACOTH(x) for x >= -1 or x <= 1: x = 0"
         )
         testCalculateExpression(
-            inputExpression = "acoth(1)",
-            expectedResult = "Illegal acoth(x) for x >= -1 or x <= 1: x = 1"
+            inputExpression = "$ACOTH(1)",
+            expectedResult = "Illegal $ACOTH(x) for x >= -1 or x <= 1: x = 1"
         )
         testCalculateExpression(
-            inputExpression = "acoth(2)",
+            inputExpression = "$ACOTH(2)",
             expectedResult = "0.549306144334055"
         )
         println("OK")
 
         print("\t\tTesting the execution of the asech function... ")
         testCalculateExpression(
-            inputExpression = "asech(0)",
-            expectedResult = "Illegal asech(x) for x <= 0: x = 0"
+            inputExpression = "$ASECH(0)",
+            expectedResult = "Illegal $ASECH(x) for x <= 0: x = 0"
         )
         testCalculateExpression(
-            inputExpression = "asech(0.5)",
+            inputExpression = "$ASECH(0.5)",
             expectedResult = "1.31695789692482"
         )
-        testCalculateExpression(inputExpression = "asech(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ASECH(1)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "asech(2)",
-            expectedResult = "Illegal asech(x) for x > 1: x = 2"
+            inputExpression = "$ASECH(2)",
+            expectedResult = "Illegal $ASECH(x) for x > 1: x = 2"
         )
         println("OK")
 
         print("\t\tTesting the execution of the acsch function... ")
         testCalculateExpression(
-            inputExpression = "acsch(-2)",
+            inputExpression = "$ACSCH(-2)",
             expectedResult = "-0.481211825059603"
         )
         testCalculateExpression(
-            inputExpression = "acsch(-1)",
+            inputExpression = "$ACSCH(-1)",
             expectedResult = "-0.881373587019543"
         )
         testCalculateExpression(
-            inputExpression = "acsch(-0.5)",
+            inputExpression = "$ACSCH(-0.5)",
             expectedResult = "-1.44363547517881"
         )
         testCalculateExpression(
-            inputExpression = "acsch(0)",
-            expectedResult = "Illegal acsch(x) for x = 0"
+            inputExpression = "$ACSCH(0)",
+            expectedResult = "Illegal $ACSCH(x) for x = 0"
         )
         testCalculateExpression(
-            inputExpression = "acsch(0.5)",
+            inputExpression = "$ACSCH(0.5)",
             expectedResult = "1.44363547517881"
         )
         testCalculateExpression(
-            inputExpression = "acsch(1)",
+            inputExpression = "$ACSCH(1)",
             expectedResult = "0.881373587019543"
         )
         testCalculateExpression(
-            inputExpression = "acsch(2)",
+            inputExpression = "$ACSCH(2)",
             expectedResult = "0.481211825059603"
         )
         println("OK")
@@ -931,36 +909,36 @@ internal class TestCalculator {
         println("\tTesting the execution of rounding functions...")
 
         print("\t\tTesting the execution of the ceil function... ")
-        testCalculateExpression(inputExpression = "ceil(1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "ceil(1.1)", expectedResult = "2")
-        testCalculateExpression(inputExpression = "ceil(1.5)", expectedResult = "2")
-        testCalculateExpression(inputExpression = "ceil(1.7)", expectedResult = "2")
-        testCalculateExpression(inputExpression = "ceil(-1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "ceil(-1.1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "ceil(-1.5)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "ceil(-1.7)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$CEIL(1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$CEIL(1.1)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$CEIL(1.5)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$CEIL(1.7)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$CEIL(-1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$CEIL(-1.1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$CEIL(-1.5)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$CEIL(-1.7)", expectedResult = "-1")
         println("OK")
 
         print("\t\tTesting the execution of the floor function... ")
-        testCalculateExpression(inputExpression = "floor(1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "floor(1.1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "floor(1.5)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "floor(1.7)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "floor(-1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "floor(-1.1)", expectedResult = "-2")
-        testCalculateExpression(inputExpression = "floor(-1.5)", expectedResult = "-2")
-        testCalculateExpression(inputExpression = "floor(-1.7)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$FLOOR(1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$FLOOR(1.1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$FLOOR(1.5)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$FLOOR(1.7)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$FLOOR(-1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$FLOOR(-1.1)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$FLOOR(-1.5)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$FLOOR(-1.7)", expectedResult = "-2")
         println("OK")
 
         print("\t\tTesting the execution of the round function... ")
-        testCalculateExpression(inputExpression = "round(1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "round(1.1)", expectedResult = "1")
-        testCalculateExpression(inputExpression = "round(1.5)", expectedResult = "2")
-        testCalculateExpression(inputExpression = "round(1.7)", expectedResult = "2")
-        testCalculateExpression(inputExpression = "round(-1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "round(-1.1)", expectedResult = "-1")
-        testCalculateExpression(inputExpression = "round(-1.5)", expectedResult = "-2")
-        testCalculateExpression(inputExpression = "round(-1.7)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$ROUND(1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$ROUND(1.1)", expectedResult = "1")
+        testCalculateExpression(inputExpression = "$ROUND(1.5)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$ROUND(1.7)", expectedResult = "2")
+        testCalculateExpression(inputExpression = "$ROUND(-1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$ROUND(-1.1)", expectedResult = "-1")
+        testCalculateExpression(inputExpression = "$ROUND(-1.5)", expectedResult = "-2")
+        testCalculateExpression(inputExpression = "$ROUND(-1.7)", expectedResult = "-2")
         println("OK")
 
         println("\tTesting the execution of rounding functions... OK")
@@ -971,37 +949,37 @@ internal class TestCalculator {
         println("\tTesting the execution of other functions...")
 
         print("\t\tTesting the execution of the abs function... ")
-        testCalculateExpression(inputExpression = "abs(-10^100)", expectedResult = "1*10^+100")
-        testCalculateExpression(inputExpression = "abs(-12)", expectedResult = "12")
-        testCalculateExpression(inputExpression = "abs(0)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "abs(12)", expectedResult = "12")
-        testCalculateExpression(inputExpression = "abs(10^100)", expectedResult = "1*10^+100")
+        testCalculateExpression(inputExpression = "$ABS(-10^100)", expectedResult = "1*10^+100")
+        testCalculateExpression(inputExpression = "$ABS(-12)", expectedResult = "12")
+        testCalculateExpression(inputExpression = "$ABS(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$ABS(12)", expectedResult = "12")
+        testCalculateExpression(inputExpression = "$ABS(10^100)", expectedResult = "1*10^+100")
         println("OK")
 
         print("\t\tTesting the execution of the fraction function... ")
-        testCalculateExpression(inputExpression = "fraction(1.1)", expectedResult = "0.1")
+        testCalculateExpression(inputExpression = "$FRACTION(1.1)", expectedResult = "0.1")
         testCalculateExpression(
-            inputExpression = "fraction(π)",
+            inputExpression = "$FRACTION($PI)",
             expectedResult = "0.141592653589793"
         )
-        testCalculateExpression(inputExpression = "fraction(1)", expectedResult = "0")
-        testCalculateExpression(inputExpression = "fraction(0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$FRACTION(1)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$FRACTION(0)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "fraction(e)",
+            inputExpression = "$FRACTION($E)",
             expectedResult = "0.718281828459045"
         )
         println("OK")
 
         print("\t\tTesting the execution of the hypot function... ")
-        testCalculateExpression(inputExpression = "hypot(0,0)", expectedResult = "0")
+        testCalculateExpression(inputExpression = "$HYPOT(0,0)", expectedResult = "0")
         testCalculateExpression(
-            inputExpression = "hypot(-1,-1)",
+            inputExpression = "$HYPOT(-1,-1)",
             expectedResult = "1.4142135623731"
         )
-        testCalculateExpression(inputExpression = "hypot(3,4)", expectedResult = "5")
-        testCalculateExpression(inputExpression = "hypot(12,5)", expectedResult = "13")
+        testCalculateExpression(inputExpression = "$HYPOT(3,4)", expectedResult = "5")
+        testCalculateExpression(inputExpression = "$HYPOT(12,5)", expectedResult = "13")
         testCalculateExpression(
-            inputExpression = "hypot(4,4)",
+            inputExpression = "$HYPOT(4,4)",
             expectedResult = "5.65685424949238"
         )
         println("OK")
@@ -1015,12 +993,12 @@ internal class TestCalculator {
 
         print("\t\tTesting the execution of functions with a lack or excess of arguments... ")
         testCalculateExpression(
-            inputExpression = "sin()",
-            expectedResult = "The function 'sin' expects 1 arguments, but given 0"
+            inputExpression = "$SIN()",
+            expectedResult = "The function '$SIN' expects 1 arguments, but given 0"
         )
         testCalculateExpression(
-            inputExpression = "sin(1,2)",
-            expectedResult = "The function 'sin' expects 1 arguments, but given 2"
+            inputExpression = "$SIN(1,2)",
+            expectedResult = "The function '$SIN' expects 1 arguments, but given 2"
         )
         println("OK")
 
@@ -1051,7 +1029,7 @@ internal class TestCalculator {
 
         testCalculateExpression(inputExpression = "10!(23)(24)", expectedResult = "2003097600")
         testCalculateExpression(inputExpression = "9+1-2", expectedResult = "8")
-        testCalculateExpression(inputExpression = "1.2*8÷2.1", expectedResult = "4.57142857142857")
+        testCalculateExpression(inputExpression = "1.2*8/2.1", expectedResult = "4.57142857142857")
         testCalculateExpression(inputExpression = "+-+++1.2", expectedResult = "-1.2")
         testCalculateExpression(
             inputExpression = "2^3^9",
@@ -1060,17 +1038,17 @@ internal class TestCalculator {
         testCalculateExpression(inputExpression = "2!!%!", expectedResult = "0.988844203263913")
         testCalculateExpression(inputExpression = "--+1.0+-+-+-++-1.3", expectedResult = "2.3")
         testCalculateExpression(
-            inputExpression = "-7^+-2!!^-7-+-4%*--4(--1.0*+-1.0)÷(-7^+-2!)",
+            inputExpression = "-7^+-2!!^-7-+-4%*--4(--1.0*+-1.0)/(-7^+-2!)",
             expectedResult = "6.85508744956883"
         )
         testCalculateExpression(inputExpression = "(1+2)*3", expectedResult = "9")
         testCalculateExpression(inputExpression = "(1-2)e", expectedResult = "-2.71828182845905")
         testCalculateExpression(
-            inputExpression = "(((-7)^(+2)!!)^-7-+-4%)*(--4(--1.0*+-1.0)÷(-7^+-2!))",
+            inputExpression = "(((-7)^(+2)!!)^-7-+-4%)*(--4(--1.0*+-1.0)/(-7^+-2!))",
             expectedResult = "7.84000000028899"
         )
         testCalculateExpression(
-            inputExpression = "log(27^2,8!)8+sin(1+2)",
+            inputExpression = "$LOG(27^2,8!)8+$SIN(1+2)",
             expectedResult = "13.0114207345659"
         )
 
@@ -1080,15 +1058,15 @@ internal class TestCalculator {
     private fun testCalculateExpression(inputExpression: String, expectedResult: String) {
         val actualResult =
             when (val result = calculator.calculateExpression(inputExpression)) {
-                is Nothing -> ""
-                is Number -> result.toString(15, 9)
-                is Error -> result.e.localizedMessage
+                is CalculationNothing -> ""
+                is CalculationNumber -> result.toString(precision = 15, maxTrailingZeros = 9)
+                is CalculationError -> result.error.localizedMessage
                 else -> result.toString()
             }
 
         assertEquals(
-            "The actual result is not equal to the expected one",
-            expectedResult, actualResult
+            /* message = */ "The actual result is not equal to the expected one",
+            /* expected = */ expectedResult, /* actual = */ actualResult
         )
     }
 
@@ -1099,7 +1077,7 @@ internal class TestCalculator {
         fun start() {
             println(
                 """
-                |Testing methods of the Calculator and Number classes,
+                |Testing methods of the Calculator and CalculationNumber classes,
                 |as well as functions from the CalculatorContext class...
                 """.trimMargin().trimIndent()
             )
@@ -1110,7 +1088,7 @@ internal class TestCalculator {
         fun finish() {
             println(
                 """
-                |Testing methods of the Calculator and Number classes,
+                |Testing methods of the Calculator and CalculationNumber classes,
                 |as well as functions from the CalculatorContext class... OK
                 """.trimMargin().trimIndent()
             )

@@ -8,16 +8,16 @@ import java.math.RoundingMode
 import kotlin.math.absoluteValue
 
 /**
+ * Number result of calculation.
  * Wrapper class for the [BigDecimal] class.
- * Arithmetic operations on this class can lead to an overflow exception
- * (an instance of the [ArithmeticException] class).
  */
-data class Number(val value: BigDecimal) : Calculator.Operand, CalculationResult {
+data class CalculationNumber internal constructor(val value: BigDecimal) :
+    Calculator.Operand, CalculationResult {
 
     /**
      * Checks whether number is an integer.
      */
-    internal val isInteger: Boolean get() = value.stripTrailingZeros().scale() <= 0
+    internal val isInteger get() = value.stripTrailingZeros().scale() <= 0
 
 
     /**
@@ -63,57 +63,57 @@ data class Number(val value: BigDecimal) : Calculator.Operand, CalculationResult
 
             else -> roundedValue
 
-        }.toString().replace("E", "*10^")
+        }.toString().replace(oldValue = "E", newValue = "*10^")
     }
 
     /**
      * Changes the sign of a number by rounding it to the precision specified by the [mc].
      */
-    internal fun negate(mc: MathContext) = Number(value.negate(mc))
+    internal fun negate(mc: MathContext) = CalculationNumber(value.negate(mc))
 
     /**
      * Adds two numbers and returns a new one rounded to the precision specified in the [mc].
      */
-    internal fun add(other: Number, mc: MathContext) = Number(value.add(other.value, mc))
+    internal fun add(other: CalculationNumber, mc: MathContext) =
+        CalculationNumber(value.add(other.value, mc))
 
     /**
      * Subtracts two numbers and returns a new one rounded to the precision specified in the [mc].
      */
-    internal fun subtract(other: Number, mc: MathContext) =
-        Number(value.subtract(other.value, mc))
+    internal fun subtract(other: CalculationNumber, mc: MathContext) =
+        CalculationNumber(value.subtract(other.value, mc))
 
     /**
      * Multiplies two numbers and returns a new one rounded to the precision specified in the [mc].
      */
-    internal fun multiply(other: Number, mc: MathContext) =
-        Number(value.multiply(other.value, mc))
+    internal fun multiply(other: CalculationNumber, mc: MathContext) =
+        CalculationNumber(value.multiply(other.value, mc))
 
     /**
      * Divides two numbers and returns a new one rounded to the precision specified in the [mc].
      *
      * @throws ArithmeticException If division by zero occurs or division is undefined.
      */
-    internal fun divide(other: Number, mc: MathContext) =
-        Number(value.divide(other.value, mc))
+    internal fun divide(other: CalculationNumber, mc: MathContext) =
+        CalculationNumber(value.divide(other.value, mc))
 
     /**
      * Raises the given number to the power of [y], rounding it to the precision specified
      * in the [mc].
+     *
      * @throws ArithmeticException If the current number is less than zero and [y] is not
      * an integer.
      * @throws UnsupportedOperationException If the [mc] has unlimited precision
      * or if the current number is zero but [y] is less than zero.
      */
-    internal fun pow(y: Number, mc: MathContext): Number = when {
-        value < BigDecimal.ZERO && !y.isInteger -> {
+    internal fun pow(y: CalculationNumber, mc: MathContext): CalculationNumber = when {
+        value < BigDecimal.ZERO && !y.isInteger ->
             throw ArithmeticException("Illegal x^y for x < 0 and non-integer y: x = $this; y = $y")
-        }
 
-        value.signum() == 0 && y.value < BigDecimal.ZERO -> {
+        value.signum() == 0 && y.value < BigDecimal.ZERO ->
             throw ArithmeticException("Illegal x^y for x = 0 and y < 0: y = $y")
-        }
 
-        else -> Number(pow(value, y.value, mc))
+        else -> CalculationNumber(pow(value, y.value, mc))
     }
 
     /**
@@ -124,11 +124,11 @@ data class Number(val value: BigDecimal) : Calculator.Operand, CalculationResult
      * @throws UnsupportedOperationException If the current number is not an integer and
      * the [mc] has unlimited precision.
      */
-    internal fun factorial(mc: MathContext): Number {
+    internal fun factorial(mc: MathContext): CalculationNumber {
         if (value < BigDecimal.ZERO && isInteger) {
             throw ArithmeticException("Illegal x! for x < 0, where x is integer: x = $this")
         } else {
-            return Number(factorial(value, mc))
+            return CalculationNumber(factorial(value, mc))
         }
     }
 
@@ -136,5 +136,8 @@ data class Number(val value: BigDecimal) : Calculator.Operand, CalculationResult
      * Returns the result of a division the current number by 100,
      * rounding it to the precision specified in the [mc].
      */
-    internal fun percent(mc: MathContext) = divide(Number(BigDecimal(100)), mc)
+    internal fun percent(mc: MathContext) = divide(
+        other = CalculationNumber(BigDecimal(100)),
+        mc = mc
+    )
 }

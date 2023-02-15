@@ -1,4 +1,4 @@
-package com.sunman.libcalculator.internal
+package com.sunman.libcalculator.parser
 
 import java.io.Closeable
 import java.io.PushbackReader
@@ -9,10 +9,11 @@ import java.io.StringReader
  * them to the input by placing them on the LIFO stack.
  *
  * @param expression where will the characters be read from.
+ * @param bufferSize maximum size of the LIFO stack.
  */
-internal class CharStream(expression: String) : Closeable {
+internal class CharStream(expression: String, bufferSize: Int) : Closeable {
 
-    private val pushbackReader = PushbackReader(StringReader(expression), 1)
+    private val pushbackReader = PushbackReader(StringReader(expression), bufferSize)
 
 
     /**
