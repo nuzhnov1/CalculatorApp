@@ -13,6 +13,7 @@ import com.sunman.feature.main.R
 import com.sunman.feature.main.databinding.MainFragmentBinding
 import com.sunman.feature.main.presentation.MainViewModel
 import com.sunman.feature.main.ui.animations.*
+import com.sunman.feature.main.ui.resources.parenthesis
 import com.sunman.libcalculator.AngleUnit
 
 class MainFragment : Fragment() {
@@ -20,7 +21,7 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     internal val binding get() = _binding!!
 
-    private var isFunctionSubpanelVisible = false
+    private var isFunctionSubpanelShown = false
     private var isInverseFunctionsUsed = false
 
     private val viewModel: MainViewModel by viewModels()
@@ -40,29 +41,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.toolbar.apply {
-            inflateMenu(R.menu.toolbar_menu)
-            setOnMenuItemClickListener(::onMenuItemClicked)
-        }
-
-        binding.apply {
-            expressionSubpanel.lifecycleOwner = viewLifecycleOwner
-            mainSubpanel.lifecycleOwner = viewLifecycleOwner
-            mainSubpanel.functionsSubpanel?.lifecycleOwner = viewLifecycleOwner
-
-            expressionSubpanel.fragment = this@MainFragment
-            expressionSubpanel.viewModel = viewModel
-            mainSubpanel.fragment = this@MainFragment
-            mainSubpanel.viewModel = viewModel
-            mainSubpanel.functionsSubpanel?.fragment = this@MainFragment
-            mainSubpanel.functionsSubpanel?.viewModel = viewModel
-        }
-
-        binding.historyFragment.doOnLayout {
-            binding.historyFragment.changeVisibilityImmediately()
-            binding.historyFragment.addOnLayoutChangeListener(HistoryFragmentOnLayoutChangeListener)
-        }
-
+        setBindingsAndObservers()
         setAnimationsOnAllMaterialButtons()
     }
 
@@ -70,7 +49,7 @@ class MainFragment : Fragment() {
         super.onViewStateRestored(savedInstanceState)
 
         if (savedInstanceState != null) {
-            isFunctionSubpanelVisible = savedInstanceState.getBoolean(IS_FUNCTION_SUBPANEL_SHOWN)
+            isFunctionSubpanelShown = savedInstanceState.getBoolean(IS_FUNCTION_SUBPANEL_SHOWN)
             isInverseFunctionsUsed = savedInstanceState.getBoolean(IS_USING_INVERSE_FUNCTIONS)
         }
     }
@@ -78,10 +57,16 @@ class MainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if (isFunctionSubpanelVisible) {
-            binding.mainSubpanel.functionsSubpanel?.root?.visibility = View.VISIBLE
+        val functionsSubpanelRoot = binding.mainSubpanel.functionsSubpanel?.root
+
+        // It is displayed by default in landscape mode and in portrait mode on devices with
+        // a height of 1024 dp or more:
+        val isVisibleByDefault = functionsSubpanelRoot?.visibility == View.VISIBLE
+
+        if (isFunctionSubpanelShown || isVisibleByDefault) {
+            functionsSubpanelRoot?.visibility = View.VISIBLE
         } else {
-            binding.mainSubpanel.functionsSubpanel?.root?.visibility = View.GONE
+            functionsSubpanelRoot?.visibility = View.GONE
         }
 
         if (isInverseFunctionsUsed) {
@@ -94,7 +79,7 @@ class MainFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putBoolean(IS_FUNCTION_SUBPANEL_SHOWN, isFunctionSubpanelVisible)
+        outState.putBoolean(IS_FUNCTION_SUBPANEL_SHOWN, isFunctionSubpanelShown)
         outState.putBoolean(IS_USING_INVERSE_FUNCTIONS, isInverseFunctionsUsed)
     }
 
@@ -115,7 +100,13 @@ class MainFragment : Fragment() {
 
     fun onAddButtonTextToInputString(view: View) {
         val buttonText = (view as MaterialButton).text.toString()
-        viewModel.addItemToCalculationString(buttonText.toDisplayableString())
+        val context = requireContext()
+
+        if (buttonText == context.resources.parenthesis) {
+            viewModel.addParenthesisToCalculationField()
+        } else {
+            viewModel.addItemToCalculationField(buttonText.toDisplayableRepresentation(context))
+        }
     }
 
     fun onLongClickToBackButton(): Boolean {
@@ -134,12 +125,52 @@ class MainFragment : Fragment() {
     }
 
     fun onChangeShowingFunctionsSubpanel() {
-        isFunctionSubpanelVisible = !isFunctionSubpanelVisible
+        isFunctionSubpanelShown = !isFunctionSubpanelShown
 
-        if (isFunctionSubpanelVisible) {
-            binding.mainSubpanel.functionsSubpanel?.animateExpand()
+        if (isFunctionSubpanelShown) {
+            binding.mainSubpanel.animateFunctionsSubpanelExpand()
         } else {
-            binding.mainSubpanel.functionsSubpanel?.animateCollapse()
+            binding.mainSubpanel.animateFunctionsSubpanelCollapse()
+        }
+    }
+
+    private fun setBindingsAndObservers() {
+        binding.apply {
+            expressionSubpanel.lifecycleOwner = viewLifecycleOwner
+            mainSubpanel.lifecycleOwner = viewLifecycleOwner
+            mainSubpanel.functionsSubpanel?.lifecycleOwner = viewLifecycleOwner
+
+            expressionSubpanel.fragment = this@MainFragment
+            mainSubpanel.fragment = this@MainFragment
+            mainSubpanel.viewModel = viewModel
+            mainSubpanel.functionsSubpanel?.fragment = this@MainFragment
+            mainSubpanel.functionsSubpanel?.viewModel = viewModel
+        }
+
+        binding.toolbar.apply {
+            inflateMenu(R.menu.toolbar_menu)
+            setOnMenuItemClickListener(::onMenuItemClicked)
+        }
+
+        binding.expressionSubpanel.apply {
+            viewModel.angleUnit.observe(viewLifecycleOwner) { angleUnit ->
+                angleUnitButton.text = angleUnit.toString(requireContext())
+            }
+
+            viewModel.calculationField.observe(viewLifecycleOwner) { fieldState ->
+                calculationField.text = fieldState.toString(requireContext())
+            }
+
+            if (calculationFieldResult != null) {
+                viewModel.resultField.observe(viewLifecycleOwner) { fieldState ->
+                    calculationFieldResult.text = fieldState.toString(requireContext())
+                }
+            }
+        }
+
+        binding.historyFragment.doOnLayout {
+            binding.historyFragment.changeVisibilityImmediately()
+            binding.historyFragment.addOnLayoutChangeListener(HistoryFragmentOnLayoutChangeListener)
         }
     }
 

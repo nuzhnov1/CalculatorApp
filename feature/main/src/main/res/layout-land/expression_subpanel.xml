@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.sunman.feature.main.ui.ExtensionsKt" />
         <variable name="fragment" type="com.sunman.feature.main.ui.MainFragment" />
-        <variable name="viewModel" type="com.sunman.feature.main.presentation.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -17,19 +15,19 @@
         android:gravity="center_vertical">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/angleUnitButton"
             style="@style/Widget.CalculationPanel.Button.Control.AngleUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{ExtensionsKt.toDisplayableString(viewModel.angleUnit, fragment.requireContext())}"
             android:onClick="@{() -> fragment.onChangeAngleUnit()}"
             tools:text="@string/rad" />
 
         <TextView
+            android:id="@+id/calculationField"
             style="@style/Widget.CalculationPanel.TextView.CalculationField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/calculation_field_hint"
-            android:text="@{viewModel.calculationString}" />
+            android:hint="@string/calculation_field_hint" />
     </LinearLayout>
 </layout>

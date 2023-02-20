@@ -46,6 +46,14 @@ internal val Resources.rad get() = getString(R.string.rad)
 internal val Resources.deg get() = getString(R.string.deg)
 internal val Resources.grad get() = getString(R.string.grad)
 
+internal val Resources.parenthesis get() = getString(R.string.parenthesis)
+internal val Resources.factorial get() = getString(R.string.factorial)
+internal val Resources.percent get() = getString(R.string.percent)
+internal val Resources.division get() = getString(R.string.division)
+internal val Resources.multiplication get() = getString(R.string.multiplication)
+internal val Resources.subtraction get() = getString(R.string.subtraction)
+internal val Resources.addition get() = getString(R.string.addition)
+
 internal val Resources.power get() = getString(R.string.power)
 internal val Resources.powerDescription get() = getString(R.string.power_description)
 internal val Resources.sqrt get() = getString(R.string.sqrt)
@@ -119,12 +127,18 @@ internal val Resources.cbrtDescription get() = getString(R.string.cbrt_descripti
 internal val Resources.cube get() = getString(R.string.cube)
 internal val Resources.cubeDescription get() = getString(R.string.cube_description)
 
+internal val Resources.pi get() = getString(R.string.pi)
+internal val Resources.e get() = getString(R.string.e)
+
 internal val Resources.invalidExpression get() = getString(R.string.invalid_expression)
 internal val Resources.divisionByZero get() = getString(R.string.division_by_zero)
 internal val Resources.invalidArgument get() = getString(R.string.invalid_argument)
 internal val Resources.invalidArgumentsNumber get() = getString(R.string.invalid_arguments_number)
 internal val Resources.genericError get() = getString(R.string.generic_error)
 
+
+internal fun Resources.getInProgressString(expression: CharSequence) =
+    getString(R.string.in_progress, expression)
 
 internal fun Context.getArrowAVD(direction: ArrowDirection) = when (direction) {
     ArrowDirection.UP -> AnimatedVectorDrawableCompat.create(

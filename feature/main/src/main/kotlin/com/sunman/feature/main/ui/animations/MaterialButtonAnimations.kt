@@ -19,6 +19,7 @@ internal fun MainFragment.setAnimationsOnAllMaterialButtons() {
             it.setOnTouchListener { _, motionEvent -> it.animateOnClick(motionEvent) }
         }
     }
+
     binding.mainSubpanel.collapseButton?.setCollapseButtonAnimation()
 }
 
@@ -36,12 +37,10 @@ private fun MaterialButton.setCollapseButtonAnimation() {
 
             currentAVD.apply {
                 registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
-                    override fun onAnimationStart(drawable: Drawable?) { isEnabled = false }
-                    override fun onAnimationEnd(drawable: Drawable?) {
-                        icon = nextAVD
-                        isEnabled = true
-                    }
+                    override fun onAnimationEnd(drawable: Drawable?) { icon = nextAVD }
                 })
+
+                start()
             }
         }
 
@@ -53,7 +52,7 @@ private fun MaterialButton.animateOnClick(motionEvent: MotionEvent) =
     when (motionEvent.actionMasked) {
         MotionEvent.ACTION_HOVER_ENTER -> {
             hoveredAnimatorSet.start()
-            true
+            false
         }
 
         MotionEvent.ACTION_HOVER_EXIT -> {

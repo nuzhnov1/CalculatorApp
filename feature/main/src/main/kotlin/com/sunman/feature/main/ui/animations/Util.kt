@@ -5,6 +5,11 @@ import android.view.ViewGroup
 import androidx.core.view.allViews
 
 
+internal fun View.update() {
+    requestLayout()
+    invalidate()
+}
+
 internal fun View.enable() {
     if (this is ViewGroup) {
         allViews.forEach { it.isEnabled = true }

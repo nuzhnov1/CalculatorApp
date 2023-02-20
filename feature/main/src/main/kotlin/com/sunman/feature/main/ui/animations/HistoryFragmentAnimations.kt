@@ -6,8 +6,21 @@ import android.view.View
 import com.sunman.feature.main.ui.resources.historyFragmentMinHeight
 
 
+internal fun View.changeVisibilityImmediately() {
+    val minHeight = context.resources.historyFragmentMinHeight
+
+    visibility = if (measuredHeight < minHeight) {
+        View.INVISIBLE
+    } else {
+        View.VISIBLE
+    }
+}
+
+
 internal object HistoryFragmentOnLayoutChangeListener : View.OnLayoutChangeListener {
-    var isAnimating = false
+
+    private var animatorWrapper: HistoryFragmentAnimatorWrapper? = null
+
 
     override fun onLayoutChange(
         view: View?,
@@ -20,41 +33,36 @@ internal object HistoryFragmentOnLayoutChangeListener : View.OnLayoutChangeListe
         rightOld: Int,
         bottomOld: Int
     ) {
-        if (view == null || isAnimating) {
+        if (view == null) {
             return
         }
 
         val minHeight = view.context.resources.historyFragmentMinHeight
 
-        if (view.visibility == View.VISIBLE && view.measuredHeight < minHeight) {
-            isAnimating = true
+        if (view.visibility == View.VISIBLE && view.measuredHeight < minHeight &&
+            animatorWrapper !is HistoryFragmentHideAnimatorWrapper) {
 
-            view.hideAnimator.apply {
-                addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) { isAnimating = false }
-                })
-                start()
+            animatorWrapper = HistoryFragmentHideAnimatorWrapper(view, view.alpha).apply {
+                animator.apply {
+                    addListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) { animatorWrapper = null }
+                    })
+
+                    start()
+                }
             }
-        } else if (view.visibility == View.INVISIBLE && view.measuredHeight >= minHeight) {
-            isAnimating = true
+        } else if (view.visibility == View.INVISIBLE && view.measuredHeight >= minHeight &&
+            animatorWrapper !is HistoryFragmentShowAnimatorWrapper) {
 
-            view.showAnimator.apply {
-                addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) { isAnimating = false }
-                })
-                start()
+            animatorWrapper = HistoryFragmentShowAnimatorWrapper(view, view.alpha).apply {
+                animator.apply {
+                    addListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) { animatorWrapper = null }
+                    })
+
+                    start()
+                }
             }
         }
-    }
-}
-
-
-internal fun View.changeVisibilityImmediately() {
-    val minHeight = context.resources.historyFragmentMinHeight
-
-    visibility = if (measuredHeight < minHeight) {
-        View.INVISIBLE
-    } else {
-        View.VISIBLE
     }
 }

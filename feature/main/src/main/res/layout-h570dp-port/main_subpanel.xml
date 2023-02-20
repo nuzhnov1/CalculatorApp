@@ -74,7 +74,9 @@
 
         <include
             android:id="@+id/functionsSubpanel"
-            layout="@layout/functions_subpanel" />
+            layout="@layout/functions_subpanel"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TableRow
             android:layout_weight="1"

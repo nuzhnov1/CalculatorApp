@@ -146,7 +146,8 @@
     <string name="pi_description">Pi constant</string>
     <string name="e_description">Euler constant</string>
 
-    <!-- Error messages -->
+    <!-- Error and state messages -->
+    <string name="in_progress">Calculating expression: %1$s…</string>
     <string name="invalid_expression">Invalid expression</string>
     <string name="division_by_zero">Division by zero</string>
     <string name="invalid_argument">Invalid argument</string>

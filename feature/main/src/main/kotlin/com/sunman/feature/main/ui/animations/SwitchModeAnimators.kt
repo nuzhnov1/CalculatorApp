@@ -13,7 +13,7 @@ internal val MainSubpanelBinding.normalModeAnimator get() = root.context.resourc
         sqrtButton.getReplaceTextAnimator(sqrt, sqrtDescription),
     )
 
-    functionsSubpanel?.normalModeAnimators?.apply { animatorsList.addAll(this) }
+    functionsSubpanel?.normalModeAnimators?.apply { animatorsList.addAll(elements = this) }
     animatorSetOf(animatorsList)
 }
 
@@ -23,7 +23,7 @@ internal val MainSubpanelBinding.inversionModeAnimator get() = root.context.reso
         sqrtButton.getReplaceTextAnimator(sqr, sqrDescription),
     )
 
-    functionsSubpanel?.inversionModeAnimators?.apply { animatorsList.addAll(this) }
+    functionsSubpanel?.inversionModeAnimators?.apply { animatorsList.addAll(elements = this) }
     animatorSetOf(animatorsList)
 }
 
@@ -96,6 +96,7 @@ private fun MaterialButton.getReplaceTextAnimator(
                 contentDescription = newContentDescription
             }
         })
+
         duration = animDuration / 2
     }
 
@@ -103,6 +104,7 @@ private fun MaterialButton.getReplaceTextAnimator(
         playSequentially(hideOldTextAnimator, showNewTextAnimator)
         addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator) { isEnabled = false }
+
             override fun onAnimationEnd(animation: Animator) { isEnabled = true }
 
             override fun onAnimationCancel(animation: Animator) {
